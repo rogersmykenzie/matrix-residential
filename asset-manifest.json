@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/matrix-residential/static/css/main.0bbdd5f6.chunk.css",
+    "main.js": "/matrix-residential/static/js/main.57b60b95.chunk.js",
+    "main.js.map": "/matrix-residential/static/js/main.57b60b95.chunk.js.map",
+    "runtime~main.js": "/matrix-residential/static/js/runtime~main.1344e54d.js",
+    "runtime~main.js.map": "/matrix-residential/static/js/runtime~main.1344e54d.js.map",
+    "static/js/2.37c3de24.chunk.js": "/matrix-residential/static/js/2.37c3de24.chunk.js",
+    "static/js/2.37c3de24.chunk.js.map": "/matrix-residential/static/js/2.37c3de24.chunk.js.map",
+    "index.html": "/matrix-residential/index.html",
+    "precache-manifest.95820c4eed9a343cba7a231068331a44.js": "/matrix-residential/precache-manifest.95820c4eed9a343cba7a231068331a44.js",
+    "service-worker.js": "/matrix-residential/service-worker.js",
+    "static/css/main.0bbdd5f6.chunk.css.map": "/matrix-residential/static/css/main.0bbdd5f6.chunk.css.map"
+  }
+}
