@@ -8,4 +8,11 @@
 .welcome-paper {
     width: 60vw;
     height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.welcome-paper h1 {
+    margin-bottom: 20vh;
 }

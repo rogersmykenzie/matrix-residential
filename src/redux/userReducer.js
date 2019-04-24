@@ -2,14 +2,21 @@ const initalState = {
     firstName: '',
     lastName: '',
     phoneNumber: '',
-    email: ''
+    email: '',
+    currPage: 0
 }
 
 const UPDATE_FIRST_NAME = 'UPDATE_FIRST_NAME';
 const UPDATE_LAST_NAME = 'UPDATE_LAST_NAME'
 const UPDATE_PHONE_NUMBER = 'UPDATE_PHONE_NUMBER';
 const UPDATE_EMAIL = 'UPDATE_EMAIL';
+const UPDATE_CURR_PAGE = 'UPDATE_CURR_PAGE';
 
+export function incCurrentPage() {
+    return {
+        type: UPDATE_CURR_PAGE,
+    }
+}
 export function changeEmail(email) {
     return {
         type: UPDATE_EMAIL,
@@ -42,6 +49,11 @@ export function changeLastName(name) {
 export default function reducer(state=initalState, action) {
     console.log(state);
     switch(action.type) {
+        case UPDATE_CURR_PAGE:
+        return {
+            ...state,
+            currPage: state.currPage + 1
+        }
         case UPDATE_FIRST_NAME:
         return {
             ...state,

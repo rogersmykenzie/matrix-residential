@@ -1,0 +1,14 @@
+.page-one-container {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-one-paper {
+    width: 60vw;
+    height: 80vh;
+}
+.page-one-next {
+    margin-top: 200vh;
+}
