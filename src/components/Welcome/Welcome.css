@@ -1,0 +1,11 @@
+.welcome-container {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-paper {
+    width: 60vw;
+    height: 80vh;
+}
