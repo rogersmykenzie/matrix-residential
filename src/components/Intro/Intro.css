@@ -1,0 +1,22 @@
+.intro-container {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.intro-text-field-container {
+    height: 60%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.intro-paper {
+    width: 60vw;
+    height: 80vh;
+}
+/* before you ask yes i know this is lazy but its 12:30pm cut me some slack */
+body {
+    font-family: 'Poppins', sans-serif;
+}

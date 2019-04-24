@@ -1,0 +1,66 @@
+.login-modul {
+    display: none;
+}
+.login-modul-open {
+    width: 50vw;
+    height: 75vh;
+    position: absolute;
+    top: 12.5vh;
+    left: 25vw;
+    animation: openModul .6s ease-in;
+}
+.login-modul-close {
+    width: 50vw;
+    height: 75vh;
+    position: absolute;
+    top: 12.5vh;
+    left: 25vw;
+    animation: closeModul .6s ease-in;
+    animation-fill-mode: forwards;
+}
+.login-modul-paper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-modul-paper-content > div {
+    /* border: 1px solid pink; */
+    width: 100%;
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+}
+.login-modul-paper-content {
+    width: 80%;
+    height: 70%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.login-modul-line{
+    width: 70%;
+    height: 1px;
+    background-color: rgba(56, 56, 56, 0.377);
+    margin-bottom: 5%;
+}
+.font-one {
+    font-family: 'Poppins', sans-serif;
+}
+@keyframes openModul {
+    from {
+        transform: translateY(-100vh);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+@keyframes closeModul {
+    to {
+        transform: translateY(-100vh);
+        display: none;
+    }
+}
