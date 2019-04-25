@@ -12,3 +12,14 @@
 .page-one-next {
     margin-top: 200vh;
 }
+.page-one-fade-in {
+    animation: fadeIn .5s;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1
+    }
+}

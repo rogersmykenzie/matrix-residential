@@ -12,9 +12,10 @@ const UPDATE_PHONE_NUMBER = 'UPDATE_PHONE_NUMBER';
 const UPDATE_EMAIL = 'UPDATE_EMAIL';
 const UPDATE_CURR_PAGE = 'UPDATE_CURR_PAGE';
 
-export function incCurrentPage() {
+export function setCurrentPage(num) {
     return {
         type: UPDATE_CURR_PAGE,
+        payload: num
     }
 }
 export function changeEmail(email) {
@@ -52,7 +53,7 @@ export default function reducer(state=initalState, action) {
         case UPDATE_CURR_PAGE:
         return {
             ...state,
-            currPage: state.currPage + 1
+            currPage: action.payload
         }
         case UPDATE_FIRST_NAME:
         return {

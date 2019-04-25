@@ -9,7 +9,7 @@ const CheckboxComp = props => {
             <FormControlLabel 
             control={
                 <Checkbox 
-                onChange={() => props.whenClicked()}
+                onChange={() => props.whenClicked ? props.whenClicked() : null}
                 />
             }
             label={props.label}
