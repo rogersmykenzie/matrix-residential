@@ -1,4 +1,4 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import { createStore, combineReducers, compose } from 'redux';
 import userReducer from './userReducer';
 import formInfoReducer from './formInfoReducer';
 
@@ -9,4 +9,4 @@ let reducer = combineReducers({
     formInfoReducer
 })
 
-export default createStore(userReducer, composeEnhancers());
+export default createStore(reducer, composeEnhancers());

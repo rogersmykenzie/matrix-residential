@@ -11,6 +11,8 @@ const ADD_HOME_STYLE = 'ADD_HOME_STYLE';
 const REMOVE_PROPERTY_TYPE = 'REMOVE_PROPERTY_TYPE';
 const REMOVE_HOUSING_TYPE = 'REMOVE_HOUSING_TYPE';
 const REMOVE_HOME_STYLE = 'REMOVE_HOME_STYLE';
+const ADD_CONSTRUCTION_TYPE = 'ADD_CONSTRUCTION_TYPE';
+const REMOVE_CONSTRUCTION_TYPE = 'REMOVE_CONSTRUCTION_TYPE';
 
 //action creators
 
@@ -55,6 +57,7 @@ export function addPropertyType(type) {
 }
 
 export default function reducer(state=initialState, action) {
+    console.log('here')
     switch(action.type) {
         case ADD_PROPERTY_TYPE:
             return {
