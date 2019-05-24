@@ -46,9 +46,10 @@ const PageOne = props => {
         props.removeHousingType(type);
     }
 
+    const {setCurrentPage} = props;
     //update page in nav - may remove. two sources of truth
     useEffect(() => {
-        props.setCurrentPage(1);
+        setCurrentPage(1);
     }, [])
 
     //req info
@@ -107,7 +108,7 @@ const PageOne = props => {
 
                 {numPickedSecondAnswer && numPickedFirstAnswer 
                 ?
-                <Link to='/page/2'>
+                <Link to={`/page/2`}>
                     <Button
                     className='page-one-fade-in'
                     style={styles.buttonStyle}
@@ -121,7 +122,9 @@ const PageOne = props => {
     )
 }
 
-const mapStateToProps = props => props;
+const mapStateToProps = state => {
+    return {}
+};
 
 export default connect(mapStateToProps, 
     {
