@@ -1,7 +1,7 @@
-import externalStyle from '../Intro/IntroStyles'
+import {buttonStyleMain} from '../../styles/GlobalStyles';
 export default {
     buttonStyle: {
-        ...externalStyle.buttonStyle,
+        ...buttonStyleMain,
         marginTop: '3vh'
     }
 }

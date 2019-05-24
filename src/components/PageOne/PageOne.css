@@ -8,6 +8,7 @@
 .page-one-paper {
     width: 60vw;
     height: 80vh;
+    overflow: scroll;
 }
 .page-one-next {
     margin-top: 200vh;

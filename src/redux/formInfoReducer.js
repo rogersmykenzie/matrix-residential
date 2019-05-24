@@ -1,19 +1,48 @@
 const initialState = {
     propertyTypes: [],
     housingTypes: [],
-    homeStyles: []
+    homeStyles: [],
+    constructionTypes: [],
+    squareFootageType: '',
+    squareFootageChangeReason: null
 }
 //type constants
-
 const ADD_PROPERTY_TYPE = 'ADD_PROPERTY_TYPE';
 const ADD_HOUSING_TYPE = 'ADD_HOUSING_TYPE';
 const ADD_HOME_STYLE = 'ADD_HOME_STYLE';
 const REMOVE_PROPERTY_TYPE = 'REMOVE_PROPERTY_TYPE';
 const REMOVE_HOUSING_TYPE = 'REMOVE_HOUSING_TYPE';
 const REMOVE_HOME_STYLE = 'REMOVE_HOME_STYLE';
+const ADD_CONSTRUCTION_TYPE = 'ADD_CONSTRUCTION_TYPE';
+const REMOVE_CONSTRUCTION_TYPE = 'REMOVE_CONSTRUCTION_TYPE';
+const SET_SQUARE_FOOTAGE_TYPE = 'SET_SQUARE_FOOTAGE_TYPE';
+const SET_SQUARE_FOOTAGE_CHANGE_REASON = "SET_SQUARE_FOOTAGE_CHANGE_REASON"
 
 //action creators
-
+export function setChangeReason(reason) {
+    return {
+        type: SET_SQUARE_FOOTAGE_CHANGE_REASON,
+        payload: reason
+    }
+}
+export function setSquareFootage(type) {
+    return {
+        type: SET_SQUARE_FOOTAGE_TYPE,
+        payload: type
+    }
+}
+export function removeConstructionType(style) {
+    return {
+        type: REMOVE_CONSTRUCTION_TYPE,
+        payload: style
+    }
+}
+export function addConstructionType(style) {
+    return {
+        type: ADD_CONSTRUCTION_TYPE,
+        payload: style
+    }
+}
 export function removeHomeStyle(style) {
     return {
         type: REMOVE_HOME_STYLE,
@@ -32,21 +61,18 @@ export function removeHousingType(type) {
         payload: type
     }
 } 
-
 export function addHousingType(type) {
     return {
         type: ADD_HOUSING_TYPE,
         payload: type
     }
 }
-
 export function removePropertyType(type) {
     return {
         type: REMOVE_PROPERTY_TYPE,
         payload: type
     }
 }
-
 export function addPropertyType(type) {
     return {
         type: ADD_PROPERTY_TYPE,
@@ -56,6 +82,37 @@ export function addPropertyType(type) {
 
 export default function reducer(state=initialState, action) {
     switch(action.type) {
+        case SET_SQUARE_FOOTAGE_CHANGE_REASON:
+            return {
+                ...state,
+                squareFootageChangeReason: action.payload
+            }
+        case SET_SQUARE_FOOTAGE_TYPE:
+            if(action.payload === "Same as Tax Record") {
+                return {
+                    ...state,
+                    squareFootageType: action.payload,
+                    squareFootageChangeReason: null
+                }
+            }
+            return {
+                ...state,
+                squareFootageType: action.payload
+            }
+        case ADD_CONSTRUCTION_TYPE:
+            return {
+                ...state,
+                constructionTypes: [...state.constructionTypes, action.payload]
+            }
+        case REMOVE_CONSTRUCTION_TYPE:
+            let newConstructionTypes = [...state.constructionTypes];
+            newConstructionTypes.splice(newConstructionTypes.findIndex(val => {
+                return val === action.payload
+            }), 1);
+            return {
+                ...state,
+                constructionTypes: newConstructionTypes
+            }
         case ADD_PROPERTY_TYPE:
             return {
                 ...state,

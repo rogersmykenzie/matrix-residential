@@ -8,6 +8,8 @@ import './Welcome.css';
 import styles from './WelcomeStyles';
 //routing
 import { Link } from 'react-router-dom';
+//redux
+import { connect } from 'react-redux';
 
 const Welcome = props => {
     return(
@@ -18,7 +20,7 @@ const Welcome = props => {
             className='welcome-paper'
             >
                 <h1>Thanks for that! We can now get started on the important bits</h1>
-                <Link to='/page/1'>
+                <Link to={`/page/1`}>
                     <Button
                     variant='contained'
                     style={styles.buttonStyle}
@@ -31,4 +33,8 @@ const Welcome = props => {
     )
 }
 
-export default Welcome;
+const mapStateToProps = state => {
+    return {}
+}
+
+export default connect(mapStateToProps)(Welcome);
