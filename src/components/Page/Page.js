@@ -10,8 +10,8 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
 
 const Page = props => {
-    //Switch hard a to props.auth for prod
-    switch(+props.match.params.pageNum + 'c') {
+    //Switch hard a to `props.auth` for prod
+    switch(+props.match.params.pageNum + 'a') {
         case '1c':
         case '1a':
         return <PageOne />

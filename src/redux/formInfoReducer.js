@@ -4,7 +4,11 @@ const initialState = {
     homeStyles: [],
     constructionTypes: [],
     squareFootageType: '',
-    squareFootageChangeReason: null
+    squareFootageChangeReason: null,
+    accessoryUnitTypes: [],
+    elementarySchool: '',
+    middleSchool: '',
+    highSchool: ''
 }
 //type constants
 const ADD_PROPERTY_TYPE = 'ADD_PROPERTY_TYPE';
@@ -17,8 +21,31 @@ const ADD_CONSTRUCTION_TYPE = 'ADD_CONSTRUCTION_TYPE';
 const REMOVE_CONSTRUCTION_TYPE = 'REMOVE_CONSTRUCTION_TYPE';
 const SET_SQUARE_FOOTAGE_TYPE = 'SET_SQUARE_FOOTAGE_TYPE';
 const SET_SQUARE_FOOTAGE_CHANGE_REASON = "SET_SQUARE_FOOTAGE_CHANGE_REASON"
-
+const ADD_ACCESSORY_UNIT_TYPES = 'ADD_ACCESSORY_UNIT_TYPES';
+const REMOVE_ACCESSORY_UNIT_TYPES = 'REMOVE_ACCESSORY_UNIT_TYPES';
+const CHANGE_SCHOOL = 'CHANGE_SCHOOL';
 //action creators
+export function changeSchool(school, schoolName) {
+    return {
+        type: CHANGE_SCHOOL,
+        payload: {
+            school,
+            schoolName
+        }
+    }
+}
+export function removeAccessoryUnit(unit) {
+    return {
+        type: REMOVE_ACCESSORY_UNIT_TYPES,
+        payload: unit
+    }
+}
+export function addAccessoryUnit(unit) {
+    return {
+        type: ADD_ACCESSORY_UNIT_TYPES,
+        payload: unit
+    }
+}
 export function setChangeReason(reason) {
     return {
         type: SET_SQUARE_FOOTAGE_CHANGE_REASON,
@@ -79,9 +106,26 @@ export function addPropertyType(type) {
         payload: type
     }
 }
-
 export default function reducer(state=initialState, action) {
     switch(action.type) {
+        case CHANGE_SCHOOL:
+            return {
+                ...state,
+                [action.payload.school]: action.payload.schoolName
+            }
+        case REMOVE_ACCESSORY_UNIT_TYPES:
+            const tempArr = state.accessoryUnitTypes.slice();
+            const index = tempArr.findIndex(val => val === action.payload);
+            tempArr.splice(index, 1);
+            return {
+                ...state,
+                accessoryUnitTypes: tempArr
+            }
+        case ADD_ACCESSORY_UNIT_TYPES:
+            return {
+                ...state,
+                accessoryUnitTypes: [...state.accessoryUnitTypes, action.payload]
+            }
         case SET_SQUARE_FOOTAGE_CHANGE_REASON:
             return {
                 ...state,
