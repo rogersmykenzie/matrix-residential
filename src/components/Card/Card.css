@@ -9,9 +9,9 @@
     cursor: pointer;
 }
 .card:hover {
-    animation: fadeIn .2s linear forwards;
+    animation: colorIn .2s linear forwards;
 }
-@keyframes fadeIn {
+@keyframes colorIn {
     to {
         background-color: pink;
     }
