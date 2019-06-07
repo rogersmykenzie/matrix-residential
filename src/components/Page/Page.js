@@ -4,6 +4,7 @@ import PageOne from '../PageOne/PageOne';
 import PageTwo from '../PageTwo/PageTwo';
 import AdminPageThree from '../AdminPageThree/AdminPageThree';
 import PageFour from '../PageFour/PageFour';
+import AdminPageFive from '../AdminPageFive/AdminPageFive';
 //redux
 import {connect} from 'react-redux';
 //routing
@@ -23,6 +24,8 @@ const Page = props => {
         case '3c':
         case '4a':
         return <PageFour />
+        case '5a':
+        return <AdminPageFive />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }

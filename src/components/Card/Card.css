@@ -1,0 +1,18 @@
+.card {
+    width: 20vw;
+    height: 30vh;
+    border-radius: 5px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.card:hover {
+    animation: fadeIn .2s linear forwards;
+}
+@keyframes fadeIn {
+    to {
+        background-color: pink;
+    }
+}
