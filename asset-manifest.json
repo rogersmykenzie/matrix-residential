@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/matrix-residential/static/css/main.b6305e85.chunk.css",
-    "main.js": "/matrix-residential/static/js/main.8ab7bf39.chunk.js",
-    "main.js.map": "/matrix-residential/static/js/main.8ab7bf39.chunk.js.map",
+    "main.css": "/matrix-residential/static/css/main.7b71b815.chunk.css",
+    "main.js": "/matrix-residential/static/js/main.c41f3bcd.chunk.js",
+    "main.js.map": "/matrix-residential/static/js/main.c41f3bcd.chunk.js.map",
     "runtime~main.js": "/matrix-residential/static/js/runtime~main.1344e54d.js",
     "runtime~main.js.map": "/matrix-residential/static/js/runtime~main.1344e54d.js.map",
-    "static/js/2.e16309c6.chunk.js": "/matrix-residential/static/js/2.e16309c6.chunk.js",
-    "static/js/2.e16309c6.chunk.js.map": "/matrix-residential/static/js/2.e16309c6.chunk.js.map",
+    "static/js/2.90a186ab.chunk.js": "/matrix-residential/static/js/2.90a186ab.chunk.js",
+    "static/js/2.90a186ab.chunk.js.map": "/matrix-residential/static/js/2.90a186ab.chunk.js.map",
     "index.html": "/matrix-residential/index.html",
-    "precache-manifest.d31ba0e319b5dd0b8fdba460a1df2b0f.js": "/matrix-residential/precache-manifest.d31ba0e319b5dd0b8fdba460a1df2b0f.js",
+    "precache-manifest.72f49876b9492e046cc31df7043f93d2.js": "/matrix-residential/precache-manifest.72f49876b9492e046cc31df7043f93d2.js",
     "service-worker.js": "/matrix-residential/service-worker.js",
-    "static/css/main.b6305e85.chunk.css.map": "/matrix-residential/static/css/main.b6305e85.chunk.css.map"
+    "static/css/main.7b71b815.chunk.css.map": "/matrix-residential/static/css/main.7b71b815.chunk.css.map"
   }
 }
