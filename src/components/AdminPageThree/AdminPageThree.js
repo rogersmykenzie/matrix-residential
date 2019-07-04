@@ -11,13 +11,12 @@ import styles from './AdminPageThreeStyles';
 import {buttonStyleMain} from '../../styles/GlobalStyles';
 //components
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
+import NextPage from '../NextPage/NextPage';
 //redux
 import {connect} from 'react-redux';
 import {setSquareFootage, setChangeReason} from '../../redux/formInfoReducer';
 //test
 import RadioButtons from '../RadioButtons/RadioButtons';
-//routing
-import { Link } from 'react-router-dom';
 
 const AdminPageThree = props => {
     //State
@@ -55,7 +54,7 @@ const AdminPageThree = props => {
 
     //UI
     return <div>
-        <div className='page-one-container'>
+        <div className='container'>
             <Paper className="page-two-paper">
                 <h1>Is your Square Footage...?</h1>
                 <form
@@ -92,7 +91,7 @@ const AdminPageThree = props => {
                     {sqFtSelection === 'Change to:' && customSqFt !== ''
                     ? <>
                         <h1
-                        className='page-one-fade-in'
+                        className='fade-in'
                         >Select a Reason for this Change:</h1>
                             <RadioButtons
                             buttons={changeReasons}
@@ -102,15 +101,7 @@ const AdminPageThree = props => {
                     : null}
                     <br />
                     {sqFtSelection === 'Same as Tax Record' || (changeReason && customSqFt)
-                    ? <Link to="/page/4">
-                            <Button
-                            className='page-one-fade-in admin-page-three-button'
-                            style={{...buttonStyleMain, marginTop: "3vh"}}
-                            variant='contained'
-                            >
-                                Next
-                            </Button>
-                        </Link>
+                    ? <NextPage to={`/page/${props.page + 1}`} />
                     : null}
                 </form>
             </Paper>

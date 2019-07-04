@@ -4,3 +4,8 @@ export const buttonStyleMain = {
     fontFamily: "'Poppins', sans-serif",
     fontWeight: 1000
 }
+
+export const textFieldStyle = {
+    width: '60%',
+    marginBottom: "3vh"
+}

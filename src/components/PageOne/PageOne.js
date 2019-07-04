@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 //mui
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 //css
 import './PageOne.css';
 //redux
@@ -16,10 +15,8 @@ import {
 import { connect } from 'react-redux';
 //components
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
-//inline styling
-import styles from './PageOneStyles'
 //routing
-import {Link} from 'react-router-dom';
+import NextPage from '../NextPage/NextPage'
 
 const PageOne = props => {
     const [numPickedFirstAnswer, setFirst] = useState(false); //A counter to make sure they checked at least one property type
@@ -59,13 +56,13 @@ const PageOne = props => {
     
     return(
         <div
-        className='page-one-container'
+        className='container'
         >
             <Paper
             className='page-one-paper'
             >   
                 <div
-                className='page-one-fade-in'>
+                className='fade-in'>
                     <h1>Please select a property type:</h1>
                     {propertyTypes.map(val => {
                         return <CheckboxComp 
@@ -77,7 +74,7 @@ const PageOne = props => {
                 </div>
                 {/* Checks to make sure that a first answer was picked before rendering */}
                 {numPickedFirstAnswer ?
-                <div className='page-one-fade-in'>
+                <div className='fade-in'>
                     <h1>
                         Select all that describe your housing type:
                     </h1>
@@ -93,7 +90,7 @@ const PageOne = props => {
 
                 {/* Checks to make sure a second answer was picked before rendering */}
                 {numPickedSecondAnswer && numPickedFirstAnswer ? 
-                <div className='page-one-fade-in'>
+                <div className='fade-in'>
                     <h1>
                         Select any home styles that apply
                     </h1>
@@ -107,16 +104,7 @@ const PageOne = props => {
                 </div> : null}
 
                 {numPickedSecondAnswer && numPickedFirstAnswer 
-                ?
-                <Link to={`/page/2`}>
-                    <Button
-                    className='page-one-fade-in'
-                    style={styles.buttonStyle}
-                    variant='contained'
-                    >
-                        Next
-                    </Button> 
-                </Link> : null}
+                ? <NextPage to={`/page/${props.page + 1}`} /> : null}
             </Paper>
         </div>
     )

@@ -2,17 +2,23 @@
     width: 20vw;
     height: 30vh;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid rgba(0,0,0,.4);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background: whitesmoke;
 }
 .card:hover {
     animation: colorIn .2s linear forwards;
 }
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 @keyframes colorIn {
-    to {
-        background-color: pink;
+    100% {
+        background-color: white;
     }
 }

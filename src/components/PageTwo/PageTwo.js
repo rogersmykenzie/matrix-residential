@@ -3,13 +3,9 @@ import React, {useState} from 'react';
 import './PageTwo.css';
 //mui
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button'
 //components
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
-//inline styles
-import styles from './PageTwoStyles';
-//routing
-import {Link} from 'react-router-dom';
+import NextPage from '../NextPage/NextPage';
 //redux
 import {connect} from 'react-redux';
 import {removeConstructionType, addConstructionType} from '../../redux/formInfoReducer';
@@ -30,7 +26,7 @@ const PageTwo = props => {
     }
 
     return (
-        <div className='page-one-container'>
+        <div className='container'>
             <Paper className="page-two-paper">
                 <div className='page-two-text-constraint'>
                     <h1>Please select types of construction used in your home:</h1>
@@ -51,19 +47,8 @@ const PageTwo = props => {
                         })}
                     </>
                     : null}
-                    
                     <br />
-
-                    {numClicked ?
-                    <Link to='/page/3'>
-                        <Button
-                        className='page-one-fade-in'
-                        style={styles.buttonStyleMain}
-                        variant='contained'
-                        >
-                            Next
-                        </Button>
-                    </Link> : null}
+                    {numClicked ? <NextPage to={`/page/${props.page + 1}`} /> : null}
                 </div>
             </Paper>
         </div>
