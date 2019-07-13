@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
-//checkbox
+//components
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
+import NextPage from '../NextPage/NextPage';
 //redux
 import { connect } from 'react-redux';
 import { addAccessoryUnit, removeAccessoryUnit, changeSchool } from '../../redux/formInfoReducer';
@@ -15,7 +16,6 @@ import styles from './PageFourStyles';
 import {buttonStyleMain} from '../../styles/GlobalStyles';
 
 function PageFour(props) {
-    fetch('https://www.swapi.co/api/people/?format=json').then(response => response.json()).then(response => console.log(response))
     //constants
     const accessoryTypes = ["Guest Quarters", "Other", "Pool House"]
     const schoolTypes = ["Elementary School", "Middle School", "High School"]
@@ -41,7 +41,7 @@ function PageFour(props) {
         }).join('');
 
     return (
-        <div className='page-one-container'>
+        <div className='container'>
             <Paper className='page-two-paper'>
                 <h1>Do you have any Accessory Units?</h1>
                 {accessoryTypes.map(val => {
@@ -53,7 +53,7 @@ function PageFour(props) {
                 })}
                 {props.accessoryUnitTypes.length > 0
                     ? <>
-                        <h1 className='page-one-fade-in'>What schools is this property part of?</h1>
+                        <h1 className='fade-in'>What schools is this property part of?</h1>
                         {schoolTypes.map(val => <TextField
                             variant='outlined'
                             placeholder={val}
@@ -63,15 +63,7 @@ function PageFour(props) {
                         />)}
                         {schoolsFilledOut ? <>
                             <br />
-                            <Link to='/page/5'>
-                                <Button
-                                className='page-one-fade-in admin-page-three-button'
-                                style={{...buttonStyleMain, marginTop: "3vh"}}
-                                variant='contained'
-                                >
-                                    Next
-                                </Button>
-                            </Link>
+                            <NextPage to={`/page/${props.page + 1}`} />
                             </>
                             : null}
                     </>
