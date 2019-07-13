@@ -43,10 +43,9 @@ const PageOne = props => {
         props.removeHousingType(type);
     }
 
-    const {setCurrentPage} = props;
     //update page in nav - may remove. two sources of truth
     useEffect(() => {
-        setCurrentPage(1);
+        props.setCurrentPage(1);
     }, [])
 
     //req info
@@ -110,11 +109,7 @@ const PageOne = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return {}
-};
-
-export default connect(mapStateToProps, 
+export default connect(undefined, 
     {
         setCurrentPage, 
         addPropertyType, 

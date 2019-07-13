@@ -25,11 +25,13 @@ const Page = props => {
         case '4a':
             return <PageFour page={+props.match.params.pageNum} />
         case '5a':
+        case '4c':
             return <AdminPageFive page={+props.match.params.pageNum} />
         case '6a':
             return <AdminPageSix page={+props.match.params.pageNum} />
         case '7a':
-            return <AdminPageSeven page={+props.match.params.pageNum} />
+            return <AdminPageSeven page={+props.match.params.pageNum} room={+props.match.params.roomNum} />
+        
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }

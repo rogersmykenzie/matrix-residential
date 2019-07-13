@@ -18,6 +18,8 @@ const CheckboxComp = props => {
             } else {
                 props.whenUnclicked(props.label); //Runs whenUnclicked if not
             }
+        } else if(props.whenClicked || props.whenUnclicked) {
+            console.warn('You need to provide both a whenClicked and a whenUnclicked property to the CheckboxComp component to achieve onClick functionality');
         }
     }
     return (

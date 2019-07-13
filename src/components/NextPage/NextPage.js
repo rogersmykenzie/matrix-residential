@@ -6,6 +6,10 @@ import {buttonStyleMain} from '../../styles/GlobalStyles'
 //routing
 import {Link} from 'react-router-dom';
 
+/**
+ * @param {String} to - The route that the button links to  
+ */
+
 function NextPage(props) {
     return (
         <Link to={props.to}>

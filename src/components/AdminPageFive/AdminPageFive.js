@@ -14,7 +14,6 @@ import Popup from 'reactjs-popup';
 import Tooltip from '../Tooltip/Tooltip';
 
 function AdminPageFive(props) {
-    useState()
     const [rooms, dispatch] = useReducer(function (state, action) {
         switch (action.type) {
             case 'UPDATE_BEDS':
@@ -45,6 +44,7 @@ function AdminPageFive(props) {
             numDining: null,
             numLiving: null
         })
+        
     return (
         <main className='container'>
             <Paper className='page-two-paper'>

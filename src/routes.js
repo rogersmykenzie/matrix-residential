@@ -8,7 +8,7 @@ import Page from './components/Page/Page';
 
 export default (
     <Switch>
-        <Route path='/page/:pageNum/:num' component={Page} />
+        <Route path='/page/:pageNum/:roomNum' component={Page} />
         <Route path='/page/:pageNum' component={Page} />
         <Route path='/welcome' component={Welcome} />
         <Route path='/' component={Intro} />
