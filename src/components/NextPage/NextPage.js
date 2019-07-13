@@ -8,19 +8,22 @@ import {Link} from 'react-router-dom';
 
 /**
  * @param {String} to - The route that the button links to  
+ * @param {String} whenClicked - A function to run when the butotn is clicked
  */
 
 function NextPage(props) {
     return (
-        <Link to={props.to}>
-            <Button
-            className='fade-in admin-page-three-button'
-            style={{...buttonStyleMain, marginTop: "3vh"}}
-            variant='contained'
-            >
-                Next
-            </Button>
-        </Link>
+        <div onClick={props.whenClicked ? props.whenClicked : null}>
+            <Link to={props.to}>
+                <Button
+                className='fade-in admin-page-three-button'
+                style={{...buttonStyleMain, marginTop: "3vh"}}
+                variant='contained'
+                >
+                    Next
+                </Button>
+            </Link>
+        </div>
     )
 }
 

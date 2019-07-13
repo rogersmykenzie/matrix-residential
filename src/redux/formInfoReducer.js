@@ -9,7 +9,8 @@ const initialState = {
     elementarySchool: '',
     middleSchool: '',
     highSchool: '',
-    numRooms: {}
+    numRooms: {},
+    bedrooms: []
 }
 //type constants
 const UPDATE_NUM_ROOMS = 'UPDATE_NUM_ROOMS';
@@ -26,7 +27,14 @@ const SET_SQUARE_FOOTAGE_CHANGE_REASON = "SET_SQUARE_FOOTAGE_CHANGE_REASON"
 const ADD_ACCESSORY_UNIT_TYPES = 'ADD_ACCESSORY_UNIT_TYPES';
 const REMOVE_ACCESSORY_UNIT_TYPES = 'REMOVE_ACCESSORY_UNIT_TYPES';
 const CHANGE_SCHOOL = 'CHANGE_SCHOOL';
+const ADD_BEDROOM = 'ADD_BEDROOM';
 //action creators
+export function addBedroom(bedroom) {
+    return {
+        type: ADD_BEDROOM,
+        payload: bedroom
+    }
+}
 export function updateNumRooms(roomObj) {
     console.log('here')
     return {
@@ -117,6 +125,11 @@ export function addPropertyType(type) {
 }
 export default function reducer(state=initialState, action) {
     switch(action.type) {
+        case ADD_BEDROOM:
+            return {
+                ...state,
+                bedrooms: [...state.bedrooms, action.payload]
+            }
         case UPDATE_NUM_ROOMS:
             return {
                 ...state,

@@ -18,7 +18,7 @@ function AdminPageSeven(props) {
     let selectedRoomForm = (function() {
         switch(bedroomType) {
             case 'master':
-                return <MasterBedroomType reset={() => setType(null)} />
+                return <MasterBedroomType reset={() => setType(null)} roomNumber={props.room} />
             default: return null
         }
     })()
