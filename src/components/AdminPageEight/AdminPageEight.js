@@ -6,10 +6,10 @@ import NextPage from '../NextPage/NextPage';
 //redux
 import {connect} from 'react-redux';
 //routing
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 
-function AdminPageSix(props) {
-    if(props.numBeds <= 0) {
+function AdminPageEight(props) {
+    if(props.numDining <= 0) {
         return <Redirect to={`/page/${props.page + 2}`} />
     }
     return (
@@ -22,10 +22,10 @@ function AdminPageSix(props) {
     )
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(reduxState) {
     return {
-        numBeds: state.formInfoReducer.numRooms.numBeds
+        numDining: reduxState.formInfoReducer.numRooms.numDining
     }
 }
 
-export default connect(mapStateToProps)(AdminPageSix);
+export default connect(mapStateToProps)(AdminPageEight)

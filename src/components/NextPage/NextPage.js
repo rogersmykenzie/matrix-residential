@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 
 /**
  * @param {String} to - The route that the button links to  
- * @param {String} whenClicked - A function to run when the butotn is clicked
+ * @param {String} whenClicked - A function to run when the button is clicked
  */
 
 function NextPage(props) {

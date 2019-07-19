@@ -32,6 +32,7 @@ function MasterBedroomType(props) {
 
     function dispatchBedroom() {
         let bedroom = {
+            type: 'master',
             width,
             height,
             level,

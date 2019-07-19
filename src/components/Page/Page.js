@@ -7,11 +7,13 @@ import PageFour from '../PageFour/PageFour';
 import AdminPageFive from '../AdminPageFive/AdminPageFive';
 import AdminPageSix from '../AdminPageSix/AdminPageSix';
 import AdminPageSeven from '../AdminPageSeven/AdminPageSeven'
+import AdminPageEight from '../AdminPageEight/AdminPageEight';
+import AdminPageNine from '../AdminPageNine/AdminPageNine';
 //redux
 import {connect} from 'react-redux';
 
 const Page = props => {
-    //Switch hard a to `props.auth` for prod
+    //Switch hard a / c to `props.auth` for prod
     switch(+props.match.params.pageNum + 'a') {
         case '1c':
         case '1a':
@@ -31,7 +33,10 @@ const Page = props => {
             return <AdminPageSix page={+props.match.params.pageNum} />
         case '7a':
             return <AdminPageSeven page={+props.match.params.pageNum} room={+props.match.params.roomNum} />
-        
+        case '8a':
+            return <AdminPageEight page={+props.match.params.pageNum} room={+props.match.params.roomNum} />
+        case '9a':
+            return <AdminPageNine page={+props.match.params.pageNum} room={+props.match.params.roomNum} />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }

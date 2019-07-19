@@ -26,25 +26,37 @@ function AdminPageFive(props) {
                     ...state,
                     numDining: action.payload
                 }
-            case 'UPDATE_BATH':
+            case 'UPDATE_FULL_BATH':
                 return {
                     ...state,
-                    numBath: action.payload
+                    numFullBath: action.payload
+                }
+            case 'UPDATE_HALF_BATH':
+                return {
+                    ...state,
+                    numHalfBath: action.payload
                 }
             case 'UPDATE_LIVING':
                 return {
                     ...state,
                     numLiving: action.payload
                 }
+            case 'UPDATE_STORIES':
+                return {
+                    ...state,
+                    numStories: action.payload
+                }
             default: return state;
         }
     }, {
             numBeds: null,
-            numBath: null,
+            numFullBath: null,
+            numHalfBath: null,
             numDining: null,
-            numLiving: null
+            numLiving: null,
+            numStories: null
         })
-        
+    console.log(rooms)
     return (
         <main className='container'>
             <Paper className='page-two-paper'>
@@ -93,10 +105,10 @@ function AdminPageFive(props) {
                     <div className='fade-in'>
                         <h1>How many 
                             <Popup
-                                trigger={<span className='tooltip-trigger'> bathrooms </span>}
+                                trigger={<span className='tooltip-trigger'> full bathrooms </span>}
                                 position="right top"
                                 on="hover">
-                                    <Tooltip>This includes half bathrooms.</Tooltip>
+                                    <Tooltip>INSERT TOOLTIP HERE</Tooltip>
                             </Popup>do you have?</h1>
                         <Input
                             type='number'
@@ -106,10 +118,30 @@ function AdminPageFive(props) {
                                     style={{ width: '30px' }}
                                 ></i>
                             }
-                            onChange={(e) => dispatch({ type: 'UPDATE_BATH', payload: +e.target.value })}
+                            onChange={(e) => dispatch({ type: 'UPDATE_FULL_BATH', payload: +e.target.value })}
                         />
                     </div> : null}
-                {rooms.numBath !== null ?
+                {rooms.numFullBath !== null ?
+                    <div className='fade-in'>
+                        <h1>How many 
+                            <Popup
+                                trigger={<span className='tooltip-trigger'> half bathrooms </span>}
+                                position="right top"
+                                on="hover">
+                                    <Tooltip>INSERT TOOLTIP HERE</Tooltip>
+                            </Popup>do you have?</h1>
+                        <Input
+                            type='number'
+                            startAdornment={
+                                <i
+                                    className="fas fa-shower"
+                                    style={{ width: '30px' }}
+                                ></i>
+                            }
+                            onChange={(e) => dispatch({ type: 'UPDATE_HALF_BATH', payload: +e.target.value })}
+                        />
+                    </div> : null}
+                {rooms.numHalfBath !== null ?
                     <div className='fade-in'>
                         <h1>How many 
                             <Popup
@@ -130,7 +162,28 @@ function AdminPageFive(props) {
                             onChange={(e) => dispatch({ type: 'UPDATE_LIVING', payload: +e.target.value })}
                         />
                     </div> : null}
-                {rooms.numLiving !== null ? <span onClick={() => props.updateNumRooms(rooms)}><NextPage to={`/page/${props.page + 1}`} /></span> : null}
+                {rooms.numLiving !== null ?
+                    <div className='fade-in'>
+                        <h1>How many 
+                            <Popup
+                                trigger={<span className='tooltip-trigger'> stories </span>}
+                                position='right top'
+                                on="hover">
+                                    <Tooltip>INSERT TOOLTIP HERE</Tooltip>
+                            </Popup>
+                            is your house?</h1>
+                        <Input
+                            type='number'
+                            startAdornment={
+                                <i
+                                    className="fas fa-home"
+                                    style={{ width: '30px' }}
+                                ></i>
+                            }
+                            onChange={(e) => dispatch({ type: 'UPDATE_STORIES', payload: +e.target.value })}
+                        />
+                    </div> : null}
+                {rooms.numStories !== null ? <span onClick={() => props.updateNumRooms(rooms)}><NextPage to={`/page/${props.page + 1}`} /></span> : null}
             </Paper>
         </main>
     )

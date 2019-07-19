@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import Paper from '@material-ui/core/Paper';
 //components
 import MasterBedroomType from '../bedroomTypes/MasterBedroomType/MasterBedroomType'
+import GuestBedroomType from '../bedroomTypes/GuestBedroomType/GuestBedroomType';
+import OtherBedroomType from '../bedroomTypes/OtherBedroomType/OtherBedroomType';
 //redux
 import {connect} from 'react-redux';
 //routing
@@ -14,11 +16,20 @@ function AdminPageSeven(props) {
     if(props.room > props.numBeds) {
         return <Redirect to='/page/8/1' />
     }
-    console.log(props)
-    let selectedRoomForm = (function() {
+
+    const componentProps = {
+        reset: () => setType(null),
+        roomNumber: props.room
+    }
+
+    let selectedRoomForm = (function() { //im just lazy and don't want to add breaks
         switch(bedroomType) {
             case 'master':
-                return <MasterBedroomType reset={() => setType(null)} roomNumber={props.room} />
+                return <MasterBedroomType {...componentProps} />
+            case 'guest':
+                return <GuestBedroomType {...componentProps} />
+            case 'regular':
+                return <OtherBedroomType {...componentProps} />
             default: return null
         }
     })()
