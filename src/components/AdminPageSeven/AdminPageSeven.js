@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 //mui
 import Paper from '@material-ui/core/Paper';
 //components
@@ -13,12 +13,20 @@ import {Redirect} from 'react-router-dom';
 //Bedroom Form
 function AdminPageSeven(props) {
     const [bedroomType, setType] = useState(null);
+    //ref
+    const selectNode = useRef(null);
+
     if(props.room > props.numBeds) {
         return <Redirect to='/page/8/1' />
     }
 
+    function reset() {
+        setType(null);
+        selectNode.current.value = 'none';
+    }
+
     const componentProps = {
-        reset: () => setType(null),
+        reset,
         roomNumber: props.room
     }
 
@@ -38,8 +46,8 @@ function AdminPageSeven(props) {
         <div className='container'>
             <Paper className='page-two-paper'>
                 <h1>What type of bedroom is this?</h1>
-                <select onChange={(e) => setType(e.target.value)}>
-                    <option>-- Select an option</option>
+                <select ref={selectNode} onChange={(e) => setType(e.target.value)}>
+                    <option value='none'>-- Select an option</option>
                     <option value='master'>Master</option>
                     <option value='guest'>Guest</option>
                     <option value='regular'>Regular</option>

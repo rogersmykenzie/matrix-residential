@@ -25,16 +25,18 @@ function RadioButtons(props) {
     const radioButtons = props.buttons ? props.buttons.map(val => (
         <React.Fragment key={val}>
             <Radio 
-            checked={selectedButton === val}
-            onChange={handleChange}
-            value={val}
+                checked={selectedButton === val}
+                onChange={handleChange}
+                value={val}
             />
             <span
             className='radio-button-text'
-            //idk what this is vv
+            //idk what this is vv its 2am and im dumb
             onClick={() => handleChange({target: {value: val}})}
             value={val}
-            >{val}</span>
+            >
+                {val}
+            </span>
             {props.setColumn && <br />}
         </React.Fragment>
     )) : null

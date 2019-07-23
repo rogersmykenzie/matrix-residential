@@ -8,19 +8,19 @@ import './App.css';
 import { Provider } from 'react-redux'
 import store from './redux/store'
 //routing imports
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import routes from './routes'
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <div className="App">
           <Nav />
           {routes}
         </div>
       </Provider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

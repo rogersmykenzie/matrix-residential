@@ -15,7 +15,7 @@ function AdminPageEight(props) {
     return (
         <main className='container'>
             <Paper className='page-two-paper'>
-                <h1>We will now create an entry for each bedroom in your house.</h1>
+                <h1>We will now create an entry for each dining room in your house.</h1>
                 <NextPage to={`/page/${props.page + 1}/1`} />
             </Paper>
         </main>
