@@ -17,7 +17,7 @@ function GuestBedroomType(props) {
     const [height, setHeight] = useState(-1);
     const [level, setLevel] = useState(-1);
     const [selectedProps, setProp] = useState([]);
-    const bedroomProps = ['Built Ins', 'Cedar Closet', 'Custom Closet System', 'Split Bedrooms', 'Walk-in Closets']
+    const BEDROOM_PROPS = ['Built Ins', 'Cedar Closet', 'Custom Closet System', 'Split Bedrooms', 'Walk-in Closets']
     
     function addProp(prop) {
         setProp([...selectedProps, prop]);
@@ -54,7 +54,7 @@ function GuestBedroomType(props) {
             <div>
                 <RadioButtons buttons={[1,2,3]} onSelection={setLevel} />
             </div>
-            {bedroomProps.map(prop => <CheckboxComp key={prop} label={prop} whenClicked={addProp} whenUnclicked={removeProp} />)}
+            {BEDROOM_PROPS.map(prop => <CheckboxComp key={prop} label={prop} whenClicked={addProp} whenUnclicked={removeProp} />)}
             <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} />
         </div>
     )

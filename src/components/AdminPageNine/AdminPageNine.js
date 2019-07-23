@@ -1,6 +1,12 @@
 import React, {useState, useRef} from 'react';
 //components
 import DiningRoomType from '../diningTypes/DiningRoomType/DiningRoomType';
+import KitchenType from '../diningTypes/KitchenType/KitchenType';
+import BreakfastNookType from '../diningTypes/BreakfastNookType/BreakfastNookType';
+//redux
+import { connect } from 'react-redux';
+//routing
+import { Redirect } from 'react-router-dom';
 
 function AdminPageNine(props) {
     //state
@@ -11,6 +17,11 @@ function AdminPageNine(props) {
     function reset() {
         selectNode.current.value = 'none';
         setOption(null)
+    }
+    //redirect
+    console.log(props)
+    if(props.room > props.numDining) {
+        return <Redirect to='/page/10' />
     }
     //pass-down props
     const componentProps = {
@@ -23,7 +34,9 @@ function AdminPageNine(props) {
             case 'dining-room':
                 return <DiningRoomType {...componentProps} />
             case 'kitchen':
-                return null
+                return <KitchenType {...componentProps} />
+            case 'breakfast-nook':
+                return <BreakfastNookType {...componentProps} />;
             default: return <h1>Oh god please help</h1>
         }
     })()
@@ -42,4 +55,11 @@ function AdminPageNine(props) {
     )
 }
 
-export default AdminPageNine;
+function mapStateToProps(reduxState) {
+    console.log(reduxState);
+    return {
+        numDining: reduxState.formInfoReducer.numRooms.numDining
+    }
+}
+
+export default connect(mapStateToProps)(AdminPageNine);
