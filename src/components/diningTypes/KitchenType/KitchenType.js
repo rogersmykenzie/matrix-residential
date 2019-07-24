@@ -11,6 +11,7 @@ function KitchenType(props) {
             needsRadio
             needsProperties
             needsNext
+            sectionPage={props.sectionPage}
             properties={PROPERTIES}
             room={props.roomNumber}
             whenClicked={props.reset}

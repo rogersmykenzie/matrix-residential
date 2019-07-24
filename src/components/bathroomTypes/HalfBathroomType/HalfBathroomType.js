@@ -2,13 +2,9 @@ import React from 'react';
 //components
 import BuildForm from '../../BuildForm/BuildForm';
 
-
-function BreakfastNookType(props) {
-    //state
-    const [formData, setFormData] = React.useState(null);
-    console.log(props)
+function HalfBathroomType(props) {
     //constants
-    const PROPERTIES = ["Breakfast", "Built Ins", "Butlers Pantry", "Coffee Bar", "Concrete Counter", "Eat-in Kitchen", "Island", "Tile Counter"];
+    const PROPERTIES = ["Bidet", "Medicine Cabinet"];
     return (
         <BuildForm 
             needsInputs
@@ -19,9 +15,10 @@ function BreakfastNookType(props) {
             properties={PROPERTIES}
             room={props.roomNumber}
             whenClicked={props.reset}
-            whenDone={setFormData}
+            whenDone={formData => console.log(formData)}
         />
     )
+
 }
 
-export default BreakfastNookType;
+export default HalfBathroomType;

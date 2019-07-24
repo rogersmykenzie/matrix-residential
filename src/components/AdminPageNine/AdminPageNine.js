@@ -26,7 +26,8 @@ function AdminPageNine(props) {
     //pass-down props
     const componentProps = {
         reset,
-        roomNumber: props.room
+        roomNumber: props.room,
+        sectionPage: props.page
     }
     //component decider
     let currentForm = (function() {

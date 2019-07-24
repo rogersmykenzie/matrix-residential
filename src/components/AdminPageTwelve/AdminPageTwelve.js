@@ -8,15 +8,14 @@ import { connect } from 'react-redux';
 //routing
 import {Redirect} from 'react-router-dom';
 
-function AdminPageTen(props) {
-    console.log(props)
-    if(props.numBathrooms <= 0)
-        return <Redirect to='/page/14' />
+function AdminPageTwelve(props) {
+    if(props.room)
+        return <Redirect to='/page/12' />
         
     return (
         <main className='container'>
             <Paper className='page-two-paper'>
-                <h1>We will now create an entry for each bathroom in your house.</h1>
+                <h1>We will now create an entry for each living room in your house.</h1>
                 <NextPage to={`/page/${props.page + 1}/1`} />
             </Paper>
         </main>
@@ -30,4 +29,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default connect(mapStateToProps)(AdminPageTen);
+export default connect(mapStateToProps)(AdminPageTwelve);
