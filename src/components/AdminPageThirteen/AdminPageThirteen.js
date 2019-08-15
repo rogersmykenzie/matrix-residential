@@ -1,59 +1,69 @@
-import React, {useState, useRef} from 'react';
-//components
-//routing
-import {Redirect} from 'react-router-dom';
+import React from 'react';
 //redux
 import {connect} from 'react-redux';
+//components
+import Study from '../livingTypes/Study/Study';
+import MediaRoom from '../livingTypes/MediaRoom/MediaRoom';
+import GameRoom from '../livingTypes/GameRoom/GameRoom';
+import LivingRoom from '../livingTypes/LivingRoom/LivingRoom';
+import UtilityRoom from '../livingTypes/UtilityRoom/UtilityRoom';
+import Error from '../Error/Error';
+//routing
+import {Redirect} from 'react-router-dom';
 
-function AdminPageEleven(props) {
+
+function AdminPageThirteen(props) {
     //state
-    const [selectedOption, setOption] = useState(null)
+    const [option, setOption] = React.useState(null);
     //refs
-    const selectNode = useRef()
+    const selectNode = React.createRef();
     //redirect
-    if(props.room > props.numBathrooms) {
+    if(props.room > props.numLiving) {
         return <Redirect to="/page/14" />
     }
+    //component decider
+    const CurrentForm = (function() {
+        switch(option) {
+            case 'study':
+                return Study;
+            case 'media-room':
+                return MediaRoom;
+            case 'game-room':
+                return GameRoom;
+            case 'living-room':
+                return LivingRoom;
+            case 'utility':
+                return UtilityRoom;
+            default: return Error;
+        }
+    })()
     //event handlers
     function reset() {
         selectNode.current.value = 'none';
         setOption(null);
     }
-    //pass-down props
-    const componentProps = {
-        reset,
-        roomNumber: props.room,
-        sectionPage: props.page
-    }
-    //component decider
-    let currentForm = (function() {
-        switch(selectedOption) {
-            case 'full-bathroom':
-                return <FullBathroomType {...componentProps} />
-            case 'half-bathroom':
-                return <HalfBathroomType {...componentProps} />
-            default: return <h1>oh god please help</h1>
-        }
-    })()
-    //render
+    // console.log(props);
     return (
         <>
-            <h1>Please Specify Bathroom {props.room}?</h1>
+            <h1>Please Specify Living Room {props.room}</h1>
             <select ref={selectNode} onChange={e => setOption(e.target.value)}>
                 <option value='none'>- Select an Option -</option>
-                <option value='full-bathroom'>Full Bathroom</option>
-                <option value='half-bathroom'>Half Bathroom</option>
+                <option value='study'>Study</option>
+                <option value='media-room'>Media Room</option>
+                <option value='game-room'>Game Room</option>
+                <option value='living-room'>Living Room</option>
+                <option value="utility">Utility Room</option>
             </select>
-            {currentForm}
+            {<CurrentForm reset={reset} roomNumber={props.room} sectionPage={props.page} />}
         </>
     )
 }
 
 function mapStateToProps(reduxState) {
-    const {numFullBath, numHalfBath} = reduxState.formInfoReducer.numRooms
+    console.log(reduxState);
     return {
-        numBathrooms: numFullBath + numHalfBath
+        numLiving: reduxState.formInfoReducer.numRooms.numLiving
     }
 }
 
-export default connect(mapStateToProps)(AdminPageEleven);
+export default connect(mapStateToProps)(AdminPageThirteen);
