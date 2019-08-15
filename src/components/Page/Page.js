@@ -13,6 +13,7 @@ import AdminPageTen from '../AdminPageTen/AdminPageTen';
 import AdminPageEleven from '../AdminPageEleven/AdminPageEleven';
 import AdminPageTwelve from '../AdminPageTwelve/AdminPageTwelve';
 import AdminPageThirteen from '../AdminPageThirteen/AdminPageThirteen';
+import AdminPageFourteen from '../AdminPageFourteen/AdminPageFourteen';
 //redux
 import {connect} from 'react-redux';
 
@@ -54,6 +55,8 @@ const Page = props => {
             return <AdminPageTwelve page={+props.match.params.pageNum} room={+props.match.params.roomNum} />
         case '13a':
             return <AdminPageThirteen {...myProps} />
+        case '14a':
+            return <AdminPageFourteen />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }

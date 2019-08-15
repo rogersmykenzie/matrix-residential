@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 /**
  * @param {String} to - The route that the button links to  
  * @param {String} whenClicked - A function to run when the button is clicked
+ * @param {String} buttonText - Text for the button to display
  */
 
 function NextPage(props) {
@@ -20,7 +21,7 @@ function NextPage(props) {
                 style={{...buttonStyleMain, marginTop: "3vh"}}
                 variant='contained'
                 >
-                    Next
+                    {props.buttonText === undefined ? "Next" : props.buttonText}
                 </Button>
             </Link>
         </div>
