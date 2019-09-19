@@ -14,6 +14,12 @@ import AdminPageEleven from '../AdminPageEleven/AdminPageEleven';
 import AdminPageTwelve from '../AdminPageTwelve/AdminPageTwelve';
 import AdminPageThirteen from '../AdminPageThirteen/AdminPageThirteen';
 import AdminPageFourteen from '../AdminPageFourteen/AdminPageFourteen';
+import InteriorFeaturesForm from "../InteriorFeaturesForm/InteriorFeaturesForm";
+import AlarmQuestion from "../AlarmQuestion/AlarmQuestion";
+import RoofForm from "../RoofForm/RoofForm";
+import KitchenEquipForm from "../KitchenEquipForm/KitchenEquipForm";
+import PoolQuestion from "../PoolQuestion/PoolQuestion";
+import HandicapQuestion from "../HandicapQuestion/HandicapQuestion";
 //redux
 import {connect} from 'react-redux';
 
@@ -23,7 +29,6 @@ const Page = props => {
         page: +props.match.params.pageNum,
         room: +props.match.params.roomNum
     }
-
     switch(+props.match.params.pageNum + 'a') {
         case '1c':
         case '1a':
@@ -57,13 +62,25 @@ const Page = props => {
             return <AdminPageThirteen {...myProps} />
         case '14a':
             return <AdminPageFourteen />
+        case '15a':
+            return <InteriorFeaturesForm page={myProps.page} />
+        case '16a':
+            return <AlarmQuestion page={myProps.page} />
+        case '17a':
+            return <RoofForm page={myProps.page} />
+        case '18a':
+            return <KitchenEquipForm page={myProps.page} />
+        case '19a':
+            return <PoolQuestion page={myProps.page} />
+        case '20a':
+            return <HandicapQuestion page={myProps.page} />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }
 
 const mapStateToProps = state => {
     return {
-        auth: state.userReducer.auth
+        auth: state.userReducer.auth 
     }
 }
 

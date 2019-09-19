@@ -5,6 +5,7 @@ import Input from '@material-ui/core/Input'
 import CheckboxComp from '../../CheckboxComp/CheckboxComp';
 import NextPage from '../../NextPage/NextPage';
 import RadioButtons from '../../RadioButtons/RadioButtons';
+import ExtraRoomNextButton from "../../ExtraRoomNextButton/ExtraRoomNextButton";
 //css
 import './MasterBedroomType.css';
 //redux
@@ -70,9 +71,12 @@ function MasterBedroomType(props) {
                 })}
             </div>
             : null}
-            {selectedProps.length > 0 ?
+            {selectedProps.length > 0 && !props.cameFromExtraRoom ?
             <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} />
-            : null}
+            : selectedProps.length > 0 ? 
+            <ExtraRoomNextButton 
+            resetForm={props.resetForm}
+            /> : null}
         </div>
     )
 }

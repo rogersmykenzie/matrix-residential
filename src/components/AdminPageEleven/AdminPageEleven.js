@@ -6,6 +6,8 @@ import HalfBathroomType from '../bathroomTypes/HalfBathroomType/HalfBathroomType
 import {Redirect} from 'react-router-dom';
 //redux
 import {connect} from 'react-redux';
+//hoc
+import withWasClickedFunctionality from '../hoc/withWasClickedFunctionality/withWasClickedFunctionality'
 
 function AdminPageEleven(props) {
     //state
@@ -20,6 +22,7 @@ function AdminPageEleven(props) {
     //event handlers
     function reset() {
         selectNode.current.value = 'none';
+        props.setWasClicked(false);
         setOption(null);
     }
     //pass-down props
@@ -42,8 +45,11 @@ function AdminPageEleven(props) {
     return (
         <>
             <h1>Please Specify Bathroom {props.room}?</h1>
-            <select ref={selectNode} onChange={e => setOption(e.target.value)}>
-                <option value='none'>- Select an Option -</option>
+            <select ref={selectNode} onChange={e => {
+                props.setWasClicked(true)
+                setOption(e.target.value)}
+                }>
+                {props.wasClicked === false ? <option value='none'>- Select an Option -</option> : null}
                 <option value='full-bathroom'>Full Bathroom</option>
                 <option value='half-bathroom'>Half Bathroom</option>
             </select>
@@ -59,4 +65,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default connect(mapStateToProps)(AdminPageEleven);
+export default connect(mapStateToProps)(withWasClickedFunctionality(AdminPageEleven));

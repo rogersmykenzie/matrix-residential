@@ -10,9 +10,12 @@ import UtilityRoom from '../livingTypes/UtilityRoom/UtilityRoom';
 import Error from '../Error/Error';
 //routing
 import {Redirect} from 'react-router-dom';
+//hoc
+import withWasClickedFunctionality from '../hoc/withWasClickedFunctionality/withWasClickedFunctionality';
 
 
 function AdminPageThirteen(props) {
+    console.log(props);
     //state
     const [option, setOption] = React.useState(null);
     //refs
@@ -40,14 +43,18 @@ function AdminPageThirteen(props) {
     //event handlers
     function reset() {
         selectNode.current.value = 'none';
+        props.setWasClicked(false);
         setOption(null);
     }
     // console.log(props);
     return (
         <>
             <h1>Please Specify Living Room {props.room}</h1>
-            <select ref={selectNode} onChange={e => setOption(e.target.value)}>
-                <option value='none'>- Select an Option -</option>
+            <select ref={selectNode} onChange={e => {
+                props.setWasClicked(true);
+                setOption(e.target.value)
+            }}>
+                {props.wasClicked === false ? <option value='none'>- Select an Option -</option> : null}
                 <option value='study'>Study</option>
                 <option value='media-room'>Media Room</option>
                 <option value='game-room'>Game Room</option>
@@ -66,4 +73,4 @@ function mapStateToProps(reduxState) {
     }
 }
 
-export default connect(mapStateToProps)(AdminPageThirteen);
+export default connect(mapStateToProps)(withWasClickedFunctionality(AdminPageThirteen));

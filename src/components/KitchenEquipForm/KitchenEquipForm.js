@@ -1,0 +1,38 @@
+import React from "react";
+//components
+import CheckboxComp from "../CheckboxComp/CheckboxComp";
+import NextPage from "../NextPage/NextPage";
+
+function KitchenEquipForm(props) {
+    //state
+    const [selectedEquip, setSelectedEquip] = React.useState([]);
+    //event handlers
+    function onCheck(option) {
+        setSelectedEquip([...selectedEquip, option]);
+    }
+    function onUncheck(option) {
+        let arr = [...selectedEquip];
+        arr.splice(arr.indexOf(option), 1);
+        setSelectedEquip([...arr]);
+    }
+    //constants
+    const kitchenEquipment = ["Built-in Coffee Maker", "Built-in Compacter", "Built-in Icemaker", "Built-in Microwave", "Built-in Refrig/Freezer", "Commercial Grade Range", "Commercial Grade Vent", "Convection Oven", "Cooktop - Electric", "Cooktop - Gas", "Dishwasher", "Disposal", "Double Oven", "Drop in Range/Oven - Gas", "Dryer", "Dual Dishwashers", "Dual Fuel Range", "Indoor Grill", "None", "Other", "Oven - Electric", "Oven - Gas", "Plumbed for Gas in Kitchen", "Range/Oven - Electric", "Range/Oven - Gas", "Refrigerator", "Vent Mechanism", "Warmer Oven Drawer", "Washer", "Water Line to Refrig"];
+    //render
+    return (
+        <>
+            <h1>Select any of the following equipment included with your kitchen:</h1>
+            {kitchenEquipment.map(val => {
+                return <CheckboxComp 
+                    label={val}
+                    whenClicked={onCheck}
+                    whenUnclicked={onUncheck}
+                />
+            })}
+            <NextPage 
+                to={`/page/${props.page + 1}`}
+            />
+        </>
+    );
+}
+
+export default KitchenEquipForm;

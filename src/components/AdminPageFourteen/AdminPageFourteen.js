@@ -11,6 +11,10 @@ function AdminPageFourteen(props) {
                 to='/page/15'
                 buttonText="No"
             />
+            <NextPage
+                to="/rooms/extra"
+                buttonText="Yes"
+            />
         </>
     )
 }

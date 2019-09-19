@@ -10,7 +10,7 @@ import NextPage from '../NextPage/NextPage';
  * @param {Boolean} needsRadio - A boolean stating whether Radio Buttons should be shown on the form
  * @param {Boolean} needsProperties - A boolean stating whether Properties should be shown on the form
  * @param {Boolean} needsNext - A boolean stating whether a next button should be shown on the form
- * @param {Number/String} sectionPage - The current section page so the next button can route properly
+ * @param {Number|String} sectionPage - The current section page so the next button can route properly
  * @param {Array[String]} properties - An array of all the properties for the form
  * @param {Number} room - The current room number
  * @param {Function} whenClicked - A function to run when the Next button is clicked.

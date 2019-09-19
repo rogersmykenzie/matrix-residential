@@ -11,6 +11,7 @@ import NextPage from '../../NextPage/NextPage';
 import {addBedroom} from '../../../redux/formInfoReducer';
 //redux
 import {connect} from 'react-redux';
+import ExtraRoomNextButton from '../../ExtraRoomNextButton/ExtraRoomNextButton';
 
 function GuestBedroomType(props) {
     const [width, setWidth] = useState(-1);
@@ -55,7 +56,10 @@ function GuestBedroomType(props) {
                 <RadioButtons buttons={[1,2,3]} onSelection={setLevel} />
             </div>
             {BEDROOM_PROPS.map(prop => <CheckboxComp key={prop} label={prop} whenClicked={addProp} whenUnclicked={removeProp} />)}
-            <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} />
+            {!props.cameFromExtraRoom ? <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} /> 
+            : <ExtraRoomNextButton 
+            resetForm={props.resetForm}
+            />}
         </div>
     )
 } 

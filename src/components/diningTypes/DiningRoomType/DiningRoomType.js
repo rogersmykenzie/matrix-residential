@@ -5,6 +5,7 @@ import Input from '@material-ui/core/Input';
 import RadioButtons from '../../RadioButtons/RadioButtons';
 import CheckboxComp from '../../CheckboxComp/CheckboxComp';
 import NextPage from '../../NextPage/NextPage'
+import ExtraRoomNextButton from '../../ExtraRoomNextButton/ExtraRoomNextButton';
 
 function DiningRoomType(props) {
     //state
@@ -49,10 +50,15 @@ function DiningRoomType(props) {
                     whenUnclicked={removeProperty}
                 />
             ))}
+            {!props.cameFromExtraRoom 
+            ? 
             <NextPage 
                 to={`/page/9/${props.roomNumber + 1}`}
                 whenClicked={props.reset}
             />
+            : 
+            <ExtraRoomNextButton resetForm={props.resetForm} />
+            }
         </>
     )
 }
