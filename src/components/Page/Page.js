@@ -20,6 +20,14 @@ import RoofForm from "../RoofForm/RoofForm";
 import KitchenEquipForm from "../KitchenEquipForm/KitchenEquipForm";
 import PoolQuestion from "../PoolQuestion/PoolQuestion";
 import HandicapQuestion from "../HandicapQuestion/HandicapQuestion";
+import FlooringForm from "../FlooringForm/FlooringForm"
+import FeatureTotals from "../FeatureTotals/FeatureTotals";
+import SmartHomeQuestion from "../SmartHomeQuestion/SmartHomeQuestion";
+import FireplaceForm from "../FireplaceForm/FireplaceForm"
+import FoundationForm from "../FoundationForm/FoundationForm";
+import ParkingFeaturesForm from "../ParkingFeaturesForm/ParkingFeaturesForm"
+import CommonFeaturesForm from '../CommmonFeaturesForm/CommonFeaturesForm';
+import SpecialNotesForm from '../SpecialNotesForm/SpecialNotesForm';
 //redux
 import {connect} from 'react-redux';
 
@@ -74,6 +82,22 @@ const Page = props => {
             return <PoolQuestion page={myProps.page} />
         case '20a':
             return <HandicapQuestion page={myProps.page} />
+        case '21a':
+            return <FlooringForm page={myProps.page} />
+        case '22a':
+            return <FeatureTotals page={myProps.page} />
+        case '23a':
+            return <SmartHomeQuestion page={myProps.page} />
+        case '24a':
+            return <FireplaceForm page={myProps.page} />
+        case '25a':
+            return <FoundationForm page={myProps.page} />
+        case '26a':
+            return <ParkingFeaturesForm page={myProps.page} />
+        case '27a':
+            return <CommonFeaturesForm page={myProps.page} />
+        case '28a':
+            return <SpecialNotesForm page={myProps.page} />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }
