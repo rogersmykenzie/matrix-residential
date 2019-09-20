@@ -26,10 +26,24 @@ import SmartHomeQuestion from "../SmartHomeQuestion/SmartHomeQuestion";
 import FireplaceForm from "../FireplaceForm/FireplaceForm"
 import FoundationForm from "../FoundationForm/FoundationForm";
 import ParkingFeaturesForm from "../ParkingFeaturesForm/ParkingFeaturesForm"
-import CommonFeaturesForm from '../CommmonFeaturesForm/CommonFeaturesForm';
+import CommonFeaturesForm from '../CommonFeaturesForm/CommonFeaturesForm';
 import SpecialNotesForm from '../SpecialNotesForm/SpecialNotesForm';
+import WaterfrontQuestion from '../WaterfrontQuestion/WaterfrontQuestion';
+import LotIntro from "../LotIntro/LotIntro";
+import EasementsForm from "../EasementsForm/EasementsForm"
+import LotDescriptionForm from "../LotDescriptionForm/LotDescriptionForm"
+import FenceForm from "../FenceForm/FenceForm"
+import ExteriorFeaturesForm from '../ExteriorFeaturesForm/ExteriorFeaturesForm';
+import SoilForm from '../SoilForm/SoilForm';
+import RestrictionsForm from '../RestrictionsForm/RestrictionsForm';
+import StreetUtilitiesForm from "../StreetUtilitiesForm/StreetUtilitiesForm";
+import HeatingCoolingForm from '../HeatingCoolingForm/HeatingCoolingForm';
+import MudDistrictQuestion from '../MudDistrictQuestion/MudDistrictQuestion';
+import GreenFeaturesForm from '../GreenFeaturesForm/GreenFeaturesForm';
+import GreenCertificationForm from '../GreenCertificationForm/GreenCertificationForm';
 //redux
 import {connect} from 'react-redux';
+import EnergyEfficiencyForm from '../EnergyEfficiencyForm/EnergyEfficiencyForm';
 
 const Page = props => {
     //Switch hard a / c to `props.auth` for prod
@@ -98,6 +112,34 @@ const Page = props => {
             return <CommonFeaturesForm page={myProps.page} />
         case '28a':
             return <SpecialNotesForm page={myProps.page} />
+        case '29a':
+            return <WaterfrontQuestion page={myProps.page} />
+        case '30a':
+            return <LotIntro page={myProps.page} />
+        case '31a':
+            return <EasementsForm page={myProps.page} /> 
+        case '32a':
+            return <LotDescriptionForm page={myProps.page} />
+        case '33a':
+            return <FenceForm page={myProps.page} />
+        case '34a':
+            return <ExteriorFeaturesForm page={myProps.page} />
+        case '35a':
+            return <SoilForm page={myProps.page} />
+        case '36a':
+            return <RestrictionsForm page={myProps.page} />
+        case '37a':
+            return <StreetUtilitiesForm page={myProps.page} />
+        case '38a':
+            return <HeatingCoolingForm page={myProps.page} />
+        case '39a':
+            return <MudDistrictQuestion page={myProps.page} />
+        case '40a':
+            return <GreenFeaturesForm page={myProps.page} />
+        case '41a':
+            return <GreenCertificationForm page={myProps.page} />
+        case '42a':
+            return <EnergyEfficiencyForm page={myProps.page} />
         default: return <h1>Oops! Page could not be found :( Please contact site administrator at mykenzierogers@gmail.com</h1>
     }
 }
