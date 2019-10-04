@@ -3,6 +3,10 @@ import React from "react";
 import RadioButtons from "../RadioButtons/RadioButtons";
 import NextPage from "../NextPage/NextPage";
 import CheckboxComp from "../CheckboxComp/CheckboxComp"
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper";
 
 function AlarmQuestion(props) {
     //state
@@ -22,9 +26,17 @@ function AlarmQuestion(props) {
         arr.splice(arr.indexOf(option), 1);
         setSelectedTypes([...arr]);
     }
+    function postInfo() {
+        Axios.post("/info", {
+            alarmInfo: {
+                selection,
+                selectedTypes
+            }
+        })
+    }
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Does your home have any alarms/security system?</h1>
             <RadioButtons 
                 buttons={["Yes", "No"]}
@@ -42,8 +54,9 @@ function AlarmQuestion(props) {
             }
             <NextPage 
                 to={`/page/${props.page + 1}`}
+                whenClicked={postInfo}
             />
-        </>
+        </Paper>
     )
 }
 

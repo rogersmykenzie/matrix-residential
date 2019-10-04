@@ -8,4 +8,4 @@ function SoilForm(props) {
     )
 }
 
-export default withSimpleForm(SoilForm, ["Black", "Clay", "Fill", "Limestone", "Other", "Rock/Shale", "Shady Loam", "Unknown"]);
+export default withSimpleForm(SoilForm, ["Black", "Clay", "Fill", "Limestone", "Other", "Rock/Shale", "Shady Loam", "Unknown"], "soilInfo");

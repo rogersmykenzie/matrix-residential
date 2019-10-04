@@ -24,6 +24,14 @@ function DiningRoomType(props) {
         arr.splice(arr.indexOf(prop), 1);
         setSelectedProps(arr);
     }
+    function whenDone() {
+        props.reset({
+            width,
+            height,
+            level,
+            properties: selectedProps
+        })
+    }
     //render
     return (
         <>
@@ -54,10 +62,15 @@ function DiningRoomType(props) {
             ? 
             <NextPage 
                 to={`/page/9/${props.roomNumber + 1}`}
-                whenClicked={props.reset}
+                whenClicked={whenDone}
             />
             : 
-            <ExtraRoomNextButton resetForm={props.resetForm} />
+            <ExtraRoomNextButton resetForm={() => props.reset({
+                width,
+                height,
+                level,
+                properties: selectedProps
+            })} />
             }
         </>
     )

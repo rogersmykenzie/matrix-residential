@@ -12,11 +12,12 @@ import {buttonStyleMain} from '../../styles/GlobalStyles';
 //components
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
 import NextPage from '../NextPage/NextPage';
+import RadioButtons from '../RadioButtons/RadioButtons';
 //redux
 import {connect} from 'react-redux';
 import {setSquareFootage, setChangeReason} from '../../redux/formInfoReducer';
-//test
-import RadioButtons from '../RadioButtons/RadioButtons';
+//fetch
+import Axios from 'axios';
 
 const AdminPageThree = props => {
     //State
@@ -52,6 +53,14 @@ const AdminPageThree = props => {
         props.setChangeReason(value)
     }
 
+    const postData = () => {
+        Axios.post("/info", {
+            sqFtSelection,
+            customSqFt,
+            changeReason
+        })
+    }
+
     //UI
     return <div>
         <div className='container'>
@@ -59,7 +68,11 @@ const AdminPageThree = props => {
                 <h1>Is your Square Footage...?</h1>
                 <form
                 onSubmit={e => e.preventDefault()}>
-                    <Radio 
+                    <RadioButtons 
+                    buttons={["Same as Tax Record", "Change to:"]}
+                    onSelection={setSqFtSelection}
+                    />
+                    {/* <Radio 
                     checked={sqFtSelection === 'Same as Tax Record'}
                     onChange={handleRadioChange}
                     value={SAME_AS_TAX_RECORD}
@@ -68,8 +81,8 @@ const AdminPageThree = props => {
                     className='admin-page-three-label'
                     onClick={handlePClick}
                     value={SAME_AS_TAX_RECORD}
-                    >Same as Tax Record</p>
-                    <Radio 
+                    >Same as Tax Record</p> */}
+                    {/* <Radio 
                     checked={sqFtSelection === 'Change to:'}
                     onChange={handleRadioChange}
                     value="Change to:"
@@ -78,9 +91,10 @@ const AdminPageThree = props => {
                     className='admin-page-three-label'
                     onClick={handlePClick}
                     value="Change to:"
-                    >Change to:</p>
+                    >Change to:</p> */}
                     {sqFtSelection === 'Change to:' ?
                     <>
+                        <br />
                         <TextField 
                         onChange={handleCustomSqFt}
                         style={styles.inputStyle}
@@ -101,7 +115,10 @@ const AdminPageThree = props => {
                     : null}
                     <br />
                     {sqFtSelection === 'Same as Tax Record' || (changeReason && customSqFt)
-                    ? <NextPage to={`/page/${props.page + 1}`} />
+                    ? <NextPage 
+                    to={`/page/${props.page + 1}`} 
+                    whenClicked={postData}
+                    />
                     : null}
                 </form>
             </Paper>

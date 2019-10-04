@@ -7,21 +7,33 @@ import BreakfastNookType from '../diningTypes/BreakfastNookType/BreakfastNookTyp
 import { connect } from 'react-redux';
 //routing
 import { Redirect } from 'react-router-dom';
+//mui
+import Paper from "@material-ui/core/Paper"
+import Axios from 'axios';
 
 function AdminPageNine(props) {
     //state
     const [selectOption, setOption] = useState(null)
+    const [formData, setFormData] = useState([]);
     //refs
     const selectNode = useRef();
     //event handlers
-    function reset() {
+    function reset(data) {
+        setFormData([...formData, {
+            ...data,
+            type: selectOption
+        }])
         selectNode.current.value = 'none';
         setOption(null)
     }
     //redirect
     console.log(props)
     if(props.room > props.numDining) {
-        return <Redirect to='/page/10' />
+        console.log("here")
+        Axios.post("/info", {
+            diningData: formData
+        })
+        return <Redirect to={`/page/${props.page + 1}`} />
     }
     //pass-down props
     const componentProps = {
@@ -43,7 +55,7 @@ function AdminPageNine(props) {
     })()
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Please Specify Dining Area {props.room}?</h1>
             <select ref={selectNode} onChange={e => setOption(e.target.value)}>
                 <option value='none'>- Select an Option -</option>
@@ -52,7 +64,7 @@ function AdminPageNine(props) {
                 <option value="breakfast-nook">Breakfast Nook</option>
             </select>
             {currentForm}
-        </>
+        </Paper>
     )
 }
 

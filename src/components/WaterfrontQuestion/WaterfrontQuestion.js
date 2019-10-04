@@ -3,6 +3,11 @@ import React from "react";
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import RadioButtons from "../RadioButtons/RadioButtons";
 import NextPage from "../NextPage/NextPage";
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper";
+
 function WaterfrontQuestion(props) {
     //state
     const [isWaterfront, setIsWaterfront] = React.useState(null);
@@ -21,9 +26,19 @@ function WaterfrontQuestion(props) {
         arr.splice(arr.indexOf(option), 1);
         setSelectedFeatures([...arr])
     }
+    function postInfo() {
+        Axios.post("/info", {
+            waterfrontInfo: {
+                isWaterfront,
+                isLakefront,
+                dockIsPermitted,
+                properties: selectedFeatures 
+            }
+        })
+    }
     //template
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Is this a waterfront property?</h1>
             <RadioButtons 
             buttons={["Yes", "No"]}
@@ -49,8 +64,9 @@ function WaterfrontQuestion(props) {
 
             <NextPage 
             to={`/page/${props.page + 1}`}
+            whenClicked={postInfo}
             />
-        </>
+        </Paper>
     )
 }
 

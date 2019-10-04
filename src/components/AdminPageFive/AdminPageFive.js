@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 //tooltips
 import Popup from 'reactjs-popup';
 import Tooltip from '../Tooltip/Tooltip';
+import Axios from 'axios';
 
 function AdminPageFive(props) {
     const [rooms, dispatch] = useReducer(function (state, action) {
@@ -57,6 +58,12 @@ function AdminPageFive(props) {
             numStories: null
         })
     console.log(rooms)
+
+    function postInfo() {
+        Axios.post("/info", {
+            rooms
+        })
+    }
     return (
         <main className='container'>
             <Paper className='page-two-paper'>
@@ -183,7 +190,11 @@ function AdminPageFive(props) {
                             onChange={(e) => dispatch({ type: 'UPDATE_STORIES', payload: +e.target.value })}
                         />
                     </div> : null}
-                {rooms.numStories !== null ? <span onClick={() => props.updateNumRooms(rooms)}><NextPage to={`/page/${props.page + 1}`} /></span> : null}
+                {rooms.numStories !== null ? <span onClick={() => props.updateNumRooms(rooms)}>
+                    <NextPage 
+                    to={`/page/${props.page + 1}`} 
+                    whenClicked={postInfo}
+                    /></span> : null}
             </Paper>
         </main>
     )

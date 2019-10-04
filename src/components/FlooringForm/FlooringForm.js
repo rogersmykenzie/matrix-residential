@@ -2,6 +2,10 @@ import React from "react";
 //components
 import CheckboxComp from "../CheckboxComp/CheckboxComp"
 import NextPage from "../NextPage/NextPage";
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper";
 
 function FlooringForm(props) {
     //state
@@ -17,9 +21,16 @@ function FlooringForm(props) {
         arr.splice(arr.indexOf(option), 1);
         setSelectedProperties([...arr]);
     }
+    function postInfo() {
+        Axios.post("/info", {
+            flooringInfo: {
+                properties: selectedProperties
+            }
+        })
+    }
     //render
     return (
-        <>
+        <Paper className='page-two-paper'>
             <h1>Please select all that apply to your flooring:</h1>
             {properties.map(val => {
                 return <CheckboxComp 
@@ -30,8 +41,9 @@ function FlooringForm(props) {
             })}
             <NextPage 
                 to={`/page/${props.page + 1}`}
+                whenClicked={postInfo}
             />
-        </>
+        </Paper>
     )
 }
 

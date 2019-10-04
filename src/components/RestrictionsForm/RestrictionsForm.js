@@ -8,4 +8,4 @@ function RestrictionsForm(props) {
     )
 }
 
-export default withSimpleForm(RestrictionsForm, ["Agricultural", "Animals", "Architectural", "Building", "Deed", "Development", "Easement(s)", "Health Department", "Hi Line", "Inland - Wetland Restr", "Lease While on Market", "Mobile Home", "No Divide", "No Known Restriction(s)", "No Livestock", "No Mobile Home", "No Pets", "No Restrictions", "No Smoking", "No Sublease", "No Waterbeds", "None", "Other", "Pet Restrictions", "Pipeline", "Surface Lease(s)", "Timber Lease(s)", "Unknown Encumbrance(s)"]);
+export default withSimpleForm(RestrictionsForm, ["Agricultural", "Animals", "Architectural", "Building", "Deed", "Development", "Easement(s)", "Health Department", "Hi Line", "Inland - Wetland Restr", "Lease While on Market", "Mobile Home", "No Divide", "No Known Restriction(s)", "No Livestock", "No Mobile Home", "No Pets", "No Restrictions", "No Smoking", "No Sublease", "No Waterbeds", "None", "Other", "Pet Restrictions", "Pipeline", "Surface Lease(s)", "Timber Lease(s)", "Unknown Encumbrance(s)"], "restrictionsInfo");

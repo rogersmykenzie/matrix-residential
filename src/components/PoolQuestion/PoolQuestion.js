@@ -3,6 +3,10 @@ import React from "react";
 import RadioButtons from "../RadioButtons/RadioButtons";
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper"
 
 function PoolQuestion(props) {
     //state
@@ -26,9 +30,17 @@ function PoolQuestion(props) {
         arr.splice(arr.indexOf(option), 1);
         setSelectedFeatures([...arr]);
     }
+    function postInfo() {
+        Axios.post("/info", {
+            poolInfo: {
+                selection: hasPool,
+                properties: selectedFeatures
+            }
+        })
+    }
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Do you have a pool?</h1>
             <RadioButtons 
                 buttons={["Yes", "No"]}
@@ -45,8 +57,9 @@ function PoolQuestion(props) {
             }
             <NextPage 
                 to={`/page/${props.page + 1}`}
+                whenClicked={postInfo}
             />
-        </> 
+        </Paper> 
     )
 }
 

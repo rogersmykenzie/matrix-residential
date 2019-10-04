@@ -14,22 +14,65 @@ import { addAccessoryUnit, removeAccessoryUnit, changeSchool } from '../../redux
 //inline styles
 import styles from './PageFourStyles';
 import {buttonStyleMain} from '../../styles/GlobalStyles';
+import Axios from 'axios';
 
 function PageFour(props) {
+    //state
+    const [selectedTypes, setSelectedTypes] = useState([]);
+    const [schoolNames, dispatch] = React.useReducer(function(state, action) {
+        console.log(action.type);
+        switch(action.type) {
+            case 'elementarySchool':
+                return {
+                    ...state,
+                    elementarySchool: action.payload
+                }
+            case 'middleSchool':
+                return {
+                    ...state,
+                    middleSchool: action.payload
+                }
+            case 'highSchool':
+                return {
+                    ...state,
+                    highSchool: action.payload
+                }
+            default: return state;
+        }
+    }, {
+        elementarySchool: "",
+        middleSchool: "",
+        highSchool: ""
+    })
     //constants
     const accessoryTypes = ["Guest Quarters", "Other", "Pool House"]
     const schoolTypes = ["Elementary School", "Middle School", "High School"]
     //event handlers
     const handleClick = val => {
+        setSelectedTypes([...selectedTypes, val])
         props.addAccessoryUnit(val);
     }
     const handleUnclick = val => {
         props.removeAccessoryUnit(val)
+        let arr = [...selectedTypes];
+        arr.splice(arr.indexOf(val), 1);
+        setSelectedTypes(arr);
     }
     const handleChange = e => {
         props.changeSchool(e.target.name, e.target.value);
+        dispatch({
+            type: e.target.name,
+            payload: e.target.value
+        })
+        console.log(schoolNames)
     }
-    //booleans
+    function postData() {
+        Axios.post("/info", {
+            ...schoolNames, 
+            selectedTypes
+        })
+    }
+    //conditions
     const schoolsFilledOut = props.elementarySchool && props.middleSchool && props.highSchool
     //internal functions
     const camelCase = text => text.split(' ').map((val, i) => {
@@ -63,7 +106,10 @@ function PageFour(props) {
                         />)}
                         {schoolsFilledOut ? <>
                             <br />
-                            <NextPage to={`/page/${props.page + 1}`} />
+                            <NextPage 
+                            to={`/page/${props.page + 1}`} 
+                            whenClicked={postData}
+                            />
                             </>
                             : null}
                     </>

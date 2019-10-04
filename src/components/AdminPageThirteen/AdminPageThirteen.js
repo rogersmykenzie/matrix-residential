@@ -12,17 +12,24 @@ import Error from '../Error/Error';
 import {Redirect} from 'react-router-dom';
 //hoc
 import withWasClickedFunctionality from '../hoc/withWasClickedFunctionality/withWasClickedFunctionality';
+//fetch
+import Axios from 'axios';
+//mui
+import Paper from "@material-ui/core/Paper"
 
 
 function AdminPageThirteen(props) {
-    console.log(props);
     //state
-    const [option, setOption] = React.useState(null);
+    const [option, setOption] = React.useState("none");
+    const [formData, setFormData] = React.useState([]);
     //refs
     const selectNode = React.createRef();
     //redirect
     if(props.room > props.numLiving) {
-        return <Redirect to="/page/14" />
+        Axios.post("/info", {
+            livingData: formData
+        })
+        return <Redirect to={`/page/${props.page + 1}`} />
     }
     //component decider
     const CurrentForm = (function() {
@@ -37,24 +44,28 @@ function AdminPageThirteen(props) {
                 return LivingRoom;
             case 'utility':
                 return UtilityRoom;
-            default: return Error;
+            default: return () => null;
         }
     })()
     //event handlers
-    function reset() {
+    function reset(data) {
+        setFormData([...formData, {
+            ...data,
+            type: option
+        }])
         selectNode.current.value = 'none';
         props.setWasClicked(false);
         setOption(null);
     }
     // console.log(props);
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Please Specify Living Room {props.room}</h1>
             <select ref={selectNode} onChange={e => {
                 props.setWasClicked(true);
                 setOption(e.target.value)
             }}>
-                {props.wasClicked === false ? <option value='none'>- Select an Option -</option> : null}
+                <option value='none'>- Select an Option -</option>
                 <option value='study'>Study</option>
                 <option value='media-room'>Media Room</option>
                 <option value='game-room'>Game Room</option>
@@ -62,7 +73,7 @@ function AdminPageThirteen(props) {
                 <option value="utility">Utility Room</option>
             </select>
             {<CurrentForm reset={reset} roomNumber={props.room} sectionPage={props.page} />}
-        </>
+        </Paper>
     )
 }
 

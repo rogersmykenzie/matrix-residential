@@ -2,27 +2,59 @@ import React from "react";
 //components
 import forms from "../../modules/FormsModule";
 import NextPage from "../NextPage/NextPage";
-
+//redux
+import {connect} from "react-redux";
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper";
 
 function ExtraRooms(props) {
     //constants
     let options = ["--Select an Option", "Master Bedroom", "Guest Bedroom", "Other Bedroom", "Dining Room", "Kitchen", "Breakfast Nook", "Full Bathroom", "Half Bathroom", "Living Room", "Game Room", "Media Room", "Study", "Utility Room", "Other"];
     //state
     const [room, setRoom] = React.useState(null)
-    const [roomOptions, setOptions] = React.useState(options);
     const [changesMade, setChangesMade] = React.useState(false);
+    const [selectedRoomType, setSelectedRoomType] = React.useState()
     //refs
     const formRef = React.useRef();
+    //effect
+    React.useEffect(() => {
+        switch(room) {
+            case "Master Bedroom":
+            case "Guest Bedroom":
+            case "Other Bedroom":
+                setSelectedRoomType("bedroomData");
+                break;
+            case "Dining Room":
+            case "Kitchen":
+            case "Breakfast Nook":
+                setSelectedRoomType("diningData");
+                break;
+            case "Full Bathroom":
+            case "Half Bathroom":
+                setSelectedRoomType("bathroomData");
+                break;
+            case "Living Room":
+            case "Game Room":
+            case "Media Room":
+            case "Study":
+            case "Utility Room":
+                setSelectedRoomType("livingData")
+                break;
+            default: setSelectedRoomType("other");
+        }
+    }, [room])
     //event handlers
     function onRoomChange(e) {
-        // if(roomOptions.includes("Select an Option")) { //get rid of the "Select an Option" option
-        //     let newArr = [...roomOptions];
-        //     newArr.splice(0,1);
-        //     setOptions(newArr);
-        // }
         setRoom(e.target.value)
     }
-    function resetForm() {
+    function reset(data) {
+        console.log(data)
+        Axios.post(`/info/${selectedRoomType}`, {
+            ...data,
+            type: room.toLowerCase().split(" ").join("-")
+        })
         formRef.current.value = "--Select an Option";
         setRoom("--Select an Option");
         setChangesMade(true);
@@ -63,26 +95,41 @@ function ExtraRooms(props) {
     })()
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>What kind of room would you like to add?</h1>
-            <select 
+            <select
             onChange={onRoomChange}
             ref={formRef}
             >
-                {roomOptions.map(val => {
+                {options.map(val => {
                     return <option value={val}>{val}</option>
                 })}
             </select>
             <SelectedForm 
                 cameFromExtraRoom 
-                resetForm={resetForm}
+                reset={reset}
             />
-            <NextPage 
-                to="/page/15"
-                buttonText={!changesMade ? "Go Back" : "Finish Adding Rooms"}
-            />
-        </>
+            {
+                props.auth === 'a' ? 
+                <NextPage 
+                    to="/page/15"
+                    buttonText={!changesMade ? "Go Back" : "Finish Adding Rooms"}
+                />
+                : props.auth === 'c' ?
+                <NextPage 
+                    to="/page/14"
+                    buttonText={!changesMade ? "Go Back" : "Finish Adding Rooms"}
+                />
+                : null
+            }
+        </Paper>
     );
 }
 
-export default ExtraRooms;
+function mapStateToProps(state) {
+    return {
+        auth: state.userReducer.auth
+    }
+}
+
+export default connect(mapStateToProps)(ExtraRooms);

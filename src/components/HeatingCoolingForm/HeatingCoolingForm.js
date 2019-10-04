@@ -8,4 +8,4 @@ function HeatingCoolingForm(props) {
     )
 }
 
-export default withSimpleForm(HeatingCoolingForm, ["Additional Water Heater(s)", "Central Air - Electric", "Central Air - Gas", "Central Heat - Electric", "Central Heat - Gas", "Electrostatic Air Filter", "Evaporation", "Gas Jets", "Geotherm", "Heat Pump", "Humidifier", "No Air", "No Heat", "Other", "Panel/Floor/Wall", "Propane", "Solar", "Space Heater", "Window Unit", "Zoned"]);
+export default withSimpleForm(HeatingCoolingForm, ["Additional Water Heater(s)", "Central Air - Electric", "Central Air - Gas", "Central Heat - Electric", "Central Heat - Gas", "Electrostatic Air Filter", "Evaporation", "Gas Jets", "Geotherm", "Heat Pump", "Humidifier", "No Air", "No Heat", "Other", "Panel/Floor/Wall", "Propane", "Solar", "Space Heater", "Window Unit", "Zoned"], "heatingCoolingInfo");

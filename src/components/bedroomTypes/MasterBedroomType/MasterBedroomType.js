@@ -42,6 +42,18 @@ function MasterBedroomType(props) {
         props.addBedroom(bedroom)
     }
 
+    function whenClicked() {
+        dispatchBedroom();
+        props.reset({
+            type: 'master',
+            width,
+            height,
+            level,
+            properties: selectedProps
+        });
+        
+    }
+
     return (
         <div>
             <div className='master-bedroom-type-form'>
@@ -72,10 +84,15 @@ function MasterBedroomType(props) {
             </div>
             : null}
             {selectedProps.length > 0 && !props.cameFromExtraRoom ?
-            <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} />
+            <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={whenClicked} />
             : selectedProps.length > 0 ? 
             <ExtraRoomNextButton 
-            resetForm={props.resetForm}
+            resetForm={() => props.reset({
+                width,
+                height,
+                level,
+                properties: selectedProps
+            })}
             /> : null}
         </div>
     )

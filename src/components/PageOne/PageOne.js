@@ -17,30 +17,63 @@ import { connect } from 'react-redux';
 import CheckboxComp from '../CheckboxComp/CheckboxComp';
 //routing
 import NextPage from '../NextPage/NextPage'
+//fetch
+import axios from "axios";
 
 const PageOne = props => {
     const [numPickedFirstAnswer, setFirst] = useState(false); //A counter to make sure they checked at least one property type
     const [numPickedSecondAnswer, setSecond] = useState(false); //A counter to make sure they checked at least one housing type
+    const [propertyType, setPropertyType] = useState([])
+    const [housingType, setHousingType] = useState([])
+    const [homeStyles, setHomeStyles] = useState([])
 
     //pass down functions for CheckboxComp
     const setPicked = (property) => { //Increments the first counter and adds property type to store
+        setPropertyType([...propertyType, property])
         setFirst(numPickedFirstAnswer + 1);
         props.addPropertyType(property)
     }
 
     const unPicked = (property) => { //Decrements first counter and removes property type from store
+        let arr = [...propertyType];
+        arr.splice(arr.indexOf(property), 1);
+        setPropertyType(arr);
         setFirst(numPickedFirstAnswer - 1);
         props.removePropertyType(property)
     }
 
     const setPicked2 = (type) => { //Increments second counter and adds property type to store
+        setHousingType([...housingType, type])
         setSecond(numPickedSecondAnswer + 1);
         props.addHousingType(type);
     }
 
     const unPicked2 = (type) => { //Decrements second counter and removes property type from store
+        let arr = [...housingType];
+        arr.splice(arr.indexOf(type), 1);
+        setHousingType(arr);
         setSecond(numPickedSecondAnswer - 1);
         props.removeHousingType(type);
+    }
+
+    const setPicked3 = style => {
+        props.addHomeStyle(style)
+        setHomeStyles([...homeStyles, style]);
+    }
+
+    const setUnpicked3 = style => {
+        props.removeHomeStyle(style)
+        let arr = [...homeStyles];
+        arr.splice(arr.indexOf(style), 1);
+        setHomeStyles(arr);
+    }
+
+    const sendData = () => {
+        axios.post("/info", {
+            propertyType,
+            housingType,
+            homeStyles,
+        })
     }
 
     //update page in nav - may remove. two sources of truth
@@ -96,14 +129,17 @@ const PageOne = props => {
                     {optionalHousingStyles.map(val => {
                         return <CheckboxComp
                         label={val}
-                        whenClicked={style => props.addHomeStyle(style)}
-                        whenUnclicked={style => props.removeHomeStyle(style)}
+                        whenClicked={setPicked3}
+                        whenUnclicked={setUnpicked3}
                         />
                     })}
                 </div> : null}
 
                 {numPickedSecondAnswer && numPickedFirstAnswer 
-                ? <NextPage to={`/page/${props.page + 1}`} /> : null}
+                ? <NextPage 
+                    to={`/page/${props.page + 1}`} 
+                    whenClicked={sendData}
+                /> : null}
             </Paper>
         </div>
     )

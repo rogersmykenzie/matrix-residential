@@ -3,7 +3,7 @@ import React from 'react';
 import GuestBedroomType from '../GuestBedroomType/GuestBedroomType';
 
 function OtherBedroomTypes(props) {
-    return <GuestBedroomType {...props} />;
+    return <GuestBedroomType {...props} bedroomType="other" />;
 }
 
 export default OtherBedroomTypes;

@@ -9,22 +9,46 @@ import NextPage from '../NextPage/NextPage';
 //redux
 import {connect} from 'react-redux';
 import {removeConstructionType, addConstructionType} from '../../redux/formInfoReducer';
+import Axios from 'axios';
 
 const PageTwo = props => {
+    //state
     const [numClicked, setClicked] = useState(0);
+    const [constructionTypes, setConstructionTypes] = useState([])
+    const [constructionStatus, setConstructionStatus] = useState([])
+
     const isAgent = props.auth === 'a';
     const construction = ['Block', 'Brick', 'Common Wall', 'Concrete', 'Fiber Cement', 'Frame/Brick Trim', 'Glass', 'Log', 'Metal', 'Other', 'Rock/Stone', 'Siding', 'Steel', 'Stucco', 'Tilt Wall', 'Vinyl Siding', 'Wood'];
     const status = ['New Const - Complete', 'New Const - Incomplete', 'Preowned', 'Proposed', 'Unknown'];
+    //event handlers
     const setPicked = type => {
+        setConstructionTypes([...constructionTypes, type])
         setClicked(numClicked + 1);
         props.addConstructionType(type)
     }
 
     const setUnpicked = type => {
+        let arr = [...constructionTypes];
+        arr.splice(arr.indexOf(type), 1);
+        setConstructionTypes(arr);
         setClicked(numClicked - 1)
         props.removeConstructionType(type);
     }
 
+    function setPicked2(status) {
+        setConstructionStatus([...constructionStatus, status]);
+    }
+    function setUnpicked2(status) {
+        let arr = [...constructionStatus];
+        arr.splice(arr.indexOf(status), 1);
+        setConstructionStatus(arr);
+    }
+    function postData() {
+        Axios.post("/info", {
+            constructionTypes,
+            constructionStatus
+        })
+    }
     return (
         <div className='container'>
             <Paper className="page-two-paper">
@@ -43,12 +67,17 @@ const PageTwo = props => {
                         {status.map(val => {
                             return <CheckboxComp 
                             label={val}
+                            whenClicked={setPicked2}
+                            whenUnclicked={setUnpicked2}
                             />
                         })}
                     </>
                     : null}
                     <br />
-                    {numClicked ? <NextPage to={`/page/${props.page + 1}`} /> : null}
+                    {numClicked ? <NextPage 
+                    to={`/page/${props.page + 1}`} 
+                    whenClicked={postData}
+                    /> : null}
                 </div>
             </Paper>
         </div>

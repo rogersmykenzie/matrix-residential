@@ -2,6 +2,8 @@ import React from "react";
 //components
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
+//mui
+import Paper from "@material-ui/core/Paper";
 
 /**
  * 
@@ -24,7 +26,7 @@ function BuildFeature(props) {
     }
     //render
     return (
-        <>
+        <Paper className='page-two-paper'>
             <h1>{props.tagline}</h1>
             {props.properties.map(val => {
                 return <CheckboxComp 
@@ -35,9 +37,9 @@ function BuildFeature(props) {
             })}
             <NextPage 
             to={`/page/${props.page + 1}`}
-            whenClicked={props.whenClicked && props.whenClicked(selectedProps)}
+            whenClicked={() => props.whenClicked && props.whenClicked(selectedProps)}
             />
-        </>
+        </Paper>
     )
 }
 

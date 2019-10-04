@@ -10,7 +10,7 @@ import {Redirect} from 'react-router-dom';
 
 function AdminPageTwelve(props) {
     if(props.room)
-        return <Redirect to='/page/12' />
+        return <Redirect to={`/page/${props.page + 1}`} />
         
     return (
         <main className='container'>

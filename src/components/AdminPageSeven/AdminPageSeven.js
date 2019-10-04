@@ -9,18 +9,24 @@ import OtherBedroomType from '../bedroomTypes/OtherBedroomType/OtherBedroomType'
 import {connect} from 'react-redux';
 //routing
 import {Redirect} from 'react-router-dom';
+import Axios from 'axios';
 
 //Bedroom Form
 function AdminPageSeven(props) {
     const [bedroomType, setType] = useState(null);
+    const [formData, setFormData] = useState([]);
     //ref
     const selectNode = useRef(null);
 
     if(props.room > props.numBeds) {
+        Axios.post("/info", {
+            bedroomData: formData
+        })
         return <Redirect to='/page/8/1' />
     }
 
-    function reset() {
+    function reset(data) {
+        setFormData([...formData, data]);
         setType(null);
         selectNode.current.value = 'none';
     }
@@ -35,8 +41,8 @@ function AdminPageSeven(props) {
             case 'master':
                 return <MasterBedroomType {...componentProps} />
             case 'guest':
-                return <GuestBedroomType {...componentProps} />
-            case 'regular':
+                return <GuestBedroomType {...componentProps} bedroomType="guest" />
+            case 'other':
                 return <OtherBedroomType {...componentProps} />
             default: return null
         }
@@ -50,7 +56,7 @@ function AdminPageSeven(props) {
                     <option value='none'>-- Select an option</option>
                     <option value='master'>Master</option>
                     <option value='guest'>Guest</option>
-                    <option value='regular'>Regular</option>
+                    <option value='other'>Other</option>
                 </select>
                 {selectedRoomForm}
             </Paper>

@@ -15,6 +15,6 @@ export default (
         <Route path="/rooms/extra" component={ExtraRooms} />
         <Route path='/welcome' component={Welcome} />
         <Route exact path='/' component={Intro} />
-        <Route component={Error} />
+        {/* <Route component={Error} /> */}
     </Switch>
 )

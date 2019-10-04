@@ -19,8 +19,43 @@ import {
 } from '../../redux/userReducer';
 //routing imports
 import { Link } from 'react-router-dom';
+//fetch
+import axios from "axios";
 
 const Intro = props => {
+    //state
+    const [firstName, setFirstName] = React.useState("")
+    const [lastName, setLastName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [phone, setPhone] = React.useState("");
+    const [address, setAddress] = React.useState("");
+    //didMount
+    React.useEffect(() => {
+        axios.post("/start")
+    }, [])
+    
+    //event handlers
+    function postOnClick(auth) {
+        console.log("here")
+        axios.post("/info", {
+            firstName,
+            lastName,
+            email,
+            phone,
+            address,
+            auth
+        })
+    }
+
+    function handleAdminClick() {
+        props.changeAuth('c')
+        postOnClick("Client")
+    }
+
+    function handleClientClick() {
+        props.changeAuth('a')
+        postOnClick("Agent")
+    }
     return (
         <div
             className='intro-container'
@@ -37,42 +72,57 @@ const Intro = props => {
                         variant='outlined'
                         placeholder='First Name'
                         style={styles.textFieldStyle}
-                        onChange={e => props.changeFirstName(e.target.value)}
+                        onChange={e => {
+                            props.changeFirstName(e.target.value)
+                            setFirstName(e.target.value)
+                        }}
                     />
 
                     <TextField
                         variant='outlined'
                         placeholder='Last Name'
                         style={styles.textFieldStyle}
-                        onChange={e => props.changeLastName(e.target.value)}
+                        onChange={e => {
+                            props.changeLastName(e.target.value)
+                            setLastName(e.target.value)
+                        }}
                     />
 
                     <TextField
                         variant='outlined'
                         placeholder='Email'
                         style={styles.textFieldStyle}
-                        onChange={e => props.changeEmail(e.target.value)}
+                        onChange={e => {
+                            props.changeEmail(e.target.value)
+                            setEmail(e.target.value)
+                        }}
                     />
 
                     <TextField
                         variant='outlined'
                         placeholder='Phone Number'
                         style={styles.textFieldStyle}
-                        onChange={e => props.changePhoneNumber(e.target.value)}
+                        onChange={e => {
+                            props.changePhoneNumber(e.target.value)
+                            setPhone(e.target.value)
+                        }}
                     />
 
                     <TextField
                         variant='outlined'
                         placeholder="Address"
                         style={styles.textFieldStyle}
-                        onChange={e => props.updateAddress(e.target.value)}
+                        onChange={e => {
+                            props.updateAddress(e.target.value)
+                            setAddress(e.target.value)
+                        }}
                     />
                     <div>
                         <Link to='/welcome'>
                             <Button
                                 variant="contained"
                                 style={styles.buttonStyle}
-                                onClick={() => props.changeAuth('c')}
+                                onClick={handleAdminClick}
                             >
                                 Continue as Client
                             </Button>
@@ -81,7 +131,7 @@ const Intro = props => {
                             <Button
                                 variant="contained"
                                 style={styles.buttonStyle}
-                                onClick={() => props.changeAuth('a')}
+                                onClick={handleClientClick}
                             >
                                 Continue as Agent
                             </Button>

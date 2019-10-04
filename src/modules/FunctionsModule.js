@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     createWhenClicked: function(state, cb) {
         return function(option) {
             cb([...state, option])

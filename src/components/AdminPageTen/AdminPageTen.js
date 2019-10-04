@@ -11,7 +11,7 @@ import {Redirect} from 'react-router-dom';
 function AdminPageTen(props) {
     console.log(props)
     if(props.numBathrooms <= 0)
-        return <Redirect to='/page/14' />
+        return <Redirect to={`/page/${props.page + 2}`} />
         
     return (
         <main className='container'>

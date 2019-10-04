@@ -42,6 +42,17 @@ function GuestBedroomType(props) {
         props.addBedroom(bedroom);
     }
 
+    function whenClicked() {
+        dispatchBedroom();
+        props.reset({
+            type: props.bedroomType,
+            width,
+            height,
+            level,
+            properties: selectedProps
+        });
+    }
+
     return (
         <div className='guest-bedroom-type-form'>
             <Input 
@@ -56,9 +67,14 @@ function GuestBedroomType(props) {
                 <RadioButtons buttons={[1,2,3]} onSelection={setLevel} />
             </div>
             {BEDROOM_PROPS.map(prop => <CheckboxComp key={prop} label={prop} whenClicked={addProp} whenUnclicked={removeProp} />)}
-            {!props.cameFromExtraRoom ? <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={() => dispatchBedroom() || props.reset()} /> 
+            {!props.cameFromExtraRoom ? <NextPage to={`/page/7/${props.roomNumber + 1}`} whenClicked={whenClicked} /> 
             : <ExtraRoomNextButton 
-            resetForm={props.resetForm}
+            resetForm={() => props.reset({
+                width,
+                height,
+                level,
+                properties: selectedProps
+            })}
             />}
         </div>
     )

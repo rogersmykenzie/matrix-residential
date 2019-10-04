@@ -3,6 +3,8 @@ import React from "react";
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
 import RadioButtons from "../RadioButtons/RadioButtons";
+//mui
+import Paper from "@material-ui/core/Paper";
 /**
  * 
  * @prop {String|Number} page - The current page. Used for routing to next page
@@ -28,7 +30,7 @@ function ExpoundingQuestion(props) {
     }
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>{props.tagline}</h1>
 
             <RadioButtons 
@@ -45,9 +47,12 @@ function ExpoundingQuestion(props) {
             })}
             <NextPage
                 to={`/page/${props.page + 1}`}
-                whenClicked={props.whenClicked && props.whenClicked}
+                whenClicked={() => props.whenClicked ? props.whenClicked({
+                    properties: selectedOptions,
+                    selection: userSelection
+                }) : () => null}
             />
-        </>
+        </Paper>
     );
 }
 

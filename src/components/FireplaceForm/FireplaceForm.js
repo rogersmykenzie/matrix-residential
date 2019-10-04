@@ -2,6 +2,10 @@ import React from "react";
 //components
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
+//fetch
+import Axios from "axios";
+//mui
+import Paper from "@material-ui/core/Paper";
 
 function FireplaceForm(props) {
     //state
@@ -17,9 +21,16 @@ function FireplaceForm(props) {
         arr.splice(arr.indexOf(option), 1);
         setUserFireplaceProperties([...arr]);
     }
+    function postInfo() {
+        Axios.post("/info", {
+            fireplaceInfo: {
+                properties: userFireplaceProperties
+            }
+        })
+    }
     //render
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Select any of the following traits that apply to your fireplace:</h1>
             {FIREPLACE_PROPERTIES.map(val => {
                 return <CheckboxComp
@@ -30,8 +41,9 @@ function FireplaceForm(props) {
             })}
             <NextPage 
                 to={`/page/${props.page + 1}`}
+                whenClicked={postInfo}
             />
-        </>
+        </Paper>
     )
 }
 

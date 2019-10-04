@@ -8,19 +8,32 @@ import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 //hoc
 import withWasClickedFunctionality from '../hoc/withWasClickedFunctionality/withWasClickedFunctionality'
+//fetch
+import Axios from 'axios';
+//mui
+import Paper from "@material-ui/core/Paper"
+
 
 function AdminPageEleven(props) {
     //state
     const [selectedOption, setOption] = useState(null)
+    const [formData, setFormData] = useState([])
     console.log(props)
     //refs
     const selectNode = useRef()
     //redirect
     if(props.room > props.numBathrooms) {
-        return <Redirect to="/page/12" />
+        Axios.post("/info", {
+            bathroomData: formData
+        })
+        return <Redirect to={`/page/${props.page + 1}`} />
     }
     //event handlers
-    function reset() {
+    function reset(data) {
+        setFormData([...formData, {
+            ...data,
+            type: selectedOption
+        }])
         selectNode.current.value = 'none';
         props.setWasClicked(false);
         setOption(null);
@@ -42,8 +55,9 @@ function AdminPageEleven(props) {
         }
     })()
     //render
+    console.log(props.room)
     return (
-        <>
+        <Paper className="page-two-paper">
             <h1>Please Specify Bathroom {props.room}?</h1>
             <select ref={selectNode} onChange={e => {
                 props.setWasClicked(true)
@@ -54,7 +68,7 @@ function AdminPageEleven(props) {
                 <option value='half-bathroom'>Half Bathroom</option>
             </select>
             {currentForm}
-        </>
+        </Paper>
     )
 }
 
