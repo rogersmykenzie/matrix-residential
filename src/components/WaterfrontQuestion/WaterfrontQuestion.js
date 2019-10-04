@@ -66,6 +66,10 @@ function WaterfrontQuestion(props) {
             to={`/page/${props.page + 1}`}
             whenClicked={postInfo}
             />
+            <NextPage 
+            to={`/page/${props.page + 1}`}
+            whenClicked={postInfo}
+            />
         </Paper>
     )
 }
