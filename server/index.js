@@ -8,119 +8,119 @@ const app = express();
 app.use(express.json());
 
 app.use(
-    session({
-        resave: false,
-        saveUninitialized: true,
-        secret: process.env.SESSION_SECRET,
-        cookie: {
-            expires: false
-        }
-    })
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    cookie: {
+      expires: false
+    }
+  })
 );
 
 app.post("/start", function(req, res) {
-    try {
-        req.session.formData = {};
-        res.sendStatus(200);
-    } catch (e) {
-        res.status(500).json(e);
-    }
+  try {
+    req.session.formData = {};
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(500).json(e);
+  }
 });
 
 app.post("/info", function(req, res) {
-    try {
-        req.session.formData = {
-            ...req.session.formData,
-            ...req.body
-        };
-        console.log(req.session.formData);
-        res.sendStatus(200);
-    } catch (e) {
-        console.log("caught", e);
-        res.status(500).json(e);
-    }
+  try {
+    req.session.formData = {
+      ...req.session.formData,
+      ...req.body
+    };
+    console.log(req.session.formData);
+    res.sendStatus(200);
+  } catch (e) {
+    console.log("caught", e);
+    res.status(500).json(e);
+  }
 });
 
 app.post("/info/:type", function(req, res) {
-    if (req.session.formData === undefined) {
-        req.session.formData = {};
+  if (req.session.formData === undefined) {
+    req.session.formData = {};
+  }
+  try {
+    if (req.session.formData[req.params.type] === undefined) {
+      req.session.formData[req.params.type] = [];
     }
-    try {
-        if (req.session.formData[req.params.type] === undefined) {
-            req.session.formData[req.params.type] = [];
-        }
-        req.session.formData[req.params.type].push({
-            ...req.body
-        });
-        console.log(req.session.formData);
-        res.sendStatus(200);
-    } catch (e) {
-        res.status(500).json(e);
-        console.log("here", e);
-    }
+    req.session.formData[req.params.type].push({
+      ...req.body
+    });
+    console.log(req.session.formData);
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(500).json(e);
+    console.log("here", e);
+  }
 });
 
 app.post("/email", function(req, res) {
-    const {
-        other,
-        firstName,
-        lastName,
-        email,
-        phone,
-        address,
-        auth,
-        propertyType,
-        housingType,
-        homeStyles,
-        constructionTypes,
-        constructionStatus,
-        sqFtSelection,
-        customSqFt,
-        changeReason,
-        elementarySchool,
-        middleSchool,
-        highSchool,
-        selectedTypes,
-        rooms,
-        bedroomData,
-        diningData,
-        bathroomData,
-        livingData,
-        interiorFeatures,
-        alarmInfo,
-        roofInfo,
-        kitchenInfo,
-        poolInfo,
-        handicapInfo,
-        flooringInfo,
-        carportSpaces,
-        garageSpaces,
-        garageWidth,
-        garageLength,
-        totalCoverParking,
-        fireplaces,
-        smartHomeQuestion,
-        fireplaceInfo,
-        foundationInfo,
-        parkingInfo,
-        commonFeaturesInfo,
-        specialNoteInfo,
-        waterfrontInfo,
-        easementInfo,
-        lotDescriptionInfo,
-        fenceInfo,
-        exteriorFeaturesInfo,
-        soilInfo,
-        restrictionsInfo,
-        streetUtilitiesInfo,
-        heatingCoolingInfo,
-        mudDistrictInfo,
-        greenFeaturesInfo,
-        greenCertificationInfo,
-        energyEfficiencyInfo
-    } = req.session.formData;
+  const {
+    other,
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    auth,
+    propertyType,
+    housingType,
+    homeStyles,
+    constructionTypes,
+    constructionStatus,
+    sqFtSelection,
+    customSqFt,
+    changeReason,
+    elementarySchool,
+    middleSchool,
+    highSchool,
+    selectedTypes,
+    rooms,
+    bedroomData,
+    diningData,
+    bathroomData,
+    livingData,
+    interiorFeatures,
+    alarmInfo,
+    roofInfo,
+    kitchenInfo,
+    poolInfo,
+    handicapInfo,
+    flooringInfo,
+    carportSpaces,
+    garageSpaces,
+    garageWidth,
+    garageLength,
+    totalCoverParking,
+    fireplaces,
+    smartHomeQuestion,
+    fireplaceInfo,
+    foundationInfo,
+    parkingInfo,
+    commonFeaturesInfo,
+    specialNoteInfo,
+    waterfrontInfo,
+    easementInfo,
+    lotDescriptionInfo,
+    fenceInfo,
+    exteriorFeaturesInfo,
+    soilInfo,
+    restrictionsInfo,
+    streetUtilitiesInfo,
+    heatingCoolingInfo,
+    mudDistrictInfo,
+    greenFeaturesInfo,
+    greenCertificationInfo,
+    energyEfficiencyInfo
+  } = req.session.formData;
 
-    const message = `Hello! This is an automated email letting you know that a new form has been submitted by a ${auth}. This email details any answers they input into the form. Note that any instances of the keyword "null" typically refer to an answer the client didn't provide, but may also be an error due to the program. If any \`null\` values seem strange, please don't hesitate to contact "mykenzierogers@gmail.com" with any questions or concerns.
+  const message = `Hello! This is an automated email letting you know that a new form has been submitted by a ${auth}. This email details any answers they input into the form. Note that any instances of the keyword "null" typically refer to an answer the client didn't provide, but may also be an error due to the program. If any \`null\` values seem strange, please don't hesitate to contact "mykenzierogers@gmail.com" with any questions or concerns.
         
 Name: ${firstName} ${lastName}
 Email: ${email}
@@ -132,10 +132,10 @@ Styles of Home: ${homeStyles.join(", ")}
 Construction: ${constructionTypes.join(", ")}
 Construction Status: ${constructionStatus.join(", ")}
 ${
-    sqFtSelection === "Change to:"
-        ? `The are changing their square footage to ${customSqFt} for the following reason:
+  sqFtSelection === "Change to:"
+    ? `The are changing their square footage to ${customSqFt} for the following reason:
 ${changeReason}`
-        : `Their square footage is the same as their tax record`
+    : `Their square footage is the same as their tax record`
 }
 Elementary School: ${elementarySchool}
 Middle School: ${middleSchool}
@@ -149,84 +149,84 @@ They have:
 Their property is ${rooms.numStories}
 They have the following Bedrooms:
 ${bedroomData
-    .map(val => {
-        return `   Type: ${val.type}
+  .map(val => {
+    return `   Type: ${val.type}
         Width: ${val.width}
         Height: ${val.height}
         Floor: ${val.level}
         Room Properties: 
             ${val.properties.join(", ")}
         `;
-    })
-    .join("\n")}
+  })
+  .join("\n")}
 They have the following Dining Areas: 
 ${
-    diningData.length > 1
-        ? diningData
-              .map(val => {
-                  return `Type: ${val.type}
+  diningData.length > 1
+    ? diningData
+        .map(val => {
+          return `Type: ${val.type}
         Width: ${val.width}
         Height: ${val.height}
         Floor: ${val.level}
         Room Properties: 
             ${val.properties.join(", ")}
         `;
-              })
-              .join("\n")
-        : ""
+        })
+        .join("\n")
+    : ""
 }
 They have the following Bathrooms:
 ${bathroomData
-    .map(val => {
-        return `Type: ${val.type}
+  .map(val => {
+    return `Type: ${val.type}
         Width: ${val.width}
         Height: ${val.height}
         Floor: ${val.level}
         Room Properties: 
             ${val.properties.join(", ")}
         `;
-    })
-    .join("\n")}
+  })
+  .join("\n")}
 They also have the following Living Areas:
 ${livingData
-    .map(val => {
-        return `Type: ${val.type}
+  .map(val => {
+    return `Type: ${val.type}
         Width: ${val.width}
         Height: ${val.height}
         Floor: ${val.level}
         Room Properties: 
             ${val.properties.join(", ")}
         `;
-    })
-    .join("\n")}
+  })
+  .join("\n")}
 They also added the following rooms via write-in:
 ${other
-    .map(val => {
-        return `Room Name: ${val.name}
+  .map(val => {
+    return `Room Name: ${val.name}
         Room Info: ${val.info}
         `;
-    })
-    .join("\n")}
+  })
+  .join("\n")}
 The following are the features that the user inputted:
 Interior Features: ${interiorFeatures.properties.join(", ")}
 Alarm: ${alarmInfo.selection}
 ${
-    alarmInfo.selection === "Yes"
-        ? `Alarm/Security Types: ${alarmInfo.selectedTypes.join(", ")}`
-        : ""
+  alarmInfo.selection === "Yes"
+    ? `Alarm/Security Types: ${alarmInfo.selectedTypes.join(", ")}`
+    : ""
 }
 Roof: ${roofInfo.selectedTypes.join(", ")}
 Kitchen Equipment: ${kitchenInfo.selectedTypes.join(", ")}
 Pool: ${
-        poolInfo === true
-            ? `Yes\nPool Features: ${poolInfo.properties.join(", ")}`
-            : "No"
-    }
+    poolInfo === true
+      ? `Yes\nPool Features: ${poolInfo.properties.join(", ")}`
+      : "No"
+  }
 Handicap: ${handicapInfo.selection}
 ${
-    handicapInfo.selection === "Yes"
-        ? `Handicap Features: ${handicapInfo.properties.join(", ")}`
-        : ""
+  handicapInfo.selection === "Yes"
+    ? `Handicap Features: ${handicapInfo.properties.join(", ")}`
+    : ""
 }
 Flooring: ${flooringInfo.properties.join(", ")}
 
@@ -239,8 +239,8 @@ Number of Total Cover Parking Areas: ${totalCoverParking}
 Number of Fireplaces: ${fireplaces}
 
 This home is ${
-        smartHomeQuestion.selection === "No" ? "Not" : ""
-    } Password Dependent/Has a Smart Home App
+    smartHomeQuestion.selection === "No" ? "Not" : ""
+  } Password Dependent/Has a Smart Home App
 
 Some for features the user shared:
 Fireplace Features: ${fireplaceInfo.properties.join(", ")}
@@ -273,30 +273,30 @@ This ends the users input. Remember if you have any questions to reach out to "m
 See you next time!
     RoboRealtor`;
 
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.MAILER_USER,
-            pass: process.env.MAILER_PASS
-        }
-    });
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.MAILER_USER,
+      pass: process.env.MAILER_PASS
+    }
+  });
 
-    const mailOptions = {
-        from: process.env.MAILER_USER,
-        // to: req.session.formData.email
-        to: "mykenzierogers@gmail.com",
-        subject: "NEW FORM",
-        text: message
-    };
+  const mailOptions = {
+    from: process.env.MAILER_USER,
+    // to: req.session.formData.email
+    to: "",
+    subject: "NEW FORM",
+    text: message
+  };
 
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) console.log(error);
-        else console.log("Email Sent: " + info.response);
-    });
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) console.log(error);
+    else console.log("Email Sent: " + info.response);
+  });
 });
 
 app.listen(process.env.SERVER_PORT, () =>
-    console.log(`Listening on Port ${process.env.SERVER_PORT}`)
+  console.log(`Listening on Port ${process.env.SERVER_PORT}`)
 );
 
 // { firstName: 'Mykenzie',
