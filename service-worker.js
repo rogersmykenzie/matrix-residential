@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 importScripts(
-  "/matrix-residential/precache-manifest.831fb483a55291a67fd98170fdbc4730.js"
+  "/matrix-residential/precache-manifest.5e8691f59bc7a38a3869db256dfd8b51.js"
 );
 
 self.addEventListener('message', (event) => {
