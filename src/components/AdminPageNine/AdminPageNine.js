@@ -1,78 +1,88 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from "react";
 //components
-import DiningRoomType from '../diningTypes/DiningRoomType/DiningRoomType';
-import KitchenType from '../diningTypes/KitchenType/KitchenType';
-import BreakfastNookType from '../diningTypes/BreakfastNookType/BreakfastNookType';
+import DiningRoomType from "../diningTypes/DiningRoomType/DiningRoomType";
+import KitchenType from "../diningTypes/KitchenType/KitchenType";
+import BreakfastNookType from "../diningTypes/BreakfastNookType/BreakfastNookType";
+import PageStart from "../PageStart/PageStart";
 //redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 //routing
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 //mui
-import Paper from "@material-ui/core/Paper"
-import Axios from 'axios';
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+//fetch
+import Axios from "axios";
 
 function AdminPageNine(props) {
-    //state
-    const [selectOption, setOption] = useState(null)
-    const [formData, setFormData] = useState([]);
-    //refs
-    const selectNode = useRef();
-    //event handlers
-    function reset(data) {
-        setFormData([...formData, {
-            ...data,
-            type: selectOption
-        }])
-        selectNode.current.value = 'none';
-        setOption(null)
+  //state
+  const [selectOption, setOption] = useState(null);
+  const [formData, setFormData] = useState([]);
+  //refs
+  const selectNode = useRef();
+  //event handlers
+  function reset(data) {
+    setFormData([
+      ...formData,
+      {
+        ...data,
+        type: selectOption
+      }
+    ]);
+    selectNode.current.value = "none";
+    setOption(null);
+  }
+  //redirect
+  console.log(props);
+  if (props.room > props.numDining) {
+    console.log("here");
+    Axios.post("/info", {
+      diningData: formData
+    });
+    return <Redirect to={`/page/${props.page + 1}`} />;
+  }
+  //pass-down props
+  const componentProps = {
+    reset,
+    roomNumber: props.room,
+    sectionPage: props.page
+  };
+  //component decider
+  let currentForm = (function() {
+    switch (selectOption) {
+      case "dining-room":
+        return <DiningRoomType {...componentProps} />;
+      case "kitchen":
+        return <KitchenType {...componentProps} />;
+      case "breakfast-nook":
+        return <BreakfastNookType {...componentProps} />;
+      default:
+        return null;
     }
-    //redirect
-    console.log(props)
-    if(props.room > props.numDining) {
-        console.log("here")
-        Axios.post("/info", {
-            diningData: formData
-        })
-        return <Redirect to={`/page/${props.page + 1}`} />
-    }
-    //pass-down props
-    const componentProps = {
-        reset,
-        roomNumber: props.room,
-        sectionPage: props.page
-    }
-    //component decider
-    let currentForm = (function() {
-        switch(selectOption) {
-            case 'dining-room':
-                return <DiningRoomType {...componentProps} />
-            case 'kitchen':
-                return <KitchenType {...componentProps} />
-            case 'breakfast-nook':
-                return <BreakfastNookType {...componentProps} />;
-            default: return <h1>Oh god please help</h1>
-        }
-    })()
-    //render
-    return (
-        <Paper className="page-two-paper">
-            <h1>Please Specify Dining Area {props.room}?</h1>
-            <select ref={selectNode} onChange={e => setOption(e.target.value)}>
-                <option value='none'>- Select an Option -</option>
-                <option value='dining-room'>Dining Room</option>
-                <option value='kitchen'>Kitchen</option>
-                <option value="breakfast-nook">Breakfast Nook</option>
-            </select>
-            {currentForm}
-        </Paper>
-    )
+  })();
+  //render
+  return (
+    <PageStart>
+      <h1>Please Specify Dining Area {props.room}?</h1>
+      <Select
+        value={selectOption}
+        ref={selectNode}
+        onChange={e => setOption(e.target.value)}>
+        <MenuItem value="none">- Select an Option -</MenuItem>
+        <MenuItem value="dining-room">Dining Room</MenuItem>
+        <MenuItem value="kitchen">Kitchen</MenuItem>
+        <MenuItem value="breakfast-nook">Breakfast Nook</MenuItem>
+      </Select>
+      {currentForm}
+    </PageStart>
+  );
 }
 
 function mapStateToProps(reduxState) {
-    console.log(reduxState);
-    return {
-        numDining: reduxState.formInfoReducer.numRooms.numDining
-    }
+  console.log(reduxState);
+  return {
+    numDining: reduxState.formInfoReducer.numRooms.numDining
+  };
 }
 
 export default connect(mapStateToProps)(AdminPageNine);

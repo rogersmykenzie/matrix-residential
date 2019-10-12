@@ -39,22 +39,28 @@ function FormPath(props) {
     <div className="intro-container">
       <Paper className="intro-paper">
         <main className="form-path">
-          <Link to="/welcome">
-            <Button
-              variant="contained"
-              style={buttonStyleMain}
-              onClick={handleClientClick}>
-              Continue as Client
-            </Button>
-          </Link>
-          <Link to="/welcome">
-            <Button
-              variant="contained"
-              style={buttonStyleMain}
-              onClick={handleAdminClick}>
-              Continue as Agent
-            </Button>
-          </Link>
+          <div>
+            <h1>Welcome to the Sellers Listing Form</h1>
+            <h2>Are you a seller or an agent?</h2>
+          </div>
+          <div className="form-path-links">
+            <Link to="/welcome">
+              <Button
+                variant="contained"
+                style={buttonStyleMain}
+                onClick={handleClientClick}>
+                I am a seller
+              </Button>
+            </Link>
+            <Link to="/welcome">
+              <Button
+                variant="contained"
+                style={buttonStyleMain}
+                onClick={handleAdminClick}>
+                I am an agent
+              </Button>
+            </Link>
+          </div>
         </main>
       </Paper>
     </div>

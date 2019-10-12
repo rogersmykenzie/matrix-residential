@@ -134,7 +134,6 @@ const Intro = props => {
   return (
     <div className="intro-container">
       <Paper className="intro-paper">
-        <h1>Welcome to the Sellers Listing Form</h1>
         <h1>To get started, please enter your contact info:</h1>
         <div className="intro-text-field-container">
           <h1 className="error-message-global">{errorMessage}</h1>

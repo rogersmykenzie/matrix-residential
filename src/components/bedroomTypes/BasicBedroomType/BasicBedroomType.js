@@ -4,26 +4,13 @@ import BuildForm from "../../BuildForm/BuildForm";
 //hoc
 import withAuth from "../../hoc/withAuth";
 
-function SecondMasterType(props) {
+function BasicBedroomType(props) {
   const PROPERTIES = [
+    "Built Ins",
     "Cedar Closet",
-    "Coffee Bar",
     "Custom Closet System",
-    "Dual Baths",
-    "Dual Sinks",
-    "Fireplace",
-    "Garden Tub",
-    "Hollywood Bath",
-    "Jetted Tub",
-    "Laundry Chute",
-    "Linen Closet",
-    "Medicine Cabinet",
-    "Separate Shower",
-    "Separate Vanities",
-    "Shower Body Sprays",
-    "Solid Surface/Non-natural Counter",
-    "Steam Shower",
-    "Tile Counters"
+    "Split Bedrooms",
+    "Walk-in Closets"
   ];
   function whenDone(data) {
     props.reset(data);
@@ -45,4 +32,4 @@ function SecondMasterType(props) {
   );
 }
 
-export default withAuth(SecondMasterType);
+export default withAuth(BasicBedroomType);

@@ -1,7 +1,14 @@
 main.form-path {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+div.form-path-links {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
