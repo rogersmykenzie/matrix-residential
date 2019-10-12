@@ -54,13 +54,7 @@ const Page = props => {
         page: +props.match.params.pageNum,
         room: +props.match.params.roomNum
     }
-    // if(props.auth !== 'a' && props.auth !== 'c') {
-    //     return (
-    //         <>
-
-    //         </>
-    //     )
-    // }
+    
     switch(+props.match.params.pageNum + 'a') {
         case '1c':
         case '1a':
