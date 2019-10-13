@@ -1,82 +1,90 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from "react";
 //components
-import FullBathroomType from '../bathroomTypes/FullBathroomType/FullBathroomType';
-import HalfBathroomType from '../bathroomTypes/HalfBathroomType/HalfBathroomType';
+import FullBathroomType from "../bathroomTypes/FullBathroomType/FullBathroomType";
+import HalfBathroomType from "../bathroomTypes/HalfBathroomType/HalfBathroomType";
 //routing
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 //redux
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 //hoc
-import withWasClickedFunctionality from '../hoc/withWasClickedFunctionality/withWasClickedFunctionality'
+import withWasClickedFunctionality from "../hoc/withWasClickedFunctionality/withWasClickedFunctionality";
 //fetch
-import Axios from 'axios';
+import Axios from "axios";
 //mui
-import Paper from "@material-ui/core/Paper"
-
+import Paper from "@material-ui/core/Paper";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 function AdminPageEleven(props) {
-    //state
-    const [selectedOption, setOption] = useState(null)
-    const [formData, setFormData] = useState([])
-    console.log(props)
-    //refs
-    const selectNode = useRef()
-    //redirect
-    if(props.room > props.numBathrooms) {
-        Axios.post("/info", {
-            bathroomData: formData
-        })
-        return <Redirect to={`/page/${props.page + 1}`} />
+  //state
+  const [selectedOption, setOption] = useState(null);
+  const [formData, setFormData] = useState([]);
+  console.log(props);
+  //refs
+  const selectNode = useRef();
+  //redirect
+  if (props.room > props.numBathrooms) {
+    Axios.post("/info", {
+      bathroomData: formData
+    });
+    return <Redirect to={`/page/${props.page + 1}`} />;
+  }
+  //event handlers
+  function reset(data) {
+    setFormData([
+      ...formData,
+      {
+        ...data,
+        type: selectedOption
+      }
+    ]);
+    selectNode.current.value = "none";
+    props.setWasClicked(false);
+    setOption(null);
+  }
+  //pass-down props
+  const componentProps = {
+    reset,
+    roomNumber: props.room,
+    sectionPage: props.page
+  };
+  //component decider
+  let currentForm = (function() {
+    switch (selectedOption) {
+      case "full-bathroom":
+        return <FullBathroomType {...componentProps} />;
+      case "half-bathroom":
+        return <HalfBathroomType {...componentProps} />;
+      default:
+        return null;
     }
-    //event handlers
-    function reset(data) {
-        setFormData([...formData, {
-            ...data,
-            type: selectedOption
-        }])
-        selectNode.current.value = 'none';
-        props.setWasClicked(false);
-        setOption(null);
-    }
-    //pass-down props
-    const componentProps = {
-        reset,
-        roomNumber: props.room,
-        sectionPage: props.page
-    }
-    //component decider
-    let currentForm = (function() {
-        switch(selectedOption) {
-            case 'full-bathroom':
-                return <FullBathroomType {...componentProps} />
-            case 'half-bathroom':
-                return <HalfBathroomType {...componentProps} />
-            default: return <h1>oh god please help</h1>
-        }
-    })()
-    //render
-    console.log(props.room)
-    return (
-        <Paper className="page-two-paper">
-            <h1>Please Specify Bathroom {props.room}?</h1>
-            <select ref={selectNode} onChange={e => {
-                props.setWasClicked(true)
-                setOption(e.target.value)}
-                }>
-                {props.wasClicked === false ? <option value='none'>- Select an Option -</option> : null}
-                <option value='full-bathroom'>Full Bathroom</option>
-                <option value='half-bathroom'>Half Bathroom</option>
-            </select>
-            {currentForm}
-        </Paper>
-    )
+  })();
+  //render
+  console.log(props.room);
+  return (
+    <Paper className="page-two-paper">
+      <h1>Enter Bathroom {props.room ? props.room : null}</h1>
+      <Select
+        ref={selectNode}
+        value={selectedOption}
+        onChange={e => {
+          setOption(e.target.value);
+        }}>
+        <MenuItem value="full-bathroom">Full Bathroom</MenuItem>
+        <MenuItem value="half-bathroom">Half Bathroom</MenuItem>
+      </Select>
+      {currentForm}
+    </Paper>
+  );
 }
 
 function mapStateToProps(reduxState) {
-    const {numFullBath, numHalfBath} = reduxState.formInfoReducer.numRooms
-    return {
-        numBathrooms: numFullBath + numHalfBath
-    }
+  const { numFullBath, numHalfBath } = reduxState.formInfoReducer.numRooms;
+  return {
+    numBathrooms: numFullBath + numHalfBath
+  };
 }
 
-export default connect(mapStateToProps)(withWasClickedFunctionality(AdminPageEleven));
+export default connect(mapStateToProps)(
+  withWasClickedFunctionality(AdminPageEleven)
+);

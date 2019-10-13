@@ -63,7 +63,7 @@ function AdminPageNine(props) {
   //render
   return (
     <PageStart>
-      <h1>Please Specify Dining Area {props.room}?</h1>
+      <h1>Enter Dining Area {props.room}</h1>
       <Select
         value={selectOption}
         ref={selectNode}

@@ -14,7 +14,7 @@ function HalfBathroomType(props) {
   return (
     <>
       <BuildForm
-        needsInputs
+        needsInputs={props.auth === "a"}
         needsRadio
         needsProperties
         needsNext

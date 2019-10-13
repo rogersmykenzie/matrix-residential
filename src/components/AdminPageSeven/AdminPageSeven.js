@@ -23,6 +23,7 @@ function AdminPageSeven(props) {
   const selectNode = useRef(null);
 
   if (props.room > props.numBeds) {
+    console.log("IM THE ERROR");
     Axios.post("/info", {
       bedroomData: formData
     });
@@ -57,7 +58,8 @@ function AdminPageSeven(props) {
   return (
     <div className="container">
       <Paper className="page-two-paper">
-        <h1>What type of bedroom is this?</h1>
+        <h1>Bedroom {props.room ? props.room : null}</h1>
+        <h4>What type of bedroom is this?</h4>
         <Select
           ref={selectNode}
           value={bedroomType}
@@ -66,7 +68,7 @@ function AdminPageSeven(props) {
           <MenuItem value="secondMaster">Second Master</MenuItem>
           <MenuItem value="bedroom">Bedroom</MenuItem>
         </Select>
-        <SelectedRoomForm {...componentProps} />
+        <SelectedRoomForm {...componentProps} sectionPage={7} />
       </Paper>
     </div>
   );

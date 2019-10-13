@@ -1,6 +1,8 @@
 import React from "react";
 
 import BuildForm from "../../BuildForm/BuildForm";
+//hoc
+import withAuth from "../../hoc/withAuth";
 
 function DiningRoomTypes(props) {
   const PROPERTIES = ["Built Ins", "Butlers Pantry", "Dumbwaiter"];
@@ -11,7 +13,7 @@ function DiningRoomTypes(props) {
 
   return (
     <BuildForm
-      needsInputs={false}
+      needsInputs={props.auth === "a"}
       needsRadio
       needsProperties
       needsNext
@@ -25,4 +27,4 @@ function DiningRoomTypes(props) {
     />
   );
 }
-export default DiningRoomTypes;
+export default withAuth(DiningRoomTypes);
