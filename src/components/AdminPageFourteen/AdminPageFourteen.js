@@ -1,23 +1,80 @@
-import React from 'react';
+import React from "react";
 //components
-import NextPage from '../NextPage/NextPage';
+import NextPage from "../NextPage/NextPage";
 import ColumnPaper from "../ColumnPaper/ColumnPaper";
+import RoomCard from "../RoomCard/RoomCard";
+//fetch
+import axios from "axios";
 
 function AdminPageFourteen(props) {
+  const [rooms, setRooms] = React.useState([]);
 
-    return (
-        <ColumnPaper>
-            <h1>Are there any other rooms that you need to enter?</h1>
-            <NextPage 
-                to='/page/15'
-                buttonText="No"
-            />
-            <NextPage
-                to="/rooms/extra"
-                buttonText="Yes"
-            />
-        </ColumnPaper>
-    )
+  React.useEffect(() => {
+    axios.get("/server/rooms").then(response => {
+      const {
+        bedroomData,
+        bathroomData,
+        diningData,
+        livingData
+      } = response.data;
+      setRooms([bedroomData, bathroomData, diningData, livingData]);
+    });
+  }, []);
+  //DATA SHAPE
+  /* 
+  response.data = {
+    bathroomData: [
+      {
+        level: number,
+        width: number
+        length: number
+        properties: Array<String>
+        type: string
+      },
+      ...
+    ],
+    bedroomData: [...],
+    diningData: [...],
+    livingData: [...]
+  }
+  */
+  // console.log(rooms);
+  const roomMap = rooms.map((val, i) => {
+    if (val.length > 0) {
+      let displayText = (function() {
+        switch (i) {
+          case 0:
+            return "Bedrooms:";
+          case 1:
+            return "Bathrooms:";
+          case 2:
+            return "Dining Rooms:";
+          case 3:
+            return "Living Rooms:";
+          default:
+            return null;
+        }
+      })();
+      return (
+        <>
+          <h2>{displayText}</h2>
+          {val.map(room => (
+            <RoomCard data={room} />
+          ))}
+        </>
+      );
+    } else {
+      return null;
+    }
+  });
+  return (
+    <ColumnPaper>
+      <h1>Are there any other rooms that you need to enter?</h1>
+      <NextPage to={"/page/" + (props.page + 1)} buttonText="No" />
+      <NextPage to="/rooms/extra" buttonText="Yes" />
+      {roomMap}
+    </ColumnPaper>
+  );
 }
 
 export default AdminPageFourteen;

@@ -92,7 +92,9 @@ const PageOne = props => {
     "Condo",
     "Farm/Ranch",
     "Half Duplex",
-    "Single Family",
+    <>
+      Single Family<span style={{ fontSize: ".5em" }}> (Most Common)</span>
+    </>,
     "Townhouse"
   ];
   const housingTypes = [

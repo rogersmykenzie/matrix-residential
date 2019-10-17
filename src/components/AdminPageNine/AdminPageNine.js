@@ -52,8 +52,8 @@ function AdminPageNine(props) {
     switch (selectOption) {
       case "dining-room":
         return <DiningRoomType {...componentProps} />;
-      case "kitchen":
-        return <KitchenType {...componentProps} />;
+      // case "kitchen":
+      //   return <KitchenType {...componentProps} />;
       case "breakfast-nook":
         return <BreakfastNookType {...componentProps} />;
       default:
@@ -70,7 +70,7 @@ function AdminPageNine(props) {
         onChange={e => setOption(e.target.value)}>
         <MenuItem value="none">- Select an Option -</MenuItem>
         <MenuItem value="dining-room">Dining Room</MenuItem>
-        <MenuItem value="kitchen">Kitchen</MenuItem>
+        {/* <MenuItem value="kitchen">Kitchen</MenuItem> */}
         <MenuItem value="breakfast-nook">Breakfast Nook</MenuItem>
       </Select>
       {currentForm}

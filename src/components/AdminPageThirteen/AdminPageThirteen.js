@@ -35,16 +35,16 @@ function AdminPageThirteen(props) {
   //component decider
   const CurrentForm = (function() {
     switch (option) {
-      case "study":
-        return Study;
+      // case "study":
+      //   return Study;
       case "media-room":
         return MediaRoom;
       case "game-room":
         return GameRoom;
       case "living-room":
         return LivingRoom;
-      case "utility":
-        return UtilityRoom;
+      // case "utility":
+      //   return UtilityRoom;
       default:
         return () => null;
     }
@@ -72,11 +72,11 @@ function AdminPageThirteen(props) {
         onChange={e => {
           setOption(e.target.value);
         }}>
-        <MenuItem value="study">Study</MenuItem>
+        {/* <MenuItem value="study">Study</MenuItem> */}
         <MenuItem value="media-room">Media Room</MenuItem>
         <MenuItem value="game-room">Game Room</MenuItem>
         <MenuItem value="living-room">Living Room</MenuItem>
-        <MenuItem value="utility">Utility Room</MenuItem>
+        {/* <MenuItem value="utility">Utility Room</MenuItem> */}
       </Select>
       {
         <CurrentForm

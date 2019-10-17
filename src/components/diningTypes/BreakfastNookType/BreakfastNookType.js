@@ -14,7 +14,7 @@ function BreakfastNookType(props) {
   console.log(props);
   //constants
   const PROPERTIES = [
-    "Breakfast",
+    "Breakfast Bar",
     "Built Ins",
     "Butlers Pantry",
     "Coffee Bar",

@@ -7,8 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MasterBedroomType from "../bedroomTypes/MasterBedroomType/MasterBedroomType";
 import BasicBedroomType from "../bedroomTypes/BasicBedroomType/BasicBedroomType";
 import SecondMasterType from "../bedroomTypes/SecondMasterType/SecondMasterType";
-// import GuestBedroomType from "../bedroomTypes/GuestBedroomType/GuestBedroomType";
-// import OtherBedroomType from "../bedroomTypes/OtherBedroomType/OtherBedroomType";
 //redux
 import { connect } from "react-redux";
 //routing
@@ -22,17 +20,25 @@ function AdminPageSeven(props) {
   //ref
   const selectNode = useRef(null);
 
+  console.log("MYPROPS", props.room, props.numBeds);
   if (props.room > props.numBeds) {
-    console.log("IM THE ERROR");
     Axios.post("/info", {
-      bedroomData: formData
+      bedroomData: {
+        ...formData
+      }
     });
-    return <Redirect to="/page/8/1" />;
+    return <Redirect to={`/page/${props.page + 1}`} />;
   }
 
   function reset(data) {
     console.log([...formData, data]);
-    setFormData([...formData, data]);
+    setFormData([
+      ...formData,
+      {
+        ...data,
+        type: bedroomType
+      }
+    ]);
     setType(null);
     selectNode.current.value = "none";
   }
@@ -68,7 +74,7 @@ function AdminPageSeven(props) {
           <MenuItem value="secondMaster">Second Master</MenuItem>
           <MenuItem value="bedroom">Bedroom</MenuItem>
         </Select>
-        <SelectedRoomForm {...componentProps} sectionPage={7} />
+        <SelectedRoomForm {...componentProps} sectionPage={props.page} />
       </Paper>
     </div>
   );

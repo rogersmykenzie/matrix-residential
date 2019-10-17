@@ -5,7 +5,7 @@ const initalState = {
   email: "",
   address: "",
   currPage: 0,
-  auth: "a"
+  auth: ""
 };
 
 const UPDATE_FIRST_NAME = "UPDATE_FIRST_NAME";

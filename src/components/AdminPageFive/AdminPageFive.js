@@ -101,7 +101,9 @@ function AdminPageFive(props) {
                 }
                 position="right top"
                 on="hover">
-                <Tooltip>This includes kitchens, breakfast nooks, etc.</Tooltip>
+                <Tooltip>
+                  This includes breakfast nooks and dining rooms.
+                </Tooltip>
               </Popup>
             </h1>
             <Input

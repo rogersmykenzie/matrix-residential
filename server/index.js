@@ -60,6 +60,16 @@ app.post("/info/:type", function(req, res) {
   }
 });
 
+app.get("/server/rooms", function(req, res) {
+  console.log(req.session);
+  res.status(200).json({
+    bedroomData: req.session.formData.bedroomData,
+    diningData: req.session.formData.diningData,
+    bathroomData: req.session.formData.bathroomData,
+    livingData: req.session.formData.livingData
+  });
+});
+
 app.post("/email", function(req, res) {
   const {
     other,
@@ -141,7 +151,7 @@ Elementary School: ${elementarySchool}
 Middle School: ${middleSchool}
 High School: ${highSchool}
 They have:
-    ${rooms.numBeds} Bedrooms,
+    ${rooms.numBedroom} Bedrooms,
     ${rooms.numFullBath} Full Bathrooms,
     ${rooms.numHalfBath} Half Bathrooms,
     ${rooms.numLiving} Living Areas,

@@ -21,9 +21,9 @@ function SecondMasterType(props) {
     "Separate Shower",
     "Separate Vanities",
     "Shower Body Sprays",
-    "Solid Surface/Non-natural Counter",
+    "Sitting Area",
     "Steam Shower",
-    "Tile Counters"
+    "Walk-in Closet"
   ];
   function whenDone(data) {
     props.reset(data);
