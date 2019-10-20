@@ -38,6 +38,9 @@ function AdminPageFourteen(props) {
     livingData: [...]
   }
   */
+  function sum(a, b) {
+    return a + b;
+  }
   // console.log(rooms);
   const roomMap = rooms.map((val, i) => {
     if (val.length > 0) {
