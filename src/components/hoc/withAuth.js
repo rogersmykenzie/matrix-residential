@@ -9,7 +9,6 @@ function mapStateToProps(reduxState) {
 }
 function withAuth(Component) {
   return connect(mapStateToProps)(function(props) {
-    console.log(props.auth);
     return <Component {...props} auth={props.auth} />;
   });
 }

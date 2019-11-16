@@ -12,6 +12,11 @@ import GameRoom from "../components/livingTypes/GameRoom/GameRoom";
 import Study from "../components/livingTypes/Study/Study";
 import UtilityRoom from "../components/livingTypes/UtilityRoom/UtilityRoom";
 import OtherForm from "../components/OtherForm/OtherForm";
+import ExerciseRoom from "../components/extraRoomForms/ExerciseRoom";
+import ExtraStorageRoom from "../components/extraRoomForms/ExtraStorageRoom";
+import WineCellar from "../components/extraRoomForms/WineCellar";
+
+//just realized this is probably not performant
 
 export default {
   MasterBedroomType,
@@ -27,5 +32,8 @@ export default {
   GameRoom,
   Study,
   UtilityRoom,
-  OtherForm
+  OtherForm,
+  ExerciseRoom,
+  ExtraStorageRoom,
+  WineCellar
 };

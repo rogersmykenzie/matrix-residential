@@ -85,24 +85,26 @@ function BuildForm(props) {
         </>
       ) : null}
       {props.needsNext === true && props.cameFromExtraRoom !== true ? (
-        <span
-          onClick={() =>
-            props.whenDone({
-              level,
-              width,
-              length,
-              properties: selectedProps
-            })
-          }>
-          <NextPage
-            to={
-              props.isRoomForm
-                ? `/page/${props.sectionPage}/${props.room + 1}`
-                : `/page/${props.sectionPage + 1}`
-            }
-            whenClicked={props.whenClicked ? props.whenClicked : () => null}
-          />
-        </span>
+        props.waitForSelection === true && selectedProps.length === 0 ? null : (
+          <span
+            onClick={() =>
+              props.whenDone({
+                level,
+                width,
+                length,
+                properties: selectedProps
+              })
+            }>
+            <NextPage
+              to={
+                props.isRoomForm
+                  ? `/page/${props.sectionPage}/${props.room + 1}`
+                  : `/page/${props.sectionPage + 1}`
+              }
+              whenClicked={props.whenClicked ? props.whenClicked : () => null}
+            />
+          </span>
+        )
       ) : props.needsNext === true && props.cameFromExtraRoom === true ? (
         <ExtraRoomNextButton
           resetForm={() =>
