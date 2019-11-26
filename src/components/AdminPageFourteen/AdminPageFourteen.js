@@ -40,7 +40,7 @@ function AdminPageFourteen(props) {
   */
   // console.log(rooms);
   const roomMap = rooms.map((val, i) => {
-    if (val.length > 0) {
+    if (val && val.length > 0) {
       let displayText = (function() {
         switch (i) {
           case 0:
@@ -56,22 +56,27 @@ function AdminPageFourteen(props) {
         }
       })();
       return (
-        <>
+        <div className="room-cards__master">
           <h2>{displayText}</h2>
           {val.map(room => (
             <RoomCard data={room} />
           ))}
-        </>
+        </div>
       );
     } else {
       return null;
     }
   });
+
   return (
     <ColumnPaper>
       <h1>Are there any other rooms that you need to enter?</h1>
-      <NextPage to={"/page/" + (props.page + 1)} buttonText="No" />
-      <NextPage to="/rooms/extra" buttonText="Yes" />
+      <div className="next-button__master">
+        <div className="next-button__container">
+          <NextPage to={"/page/" + (props.page + 1)} buttonText="No" />
+          <NextPage to="/rooms/extra" buttonText="Yes" />
+        </div>
+      </div>
       {roomMap}
     </ColumnPaper>
   );

@@ -42,6 +42,7 @@ import MudDistrictQuestion from "../MudDistrictQuestion/MudDistrictQuestion";
 import GreenFeaturesForm from "../GreenFeaturesForm/GreenFeaturesForm";
 import GreenCertificationForm from "../GreenCertificationForm/GreenCertificationForm";
 import EnergyEfficiencyForm from "../EnergyEfficiencyForm/EnergyEfficiencyForm";
+import HoaForm from "../HoaForm/HoaForm";
 import EndPage from "../EndPage/EndPage";
 //redux
 import { connect } from "react-redux";
@@ -218,6 +219,9 @@ const Page = props => {
       return <EnergyEfficiencyForm page={myProps.page} />;
     case "43a":
     case "42c":
+      return <HoaForm page={myProps.page} />;
+    case "44a":
+    case "43c":
       return <EndPage />;
     default:
       return (

@@ -124,7 +124,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { removeConstructionType, addConstructionType }
-)(PageTwo);
+export default connect(mapStateToProps, {
+  removeConstructionType,
+  addConstructionType
+})(PageTwo);

@@ -46,7 +46,6 @@ function KitchenEquipForm(props) {
     "Dual Dishwashers",
     "Dual Fuel Range",
     "Indoor Grill",
-    "None",
     "Other",
     "Oven - Electric",
     "Oven - Gas",
@@ -57,7 +56,8 @@ function KitchenEquipForm(props) {
     "Vent Mechanism",
     "Warmer Oven Drawer",
     "Washer",
-    "Water Line to Refrig"
+    "Water Line to Refrig",
+    "None"
   ];
   //render
   return (

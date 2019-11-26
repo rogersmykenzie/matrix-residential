@@ -142,12 +142,12 @@ function ExtraRooms(props) {
           to="/page/15"
           buttonText={!changesMade ? "Go Back" : "Finish Adding Rooms"}
         />
-      ) : props.auth === "c" ? (
+      ) : (
         <NextPage
           to="/page/14"
           buttonText={!changesMade ? "Go Back" : "Finish Adding Rooms"}
         />
-      ) : null}
+      )}
     </Paper>
   );
 }

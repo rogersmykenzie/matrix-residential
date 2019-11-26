@@ -83,18 +83,16 @@ const PageOne = props => {
   };
 
   //update page in nav - may remove. two sources of truth
-  useEffect(() => {
-    props.setCurrentPage(1);
-  }, []);
 
   //req info
   const propertyTypes = [
     "Condo",
     "Farm/Ranch",
     "Half Duplex",
-    <>
-      Single Family<span style={{ fontSize: ".5em" }}> (Most Common)</span>
-    </>,
+    "Single Family (Most Common)",
+    // <span>
+    //   Single Family<span style={{ fontSize: ".5em" }}> (Most Common)</span>
+    // </span>,
     "Townhouse"
   ];
   const housingTypes = [
@@ -112,9 +110,7 @@ const PageOne = props => {
     "Log Cabin",
     "Manufacture (cert exch)",
     "Resort Property",
-    <>
-      Single Detached<span style={{ fontSize: ".5em" }}> (Most Common)</span>
-    </>,
+    "Single Detached (Most Common)",
     "Single Mobile w/ Land",
     "Underground",
     "Vacation Home"
@@ -139,9 +135,7 @@ const PageOne = props => {
     "Spanish",
     "Split Level",
     "Studio",
-    <>
-      Traditional<span style={{ fontSize: ".5em" }}> (Most Common)</span>
-    </>,
+    "Traditional (Most Common)",
     "Tudor",
     "Victorian"
   ];
@@ -193,15 +187,12 @@ const PageOne = props => {
   );
 };
 
-export default connect(
-  undefined,
-  {
-    setCurrentPage,
-    addPropertyType,
-    removePropertyType,
-    addHousingType,
-    addHomeStyle,
-    removeHomeStyle,
-    removeHousingType
-  }
-)(PageOne);
+export default connect(undefined, {
+  setCurrentPage,
+  addPropertyType,
+  removePropertyType,
+  addHousingType,
+  addHomeStyle,
+  removeHomeStyle,
+  removeHousingType
+})(PageOne);

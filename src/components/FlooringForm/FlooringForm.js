@@ -47,7 +47,7 @@ function FlooringForm(props) {
   //render
   return (
     <Paper className="page-two-paper">
-      <h1>Please select all that apply to your flooring:</h1>
+      <h1>Please select any flooring type this property has:</h1>
       {properties.map(val => {
         return (
           <CheckboxComp

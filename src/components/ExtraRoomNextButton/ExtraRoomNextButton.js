@@ -18,7 +18,7 @@ function ExtraRoomNextButton(props) {
         variant="contained"
         className="fade-in admin-page-three-button"
         onClick={() => props.resetForm()}>
-        Add Another
+        Add
       </Button>
     </>
   );

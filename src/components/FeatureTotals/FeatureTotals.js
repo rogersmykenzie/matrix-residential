@@ -61,14 +61,14 @@ function FeatureTotals(props) {
         }}>
         <TextField
           variant="outlined"
-          placeholder="Carport Spaces"
+          placeholder="# of Carport Spaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setCarportSpaces(e.target.value)}
         />
         <TextField
           variant="outlined"
-          placeholder="Garage Spaces"
+          placeholder="# of Garage Spaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setGarageSpaces(e.target.value)}
@@ -93,14 +93,14 @@ function FeatureTotals(props) {
         ) : null}
         <TextField
           variant="outlined"
-          placeholder="Total Cover Parking"
+          placeholder="# of Total Cover Parking Areas"
           type="number"
           style={textFieldStyle}
           onChange={e => setTotalCoverParking(e.target.value)}
         />
         <TextField
           variant="outlined"
-          placeholder="Fireplaces"
+          placeholder="# of Fireplaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setFireplaces(e.target.value)}
