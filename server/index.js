@@ -2,9 +2,11 @@ const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
+// const path = require("path");
 
 const app = express();
 
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 
 app.use(
