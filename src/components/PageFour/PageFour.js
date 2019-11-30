@@ -26,7 +26,6 @@ function PageFour(props) {
   const [schoolsAreUnknown, setUnknown] = useState(null);
   const [schoolNames, dispatch] = React.useReducer(
     function(state, action) {
-      console.log(action.type);
       switch (action.type) {
         case "elementarySchool":
           return {
@@ -73,7 +72,6 @@ function PageFour(props) {
       type: e.target.name,
       payload: e.target.value
     });
-    console.log(schoolNames);
   };
   function postData() {
     Axios.post("/info", {
@@ -146,7 +144,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addAccessoryUnit, removeAccessoryUnit, changeSchool }
-)(PageFour);
+export default connect(mapStateToProps, {
+  addAccessoryUnit,
+  removeAccessoryUnit,
+  changeSchool
+})(PageFour);

@@ -22,7 +22,6 @@ function withSimpleForm(Component, checkLabels, infoTitle) {
     // let funcCall = null;
     // const setNextPageFunction = (func) => {
     //     funcCall = func;
-    //     console.log(funcCall)
     // }
     function postInfo() {
       Axios.post("/info", {

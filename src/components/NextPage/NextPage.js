@@ -15,7 +15,6 @@ import "./NextPage.css";
  */
 
 function NextPage(props) {
-  console.log("PROPS", props);
   // const [shouldRedirect, setShouldRedirect] = React.useState(false);
   function runWhenClicked() {
     if (props.whenClicked) {

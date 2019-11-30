@@ -18,7 +18,6 @@ function RoomCard(props) {
   }
 
   const { data } = props;
-  console.log(data);
   if (data === undefined) {
     handleError();
     return null;

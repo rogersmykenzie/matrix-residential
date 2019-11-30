@@ -55,7 +55,6 @@ const Page = props => {
     page: +props.match.params.pageNum,
     room: +props.match.params.roomNum
   };
-  console.log(props.auth);
 
   // React.useEffect(() => {
   //   console.log("route changed");

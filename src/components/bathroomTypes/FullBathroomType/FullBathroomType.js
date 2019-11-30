@@ -5,7 +5,6 @@ import BuildForm from "../../BuildForm/BuildForm";
 import withAuth from "../../hoc/withAuth";
 
 function FullBathroomType(props) {
-  console.log(props);
   //constants
   const PROPERTIES = [
     "Bidet",

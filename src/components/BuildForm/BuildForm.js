@@ -33,7 +33,6 @@ function BuildForm(props) {
     arr.splice(arr.indexOf(prop), 1);
     setProps(arr);
   }
-  console.log(props.cameFromExtraRoom);
   //render
   return (
     <div>

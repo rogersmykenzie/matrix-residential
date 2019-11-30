@@ -56,7 +56,6 @@ function WaterfrontQuestion(props) {
       }
     });
   }
-  console.log(isWaterfront);
   //template
   return (
     <Paper className="page-two-paper">

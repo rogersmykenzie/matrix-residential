@@ -35,10 +35,8 @@ app.post("/info", function(req, res) {
       ...req.session.formData,
       ...req.body
     };
-    console.log(req.session.formData);
     res.sendStatus(200);
   } catch (e) {
-    console.log("caught", e);
     res.status(500).json(e);
   }
 });
@@ -54,16 +52,13 @@ app.post("/info/:type", function(req, res) {
     req.session.formData[req.params.type].push({
       ...req.body
     });
-    console.log(req.session.formData);
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
-    console.log("here", e);
   }
 });
 
 app.get("/server/rooms", function(req, res) {
-  console.log(req.session);
   res.status(200).json({
     bedroomData: req.session.formData.bedroomData,
     diningData: req.session.formData.diningData,
@@ -308,8 +303,6 @@ What energy efficient features do they have? ${energyEfficiencyInfo.properties.j
   )}
 
 `;
-
-  console.log(message);
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

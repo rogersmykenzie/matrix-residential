@@ -35,7 +35,6 @@ const Intro = props => {
 
   //event handlers
   function postOnClick() {
-    console.log("here");
     axios.post("/info", {
       firstName,
       lastName,
@@ -56,9 +55,7 @@ const Intro = props => {
     }
     if (props.auth === "c") {
       const properties = [firstName, lastName, email, phone, address];
-      console.log(properties);
       const filteredProps = properties.filter(val => val !== "");
-      console.log(filteredProps);
       if (filteredProps.length === 5) {
         postOnClick();
       } else {
@@ -154,20 +151,16 @@ const Intro = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.userReducer.auth);
   return {
     auth: state.userReducer.auth
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    changeFirstName,
-    changeLastName,
-    changeEmail,
-    changePhoneNumber,
-    updateAddress,
-    changeAuth
-  }
-)(Intro);
+export default connect(mapStateToProps, {
+  changeFirstName,
+  changeLastName,
+  changeEmail,
+  changePhoneNumber,
+  updateAddress,
+  changeAuth
+})(Intro);

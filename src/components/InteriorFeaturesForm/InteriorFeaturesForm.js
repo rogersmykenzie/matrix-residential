@@ -6,7 +6,6 @@ import Paper from "@material-ui/core/Paper";
 import Axios from "axios";
 
 function InteriorFeaturesForm(props) {
-  console.log(props);
   ///constants
   const PROPERTIES = [
     "Bay Windows",

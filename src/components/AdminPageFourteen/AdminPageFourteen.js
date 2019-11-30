@@ -38,7 +38,6 @@ function AdminPageFourteen(props) {
     livingData: [...]
   }
   */
-  // console.log(rooms);
   const roomMap = rooms.map((val, i) => {
     if (val && val.length > 0) {
       let displayText = (function() {

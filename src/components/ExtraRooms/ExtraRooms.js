@@ -72,7 +72,6 @@ function ExtraRooms(props) {
     setRoom(e.target.value);
   }
   function reset(data) {
-    console.log(data);
     Axios.post(`/info/${selectedRoomType}`, {
       ...data,
       type: room
