@@ -53,7 +53,7 @@ function PageFour(props) {
     }
   );
   //constants
-  const accessoryTypes = ["Guest Quarters", "Other", "Pool House"];
+  const accessoryTypes = ["Guest Quarters", "Other", "Pool House", "None"];
   const schoolTypes = ["Elementary School", "Middle School", "High School"];
   //event handlers
   const handleClick = val => {

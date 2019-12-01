@@ -19,7 +19,8 @@ export default withSimpleForm(
     "LEED Gold",
     "LEED Platinum",
     "LEED Silver",
-    "NGBP-National Green"
+    "NGBP-National Green",
+    "None"
   ],
   "greenCertificationInfo"
 );

@@ -4,7 +4,7 @@ import withSimpleForm from "../hoc/withSimpleForm";
 
 function EnergyEfficiencyForm(props) {
   return (
-    <h1>Does your property employ any of these energy efficiency methods?:</h1>
+    <h1>Does your property employ any of these energy efficiency methods?</h1>
   );
 }
 
@@ -39,7 +39,8 @@ export default withSimpleForm(
     "Tinted Windows",
     "Turbines",
     "Variable Speed HVAC",
-    "Ventilator"
+    "Ventilator",
+    "None"
   ],
   "energyEfficiencyInfo"
 );

@@ -35,7 +35,7 @@ function EasementsForm(props) {
   //template
   return (
     <ColumnPaper>
-      <h1>Select any easements that apply to your lots</h1>
+      <h1>Select any easements that apply to your lot</h1>
       {properties.map(val => (
         <CheckboxComp
           label={val}

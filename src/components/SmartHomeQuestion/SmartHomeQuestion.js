@@ -38,7 +38,7 @@ function SmartHomeQuestion(props) {
           multiline
           variant="outlined"
           placeholder="Please Describe"
-          rows="4"
+          rows="8"
           onChange={handleChange}
           style={{ borderColor: "green" }}
           color="secondary"></TextField>

@@ -44,9 +44,10 @@ function SpecialNotesForm(props) {
         "Utility Easement",
         "Verify Flood Insurance",
         "Verify Rollback Tax",
-        "Verify Tax Exemptions"
+        "Verify Tax Exemptions",
+        "None"
       ]}
-      tagline="If any of these items apply to your property, please select. Otherwise, select Next"
+      tagline="Select any of the items that apply to your property."
       page={props.page}
       whenClicked={postInfo}
     />

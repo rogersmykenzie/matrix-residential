@@ -44,7 +44,8 @@ export default withSimpleForm(
     "Storm Cellar",
     "Tennis Court(s)",
     "Workshop",
-    "Workshop With Electric"
+    "Workshop With Electric",
+    "None"
   ],
   "exteriorFeaturesInfo"
 );

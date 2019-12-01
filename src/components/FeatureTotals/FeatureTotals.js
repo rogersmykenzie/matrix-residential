@@ -59,48 +59,54 @@ function FeatureTotals(props) {
           flexDirection: "column",
           alignItems: "center"
         }}>
+        <h3># of Carport Spaces</h3>
         <TextField
           variant="outlined"
-          placeholder="# of Carport Spaces"
+          // placeholder="# of Carport Spaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setCarportSpaces(e.target.value)}
         />
+        <h3># of Garage Spaces</h3>
         <TextField
           variant="outlined"
-          placeholder="# of Garage Spaces"
+          // placeholder="# of Garage Spaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setGarageSpaces(e.target.value)}
         />
         {props.auth === "a" ? (
           <>
+            <h3>Garage Width</h3>
             <TextField
               variant="outlined"
-              placeholder="Garage Width"
+              // placeholder="Garage Width"
               type="text"
               style={textFieldStyle}
               onChange={e => setGarageWidth(e.target.value)}
             />
+            <h3>Garage Length</h3>
             <TextField
               variant="outlined"
-              placeholder="Garage Length"
+              // placeholder="Garage Length"
               type="text"
               style={textFieldStyle}
               onChange={e => setGarageLength(e.target.value)}
             />
           </>
         ) : null}
+        <h3># of Total Cover Parking Areas</h3>
         <TextField
           variant="outlined"
-          placeholder="# of Total Cover Parking Areas"
+          // placeholder="# of Total Cover Parking Areas"
           type="number"
           style={textFieldStyle}
           onChange={e => setTotalCoverParking(e.target.value)}
         />
+        <h3># of Fireplaces</h3>
         <TextField
           variant="outlined"
-          placeholder="# of Fireplaces"
+          // placeholder="# of Fireplaces"
           type="number"
           style={textFieldStyle}
           onChange={e => setFireplaces(e.target.value)}

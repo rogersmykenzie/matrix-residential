@@ -165,8 +165,10 @@ app.post("/email", function(req, res) {
     mudDistrictInfo,
     greenFeaturesInfo,
     greenCertificationInfo,
-    energyEfficiencyInfo
+    energyEfficiencyInfo,
+    hoaInfo
   } = req.session.formData;
+  console.log(hoaInfo);
   try {
     const message = `A new listing form has been submitted!
 
@@ -301,8 +303,26 @@ What green certifications do they have? ${greenCertificationInfo.properties.join
 What energy efficient features do they have? ${energyEfficiencyInfo.properties.join(
       ", "
     )}
-
-`;
+${
+  hoaInfo.hasHoa !== "None"
+    ? `They do not have an HOA.`
+    : `They have a ${hoaInfo.hasHoa} HOA.
+Their HOA bills ${hoaInfo.billingCycle}.
+${hoaInfo.hoaDues ? "They have the following HOA dues: " + hoaInfo.hoaDues : ""}
+${
+  hoaInfo.managementCompany
+    ? "They have the following Management Company" + hoaInfo.managementCompany
+    : ""
+}
+${hoaInfo.phone ? "They provided the following contact: " + hoaInfo.phone : ""}
+${
+  hoaInfo.selectedAttributes.length > 0
+    ? "They provided the following attributes: " +
+      hoaInfo.selectedAttributes.join(", ")
+    : ""
+}
+`
+}`;
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -314,7 +334,7 @@ What energy efficient features do they have? ${energyEfficiencyInfo.properties.j
     const mailOptions = {
       from: process.env.MAILER_USER,
       // to: req.session.formData.email
-      to: process.env.SENT_TO,
+      to: process.env.SEND_TO,
       subject: "NEW FORM",
       text: message
     };
