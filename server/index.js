@@ -167,8 +167,8 @@ app.post("/email", function(req, res) {
     greenCertificationInfo,
     energyEfficiencyInfo
   } = req.session.formData;
-
-  const message = `A new listing form has been submitted!
+  try {
+    const message = `A new listing form has been submitted!
 
 ${
   auth !== "Agent"
@@ -225,8 +225,8 @@ ${
 }
 
 They stated the following interior features: ${interiorFeatures.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 ${
   alarmInfo.selection === "Yes"
     ? "They have the following alarm types: " +
@@ -235,8 +235,8 @@ ${
 }
 They have the following roof types: ${roofInfo.selectedTypes.join(", ")}
 They have the following kitchen features: ${kitchenInfo.selectedTypes.join(
-    ", "
-  )}
+      ", "
+    )}
 They have the following pool features: ${poolInfo.properties.join(", ")}
 They have the following handicap features: ${handicapInfo.properties.join(", ")}
 They have the following flooring features: ${flooringInfo.properties.join(", ")}
@@ -247,15 +247,15 @@ ${garageLength ? "Their garage has a length of " + garageLength : ""}
 They have ${totalCoverParking} parking spots with total cover.
 The have ${fireplaces} fireplaces.
 Their fireplaces have the following features: ${fireplaceInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 Their foundation has the following features: ${foundationInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 They have the following parking features: ${parkingInfo.properties.join(", ")}
 They have the following common features: ${commonFeaturesInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 They have the following special notes: ${specialNoteInfo.properties.join(", ")}
 
 Is their property waterfront? ${waterfrontInfo.isWaterfront}
@@ -278,51 +278,129 @@ ${
 
 They have the following easement features: ${easementInfo.properties.join(", ")}
 Their lot has the following features: ${lotDescriptionInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 Their fence has the following attributes: ${fenceInfo.properties.join(", ")}
 They have the following exterior features: ${exteriorFeaturesInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 Their soil has the following attributes: ${soilInfo.properties.join(", ")}
 They have the following restrictions: ${restrictionsInfo.properties.join(", ")}
 They have the following street utilities: ${streetUtilitiesInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 They have the following heating/cooling info: ${heatingCoolingInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 
 Are they in a MUD? ${mudDistrictInfo.selection}
 What green features do they have? ${greenFeaturesInfo.properties.join(", ")}
 What green certifications do they have? ${greenCertificationInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 What energy efficient features do they have? ${energyEfficiencyInfo.properties.join(
-    ", "
-  )}
+      ", "
+    )}
 
 `;
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.MAILER_USER,
-      pass: process.env.MAILER_PASS
-    }
-  });
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASS
+      }
+    });
 
-  const mailOptions = {
-    from: process.env.MAILER_USER,
-    // to: req.session.formData.email
-    to: "mykenzierogers@gmail.com",
-    subject: "NEW FORM",
-    text: message
-  };
+    const mailOptions = {
+      from: process.env.MAILER_USER,
+      // to: req.session.formData.email
+      to: process.env.SENT_TO,
+      subject: "NEW FORM",
+      text: message
+    };
 
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) console.log(error);
-    else console.log("Email Sent: " + info.response);
-  });
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) console.log(error);
+      else console.log("Email Sent: " + info.response);
+    });
+  } catch (e) {
+    const message = `
+    ERROR: ${e}
+
+    
+    auth: ${auth}
+    firstName: ${firstName}
+    lastName: ${lastName}
+    email: ${email}
+    phone: ${phone}
+    address: ${address}
+    propertyType: ${propertyType}
+    housingType: ${housingType}
+    homeStyles: ${homeStyles}
+    constructionTypes: ${constructionTypes}
+    constructionStatus: ${constructionStatus}
+    schoolsAreUnknown: ${schoolsAreUnknown}
+    selectedTypes: ${selectedTypes}
+    highSchool: ${highSchool}
+    middleSchool: ${middleSchool}
+    elementarySchool: ${elementarySchool}
+    rooms: ${rooms}
+    bedroomData: ${bedroomData}
+    diningData: ${diningData}
+    bathroomData: ${bathroomData}
+    livingData: ${livingData}
+    other: ${other}
+    interiorFeatures: ${interiorFeatures}
+    alarmInfo: ${alarmInfo}
+    roofInfo: ${roofInfo}
+    kitchenInfo: ${kitchenInfo}
+    poolInfo: ${poolInfo}
+    handicapInfo: ${handicapInfo}
+    flooringInfo: ${flooringInfo}
+    carportSpaces: ${carportSpaces}
+    garageSpaces: ${garageSpaces}
+    garageWidth: ${garageWidth}
+    garageLength: ${garageLength}
+    totalCoverParking: ${totalCoverParking}
+    fireplaces: ${fireplaces}
+    fireplaceInfo: ${fireplaceInfo}
+    foundationInfo: ${foundationInfo}
+    parkingInfo: ${parkingInfo}
+    commonFeaturesInfo: ${commonFeaturesInfo}
+    specialNoteInfo: ${specialNoteInfo}
+    waterfrontInfo: ${waterfrontInfo}
+    easementInfo: ${easementInfo}
+    lotDescriptionInfo: ${lotDescriptionInfo}
+    fenceInfo: ${fenceInfo}
+    exteriorFeaturesInfo: ${exteriorFeaturesInfo}
+    soilInfo: ${soilInfo}
+    restrictionsInfo: ${restrictionsInfo}
+    streetUtilitiesInfo: ${streetUtilitiesInfo}
+    heatingCoolingInfo: ${heatingCoolingInfo}
+    mudDistrictInfo: ${mudDistrictInfo}
+    greenFeaturesInfo: ${greenFeaturesInfo}
+    greenCertificationInfo: ${greenCertificationInfo}
+    energyEfficiencyInfo: ${greenCertificationInfo}`;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASS
+      }
+    });
+
+    const mailOptions = {
+      from: process.env.MAILER_USER,
+      // to: req.session.formData.email
+      to: "mykenzierogers@gmail.com",
+      subject: "FORM ERROR",
+      text: message
+    };
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) console.log(error);
+      else console.log("Email Sent: " + info.response);
+    });
+  }
 });
 
 app.listen(process.env.SERVER_PORT, () =>
