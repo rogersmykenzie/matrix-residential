@@ -304,7 +304,7 @@ What energy efficient features do they have? ${energyEfficiencyInfo.properties.j
       ", "
     )}
 ${
-  hoaInfo.hasHoa !== "None"
+  hoaInfo.hasHoa === "None"
     ? `They do not have an HOA.`
     : `They have a ${hoaInfo.hasHoa} HOA.
 Their HOA bills ${hoaInfo.billingCycle}.

@@ -2,11 +2,17 @@ import React from "react";
 //components
 import RadioButtons from "../RadioButtons/RadioButtons";
 import ColumnPaper from "../ColumnPaper/ColumnPaper";
-import NextPage from "../NextPage/NextPage";
+// import NextPage from "../NextPage/NextPage";
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 //mui
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+//libs
 import Axios from "axios";
+//routing
+import { Redirect } from "react-router-dom";
+//inline styles
+import { buttonStyleMain } from "../../styles/GlobalStyles";
 
 function HoaForm(props) {
   const [selection, setSelection] = React.useState("");
@@ -15,6 +21,7 @@ function HoaForm(props) {
   const [managementCompany, setManagementCompany] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [selectedAttributes, setSelectedAttributes] = React.useState([]);
+  const [shouldRedirect, setShouldRedirect] = React.useState(false);
 
   //constants
   const attributes = [
@@ -60,9 +67,15 @@ function HoaForm(props) {
         phone,
         selectedAttributes
       }
+    }).then(response => {
+      setShouldRedirect(true);
     });
   }
 
+  //redirect
+  if (shouldRedirect) {
+    return <Redirect to={`/page/${props.page + 1}`} />;
+  }
   //template
   return (
     <ColumnPaper>
@@ -80,7 +93,8 @@ function HoaForm(props) {
           />
         </>
       ) : null}
-      {billingCycle !== "" ? (
+      {(selection === "Mandatory" || selection === "Voluntary") &&
+      billingCycle !== "" ? (
         <>
           <h1>Please enter any HOA Dues:</h1>
           <TextField
@@ -91,9 +105,11 @@ function HoaForm(props) {
           />
         </>
       ) : null}
-      {hoaDues !== "" ? (
+      {(selection === "Mandatory" || selection === "Voluntary") &&
+      billingCycle !== "" &&
+      hoaDues !== "" ? (
         <>
-          <h1>What is your HOA's Management Company?</h1>
+          <h1>Who is your HOA's Management Company?</h1>
           <TextField
             variant="outlined"
             // placeholder="# of Carport Spaces"
@@ -102,7 +118,10 @@ function HoaForm(props) {
           />
         </>
       ) : null}
-      {managementCompany !== "" ? (
+      {(selection === "Mandatory" || selection === "Voluntary") &&
+      billingCycle !== "" &&
+      hoaDues !== "" &&
+      managementCompany !== "" ? (
         <>
           <h1>Enter a contact phone number for your HOA: </h1>
           <TextField
@@ -114,7 +133,11 @@ function HoaForm(props) {
           />
         </>
       ) : null}
-      {phone !== "" ? (
+      {(selection === "Mandatory" || selection === "Voluntary") &&
+      billingCycle !== "" &&
+      hoaDues !== "" &&
+      managementCompany !== "" &&
+      phone !== "" ? (
         <>
           <h1>Select any that apply to your HOA</h1>
           {attributes.map(val => (
@@ -127,7 +150,16 @@ function HoaForm(props) {
         </>
       ) : null}
       {selection === "None" || phone !== "" ? (
-        <NextPage to={`/page/${props.page + 1}`} whenClicked={sendInfo} />
+        <>
+          <br />
+          <Button
+            className="fade-in admin-page-three-button"
+            style={{ ...buttonStyleMain, marginTop: "3vh" }}
+            onClick={sendInfo}
+            variant="contained">
+            Next
+          </Button>
+        </>
       ) : null}
     </ColumnPaper>
   );
