@@ -227,7 +227,4 @@ function AdminPageFive(props) {
   );
 }
 
-export default connect(
-  undefined,
-  { updateNumRooms }
-)(AdminPageFive);
+export default connect(undefined, { updateNumRooms })(AdminPageFive);

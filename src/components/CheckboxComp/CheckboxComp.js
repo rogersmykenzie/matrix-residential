@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 //mui
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 /**
  * @param {function} whenClicked - A function to run when the checkbox is clicked
  * @param {function} whenUnclicked - A function to run when the checkbox is unclicked
@@ -9,31 +9,30 @@ import Checkbox from '@material-ui/core/Checkbox';
  */
 
 const CheckboxComp = props => {
-    const [isChecked, toggle] = React.useState(false); //Holds if box is checked
-    const handleChange = () => {
-        toggle(!isChecked); //Toggles the checkbox in state
-        if(props.whenClicked && props.whenUnclicked) { //Checks to see if comp has props
-            if(!isChecked) {
-                props.whenClicked(props.label); //Runs whenClicked function if it got checked
-            } else {
-                props.whenUnclicked(props.label); //Runs whenUnclicked if not
-            }
-        } else if(props.whenClicked || props.whenUnclicked) {
-            console.warn('You need to provide both a whenClicked and a whenUnclicked property to the CheckboxComp component to achieve onClick functionality');
-        }
+  const [isChecked, toggle] = React.useState(false); //Holds if box is checked
+  const handleChange = () => {
+    toggle(!isChecked); //Toggles the checkbox in state
+    if (props.whenClicked && props.whenUnclicked) {
+      //Checks to see if comp has props
+      if (!isChecked) {
+        props.whenClicked(props.label); //Runs whenClicked function if it got checked
+      } else {
+        props.whenUnclicked(props.label); //Runs whenUnclicked if not
+      }
+    } else if (props.whenClicked || props.whenUnclicked) {
+      console.warn(
+        "You need to provide both a whenClicked and a whenUnclicked property to the CheckboxComp component to achieve onClick functionality"
+      );
     }
-    return (
-        <>
-            <FormControlLabel 
-            control={
-                <Checkbox 
-                onChange={handleChange}
-                />
-            }
-            label={props.label}
-            />
-        </>
-    )
-}
+  };
+  return (
+    <>
+      <FormControlLabel
+        control={<Checkbox onChange={handleChange} value={props.label} />}
+        label={props.label}
+      />
+    </>
+  );
+};
 
-export default CheckboxComp
+export default CheckboxComp;

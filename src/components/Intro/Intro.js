@@ -139,6 +139,7 @@ const Intro = props => {
           {props.auth === "a" || props.auth === "c" ? (
             <Button
               variant="contained"
+              className="intro__continue-button"
               style={styles.buttonStyle}
               onClick={decideOption}>
               Continue
