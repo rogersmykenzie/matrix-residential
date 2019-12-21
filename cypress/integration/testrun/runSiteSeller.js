@@ -28,7 +28,7 @@ let numLiving;
 
 describe("Can access the site", () => {
   it("Can access the site", () => {
-    cy.visit("localhost:3001");
+    cy.visit("localhost:3000");
   });
 });
 
@@ -644,5 +644,129 @@ describe("Alarm Form - Page 15", () => {
 });
 
 describe("Roof Property Form - Page 16", () => {
-  it("Should allow you to select properties on this page", () => {});
+  it("Should allow you to select properties on this page", () => {
+    const options = [
+      "Built-up",
+      "Composition",
+      "Concrete",
+      "Fiber Cement",
+      "Metal",
+      "Other",
+      "Overlay",
+      "Shake Metal",
+      "Tar/Gravel",
+      "Tile/Slate",
+      "Wood Shake",
+      "Wood Shingle"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+
+describe(`Kitchen Form - Page 17`, () => {
+  it("Should be able to select properties on the page", () => {
+    const options = [
+      "Built-in Coffee Maker",
+      "Built-in Compacter",
+      "Built-in Icemaker",
+      "Built-in Microwave",
+      "Built-in Refrig/Freezer",
+      "Commercial Grade Range",
+      "Commercial Grade Vent",
+      "Convection Oven",
+      "Cooktop - Electric",
+      "Cooktop - Gas",
+      "Dishwasher",
+      "Disposal",
+      "Double Oven",
+      "Drop in Range/Oven - Gas",
+      "Dryer",
+      "Dual Dishwashers",
+      "Dual Fuel Range",
+      "Indoor Grill",
+      "Other",
+      "Oven - Electric",
+      "Oven - Gas",
+      "Plumbed for Gas in Kitchen",
+      "Range/Oven - Electric",
+      "Range/Oven - Gas",
+      "Refrigerator",
+      "Vent Mechanism",
+      "Warmer Oven Drawer",
+      "Washer",
+      "Water Line to Refrig",
+      "None"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains(`Next`).click();
+  });
+});
+
+describe(`Pool Form - Page 18`, () => {
+  it(`Should be able to move on if they pick "No"`, () => {
+    cy.contains("No").click();
+
+    cy.contains(`Next`);
+  });
+
+  it(`Should be able to select properties on the page`, () => {
+    cy.contains("Yes").click();
+
+    const options = [
+      "Above Ground",
+      "Attached Spa",
+      "Cabana",
+      "Cleaning System",
+      "Custom Cover",
+      "Diving",
+      "Heated",
+      "In Ground Fiberglass",
+      "In Ground Gunite",
+      "In Ground Vinyl",
+      "Indoor",
+      "Infinity Edge",
+      "Lap Pool",
+      "Other",
+      "Play Pool",
+      "Pool Perimeter Fence",
+      "Saltwater Pool",
+      "Separate Spa/Hot Tub",
+      "Water Feature"
+    ];
+
+    cy.get(
+      `input[type="checkbox"][value="${
+        options[getRandomNumber(0, options.length - 1)]
+      }"]`
+    ).click();
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+
+describe("Handicap Form - Page 19", () => {
+  // it(`Should be able to go `);
 });
