@@ -362,7 +362,7 @@ describe("More Rooms - Page 13", () => {
   });
 });
 
-describe("More Rooms Form - Page 14", () => {
+describe("More Rooms Form - Page 13.5", () => {
   it("Should be able to add extra master bedroom", () => {
     cy.get("select").select("Master Bedroom");
 
@@ -538,14 +538,111 @@ describe("More Rooms Form - Page 14", () => {
   });
 
   it("Should be able to add a room with a type of `other`", () => {
+    cy.get(`select`).select("Other");
+
     cy.get(`input[placeholder="Room Name"]`).type(
-      ["Dungeon", "Trampoline Room", "Tree House"][getRandomNumber(1, 3)]
+      ["Dungeon", "Trampoline Room", "Tree House"][getRandomNumber(0, 2)]
     );
 
-    cy.get(`textarea`).type([
-      "This place is a load of baloney",
-      "This place is the bees knees",
-      "Where am I? What year is it?"
-    ]);
+    cy.get(`textarea`).type(
+      [
+        "This place is a load of baloney",
+        "This place is the bees knees",
+        "Where am I? What year is it?"
+      ][getRandomNumber(0, 2)]
+    );
+    cy.contains(`Add`).click();
   });
+
+  it("Should be able to navigate to the next page", () => {
+    cy.contains(`Finish Adding Rooms`).click();
+  });
+});
+
+describe("Interior Features Form - Page 14", () => {
+  it("Should be able to select properties", () => {
+    const options = [
+      "Bay Windows",
+      "Built-In Wine Cooler",
+      "Cable TV Available",
+      "Central Vac",
+      "Decorative Lighting",
+      "Dry Bar",
+      "Electric Shades",
+      "Elevator",
+      "Flat Screen Wiring",
+      "High Speed Internet Avail",
+      "Intercom",
+      "Loft",
+      "Multiple Staircases",
+      "Other",
+      "Paneling",
+      "Plantation Shutters",
+      "Skylights",
+      "Smart Home System",
+      "Sound System Wiring",
+      "Vaulted Ceilings",
+      "Wainscoting",
+      "Water Filter",
+      "Water Purifier",
+      "Water Softener",
+      "Wet Bar",
+      "Window Coverings"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+
+    cy.contains("Next").click({ force: true });
+  });
+});
+
+describe("Alarm Form - Page 15", () => {
+  it("Should allow you to move on if you don't have a security system or alarm", () => {
+    cy.get(`input[type="radio"][value="No"]`).click();
+
+    cy.contains("Next");
+  });
+
+  it("Should allow you to select yes and additional properties", () => {
+    cy.get(`input[type="radio"][value="Yes"]`).click();
+
+    const options = [
+      "Burglar",
+      "Carbon Mono Detector",
+      "Ext Security Light(s)",
+      "Fire Sprinkler System",
+      "Fire/Smoke",
+      "Firewall(s)",
+      "Leased",
+      "Monitored",
+      "Other",
+      "Owned",
+      "Pre-Wired",
+      "Smoke Detector",
+      "Unknown",
+      "Wireless"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it("Should allow you to move on to the next page", () => {
+    cy.contains("Next").click();
+  });
+});
+
+describe("Roof Property Form - Page 16", () => {
+  it("Should allow you to select properties on this page", () => {});
 });
