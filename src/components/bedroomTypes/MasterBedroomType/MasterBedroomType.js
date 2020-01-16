@@ -28,7 +28,6 @@ function SecondMasterType(props) {
   function whenDone(data) {
     props.reset(data);
   }
-  console.log(props);
   return (
     <BuildForm
       needsInputs={props.auth === "a"}

@@ -62,7 +62,6 @@ function AdminPageThirteen(props) {
     props.setWasClicked(false);
     setOption(null);
   }
-  // console.log(props);
   return (
     <Paper className="page-two-paper">
       <h1>Enter Living Room {props.room ? props.room : null}</h1>
@@ -90,7 +89,6 @@ function AdminPageThirteen(props) {
 }
 
 function mapStateToProps(reduxState) {
-  console.log(reduxState);
   return {
     numLiving: reduxState.formInfoReducer.numRooms.numLiving
   };

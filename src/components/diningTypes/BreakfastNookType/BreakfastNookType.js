@@ -11,7 +11,6 @@ function BreakfastNookType(props) {
   function whenDone(formData) {
     props.reset(formData);
   }
-  console.log(props);
   //constants
   const PROPERTIES = [
     "Breakfast Bar",

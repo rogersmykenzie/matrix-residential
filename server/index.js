@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 
 app.use(
@@ -36,7 +37,6 @@ app.post("/info", function(req, res) {
     console.log(req.session.formData);
     res.sendStatus(200);
   } catch (e) {
-    console.log("caught", e);
     res.status(500).json(e);
   }
 });
@@ -52,16 +52,14 @@ app.post("/info/:type", function(req, res) {
     req.session.formData[req.params.type].push({
       ...req.body
     });
-    console.log(req.session.formData);
+    console.log(`{${req.params.type}: ${req.body}}`);
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
-    console.log("here", e);
   }
 });
 
 app.get("/server/rooms", function(req, res) {
-  console.log(req.session);
   res.status(200).json({
     bedroomData: req.session.formData.bedroomData,
     diningData: req.session.formData.diningData,
@@ -71,31 +69,73 @@ app.get("/server/rooms", function(req, res) {
 });
 
 app.post("/email", function(req, res) {
+  function camelToNormal(string) {
+    let stringArg = string.trim();
+    let newString = stringArg[0].toUpperCase();
+    for (let i = 1; i < stringArg.length; i++) {
+      if (stringArg[i].toUpperCase() === stringArg[i]) {
+        newString += " ";
+      }
+      newString += stringArg[i];
+    }
+    return newString;
+  }
+  function kebabToNormal(string) {
+    return string
+      .trim()
+      .split("-")
+      .map(val => val[0].toUpperCase() + val.substring(1).toLowerCase())
+      .join(" ");
+  }
+  function convertToReadable(string) {
+    if (string.includes("-")) {
+      return kebabToNormal(string);
+    } else {
+      return camelToNormal(string);
+    }
+  }
+  function formatRoom(room) {
+    let formattedRoom = "";
+    if (room.level) {
+      formattedRoom += `  Level: ${room.level}\n`;
+    }
+    if (room.width) {
+      formattedRoom += `  Width: ${room.width}\n`;
+    }
+    if (room.length) {
+      formattedRoom += `  Length: ${room.length}\n`;
+    }
+    if (room.properties.length > 0) {
+      formattedRoom += `  Properties: ${room.properties.join(", ")}\n`;
+    }
+    if (room.type) {
+      formattedRoom += `  Type: ${convertToReadable(room.type)}\n`;
+    }
+    return formattedRoom;
+  }
   const {
-    other,
+    auth,
     firstName,
     lastName,
     email,
     phone,
     address,
-    auth,
     propertyType,
     housingType,
     homeStyles,
     constructionTypes,
     constructionStatus,
-    sqFtSelection,
-    customSqFt,
-    changeReason,
-    elementarySchool,
-    middleSchool,
-    highSchool,
+    schoolsAreUnknown,
     selectedTypes,
+    highSchool,
+    middleSchool,
+    elementarySchool,
     rooms,
     bedroomData,
     diningData,
     bathroomData,
     livingData,
+    other,
     interiorFeatures,
     alarmInfo,
     roofInfo,
@@ -109,7 +149,6 @@ app.post("/email", function(req, res) {
     garageLength,
     totalCoverParking,
     fireplaces,
-    smartHomeQuestion,
     fireplaceInfo,
     foundationInfo,
     parkingInfo,
@@ -127,182 +166,264 @@ app.post("/email", function(req, res) {
     mudDistrictInfo,
     greenFeaturesInfo,
     greenCertificationInfo,
-    energyEfficiencyInfo
+    energyEfficiencyInfo,
+    hoaInfo
   } = req.session.formData;
+  console.log(hoaInfo);
+  try {
+    const message = `A new listing form has been submitted!
 
-  const message = `Hello! This is an automated email letting you know that a new form has been submitted by a ${auth}. This email details any answers they input into the form. Note that any instances of the keyword "null" typically refer to an answer the client didn't provide, but may also be an error due to the program. If any \`null\` values seem strange, please don't hesitate to contact "mykenzierogers@gmail.com" with any questions or concerns.
-        
-Name: ${firstName} ${lastName}
-Email: ${email}
-Phone: ${phone}
-Property Address: ${address}
-Property Type(s): ${propertyType.join(", ")}
-Housing Type(s): ${housingType.join(", ")}
-Styles of Home: ${homeStyles.join(", ")}
-Construction: ${constructionTypes.join(", ")}
-Construction Status: ${constructionStatus.join(", ")}
 ${
-  sqFtSelection === "Change to:"
-    ? `The are changing their square footage to ${customSqFt} for the following reason:
-${changeReason}`
-    : `Their square footage is the same as their tax record`
+  auth !== "Agent"
+    ? `This form was submitted by a ${auth} named ${firstName} ${lastName}. Their email address is "${email}", and their phone number is ${phone}.\nThis property is located at ${address}.`
+    : `This form was submitted by an agent for the property of ${address}`
 }
-Elementary School: ${elementarySchool}
-Middle School: ${middleSchool}
-High School: ${highSchool}
-They have:
-    ${rooms.numBedroom} Bedrooms,
-    ${rooms.numFullBath} Full Bathrooms,
-    ${rooms.numHalfBath} Half Bathrooms,
-    ${rooms.numLiving} Living Areas,
-    ${rooms.numDining} Dining Areas.
-Their property is ${rooms.numStories}
-They have the following Bedrooms:
-${bedroomData
-  .map(val => {
-    return `   Type: ${val.type}
-        Width: ${val.width}
-        Height: ${val.height}
-        Floor: ${val.level}
-        Room Properties: 
-            ${val.properties.join(", ")}
-        `;
-  })
-  .join("\n")}
-They have the following Dining Areas: 
 ${
-  diningData.length > 1
-    ? diningData
-        .map(val => {
-          return `Type: ${val.type}
-        Width: ${val.width}
-        Height: ${val.height}
-        Floor: ${val.level}
-        Room Properties: 
-            ${val.properties.join(", ")}
-        `;
-        })
+  propertyType
+    ? `It has the following property types: ${propertyType.join(", ")}.`
+    : ""
+}
+It has the following housing types: ${housingType.join(", ")}.
+It has the following home styles: ${homeStyles.join(", ")}.
+It has the following construction types: ${constructionTypes.join(", ")}
+${
+  constructionStatus.length > 0
+    ? "It has the following construction status: " +
+      constructionStatus.join(", ") +
+      "\n"
+    : ""
+}
+${
+  schoolsAreUnknown
+    ? "They do not know the schools in their district."
+    : `They have the following schools: \nElementary School: ${elementarySchool}\nMiddle School: ${middleSchool}\nHigh School: ${highSchool}\n`
+}
+They have the following accessory units: ${selectedTypes.join(", ")}.
+
+They have ${rooms.numBeds} bedrooms.
+They have ${rooms.numFullBath} full bathrooms.
+They have ${rooms.numHalfBath} half bathrooms.
+They have ${rooms.numDining} dining rooms.
+They have ${rooms.numLiving} living rooms.
+
+Here are their bedrooms:
+${bedroomData && bedroomData.map(val => formatRoom(val)).join("\n")}
+Here are their dining rooms:
+${diningData && diningData.map(val => formatRoom(val)).join("\n")}
+Here are their bathrooms:
+${bathroomData && bathroomData.map(val => formatRoom(val)).join("\n")}
+Here are their living rooms:
+${livingData && livingData.map(val => formatRoom(val)).join("\n")}
+${
+  other && other.length > 0
+    ? "Here are other rooms they added:\n" +
+      other
+        .map(val =>
+          val.type === "other"
+            ? `${convertToReadable(val.type)} - ${val.name}: ${val.info}`
+            : formatRoom(val)
+        )
         .join("\n")
     : ""
 }
-They have the following Bathrooms:
-${bathroomData
-  .map(val => {
-    return `Type: ${val.type}
-        Width: ${val.width}
-        Height: ${val.height}
-        Floor: ${val.level}
-        Room Properties: 
-            ${val.properties.join(", ")}
-        `;
-  })
-  .join("\n")}
-They also have the following Living Areas:
-${livingData
-  .map(val => {
-    return `Type: ${val.type}
-        Width: ${val.width}
-        Height: ${val.height}
-        Floor: ${val.level}
-        Room Properties: 
-            ${val.properties.join(", ")}
-        `;
-  })
-  .join("\n")}
-They also added the following rooms via write-in:
-${other
-  .map(val => {
-    return `Room Name: ${val.name}
-        Room Info: ${val.info}
-        `;
-  })
-  .join("\n")}
-The following are the features that the user inputted:
-Interior Features: ${interiorFeatures.properties.join(", ")}
-Alarm: ${alarmInfo.selection}
+
+They stated the following interior features: ${interiorFeatures.properties.join(
+      ", "
+    )}
 ${
   alarmInfo.selection === "Yes"
-    ? `Alarm/Security Types: ${alarmInfo.selectedTypes.join(", ")}`
-    : ""
+    ? "They have the following alarm types: " +
+      alarmInfo.selectedTypes.join(", ")
+    : "They do not have an alarm"
 }
-Roof: ${roofInfo.selectedTypes.join(", ")}
-Kitchen Equipment: ${kitchenInfo.selectedTypes.join(", ")}
-Pool: ${
-    poolInfo === true
-      ? `Yes\nPool Features: ${poolInfo.properties.join(", ")}`
-      : "No"
-  }
-Handicap: ${handicapInfo.selection}
+They have the following roof types: ${roofInfo.selectedTypes.join(", ")}
+They have the following kitchen features: ${kitchenInfo.selectedTypes.join(
+      ", "
+    )}
+They have the following pool features: ${poolInfo.properties.join(", ")}
+They have the following handicap features: ${handicapInfo.properties.join(", ")}
+They have the following flooring features: ${flooringInfo.properties.join(", ")}
+They have ${carportSpaces} carport spaces.
+They have ${garageSpaces} garage spaces.
+${garageWidth ? "Their garage has a width of " + garageWidth : ""}
+${garageLength ? "Their garage has a length of " + garageLength : ""}
+They have ${totalCoverParking} parking spots with total cover.
+The have ${fireplaces} fireplaces.
+Their fireplaces have the following features: ${fireplaceInfo.properties.join(
+      ", "
+    )}
+Their foundation has the following features: ${foundationInfo.properties.join(
+      ", "
+    )}
+They have the following parking features: ${parkingInfo.properties.join(", ")}
+They have the following common features: ${commonFeaturesInfo.properties.join(
+      ", "
+    )}
+They have the following special notes: ${specialNoteInfo.properties.join(", ")}
+
+Is their property waterfront? ${waterfrontInfo.isWaterfront}
 ${
-  handicapInfo.selection === "Yes"
-    ? `Handicap Features: ${handicapInfo.properties.join(", ")}`
+  waterfrontInfo.isWaterfront === "Yes"
+    ? "Is their property lakefront? " + waterfrontInfo.isLakefront
     : ""
 }
-Flooring: ${flooringInfo.properties.join(", ")}
+${
+  waterfrontInfo.isWaterfront === "Yes"
+    ? "Is a dock permitted? " + waterfrontInfo.dockIsPermitted
+    : ""
+}
+${
+  waterfrontInfo.isWaterfront === "Yes"
+    ? "The waterfront has the following properties: " +
+      waterfrontInfo.properties.join(", ")
+    : ""
+}
 
-They have the following as well.
-Number of Carport Spaces: ${carportSpaces}
-Number of Garage Spaces: ${garageSpaces}
-Garage Width: ${garageWidth}
-Garage Length: ${garageLength}
-Number of Total Cover Parking Areas: ${totalCoverParking}
-Number of Fireplaces: ${fireplaces}
+They have the following easement features: ${easementInfo.properties.join(", ")}
+Their lot has the following features: ${lotDescriptionInfo.properties.join(
+      ", "
+    )}
+Their fence has the following attributes: ${fenceInfo.properties.join(", ")}
+They have the following exterior features: ${exteriorFeaturesInfo.properties.join(
+      ", "
+    )}
+Their soil has the following attributes: ${soilInfo.properties.join(", ")}
+They have the following restrictions: ${restrictionsInfo.properties.join(", ")}
+They have the following street utilities: ${streetUtilitiesInfo.properties.join(
+      ", "
+    )}
+They have the following heating/cooling info: ${heatingCoolingInfo.properties.join(
+      ", "
+    )}
 
-This home is ${
-    smartHomeQuestion.selection === "No" ? "Not" : ""
-  } Password Dependent/Has a Smart Home App
+Are they in a MUD? ${mudDistrictInfo.selection}
+What green features do they have? ${greenFeaturesInfo.properties.join(", ")}
+What green certifications do they have? ${greenCertificationInfo.properties.join(
+      ", "
+    )}
+What energy efficient features do they have? ${energyEfficiencyInfo.properties.join(
+      ", "
+    )}
+${
+  hoaInfo.hasHoa === "None"
+    ? `They do not have an HOA.`
+    : `They have a ${hoaInfo.hasHoa} HOA.
+Their HOA bills ${hoaInfo.billingCycle}.
+${hoaInfo.hoaDues ? "They have the following HOA dues: " + hoaInfo.hoaDues : ""}
+${
+  hoaInfo.managementCompany
+    ? "They have the following Management Company" + hoaInfo.managementCompany
+    : ""
+}
+${hoaInfo.phone ? "They provided the following contact: " + hoaInfo.phone : ""}
+${
+  hoaInfo.selectedAttributes.length > 0
+    ? "They provided the following attributes: " +
+      hoaInfo.selectedAttributes.join(", ")
+    : ""
+}
+`
+}`;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASS
+      }
+    });
 
-Some for features the user shared:
-Fireplace Features: ${fireplaceInfo.properties.join(", ")}
-Foundation: ${foundationInfo.properties.join(", ")}
-Parking Features: ${parkingInfo.properties.join(", ")}
-Common Features: ${commonFeaturesInfo.properties.join(", ")}
-Special Notes: ${specialNoteInfo.properties.join(", ")}
+    const mailOptions = {
+      from: process.env.MAILER_USER,
+      // to: req.session.formData.email
+      to: process.env.SEND_TO,
+      subject: "NEW FORM",
+      text: message
+    };
 
-Is this property waterfront: ${waterfrontInfo.isWaterfront}
-Is this property lakefront: ${waterfrontInfo.isLakefront}
-Is a dock permitted? ${waterfrontInfo.dockIsPermitted}
-Waterfront Features (if any): ${waterfrontInfo.properties.join(", ")}
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) console.log(error);
+      else console.log("Email Sent: " + info.response);
+    });
+  } catch (e) {
+    const message = `
+    ERROR: ${e}
 
-A few last features that were mentioned:
-Easements: ${easementInfo.properties.join(", ")}
-Lot Description: ${lotDescriptionInfo.properties.join(", ")}
-Type of Fence: ${fenceInfo.properties.join(", ")}
-Exterior Features: ${exteriorFeaturesInfo.properties.join(", ")}
-Soil: ${soilInfo.properties.join(", ")}
-Restrictions: ${restrictionsInfo.properties.join(", ")}
-Street/Utilities: ${streetUtilitiesInfo.properties.join(", ")}
-Heating/Cooling: ${heatingCoolingInfo.properties.join(", ")}
-MUD District: ${mudDistrictInfo.selection}
-Green Features: ${greenFeaturesInfo.properties.join(", ")}
-Green Certifications: ${greenCertificationInfo.properties.join(", ")}
-Energy Efficiency: ${energyEfficiencyInfo.properties.join(", ")}
+    
+    auth: ${auth}
+    firstName: ${firstName}
+    lastName: ${lastName}
+    email: ${email}
+    phone: ${phone}
+    address: ${address}
+    propertyType: ${propertyType}
+    housingType: ${housingType}
+    homeStyles: ${homeStyles}
+    constructionTypes: ${constructionTypes}
+    constructionStatus: ${constructionStatus}
+    schoolsAreUnknown: ${schoolsAreUnknown}
+    selectedTypes: ${selectedTypes}
+    highSchool: ${highSchool}
+    middleSchool: ${middleSchool}
+    elementarySchool: ${elementarySchool}
+    rooms: ${rooms}
+    bedroomData: ${bedroomData}
+    diningData: ${diningData}
+    bathroomData: ${bathroomData}
+    livingData: ${livingData}
+    other: ${other}
+    interiorFeatures: ${interiorFeatures}
+    alarmInfo: ${alarmInfo}
+    roofInfo: ${roofInfo}
+    kitchenInfo: ${kitchenInfo}
+    poolInfo: ${poolInfo}
+    handicapInfo: ${handicapInfo}
+    flooringInfo: ${flooringInfo}
+    carportSpaces: ${carportSpaces}
+    garageSpaces: ${garageSpaces}
+    garageWidth: ${garageWidth}
+    garageLength: ${garageLength}
+    totalCoverParking: ${totalCoverParking}
+    fireplaces: ${fireplaces}
+    fireplaceInfo: ${fireplaceInfo}
+    foundationInfo: ${foundationInfo}
+    parkingInfo: ${parkingInfo}
+    commonFeaturesInfo: ${commonFeaturesInfo}
+    specialNoteInfo: ${specialNoteInfo}
+    waterfrontInfo: ${waterfrontInfo}
+    easementInfo: ${easementInfo}
+    lotDescriptionInfo: ${lotDescriptionInfo}
+    fenceInfo: ${fenceInfo}
+    exteriorFeaturesInfo: ${exteriorFeaturesInfo}
+    soilInfo: ${soilInfo}
+    restrictionsInfo: ${restrictionsInfo}
+    streetUtilitiesInfo: ${streetUtilitiesInfo}
+    heatingCoolingInfo: ${heatingCoolingInfo}
+    mudDistrictInfo: ${mudDistrictInfo}
+    greenFeaturesInfo: ${greenFeaturesInfo}
+    greenCertificationInfo: ${greenCertificationInfo}
+    energyEfficiencyInfo: ${greenCertificationInfo}`;
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASS
+      }
+    });
 
-This ends the users input. Remember if you have any questions to reach out to "mykenzierogers@gmail.com"
+    const mailOptions = {
+      from: process.env.MAILER_USER,
+      // to: req.session.formData.email
+      to: "mykenzierogers@gmail.com",
+      subject: "FORM ERROR",
+      text: message
+    };
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) console.log(error);
+      else console.log("Email Sent: " + info.response);
+    });
 
-See you next time!
-    RoboRealtor`;
-
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.MAILER_USER,
-      pass: process.env.MAILER_PASS
-    }
-  });
-
-  const mailOptions = {
-    from: process.env.MAILER_USER,
-    // to: req.session.formData.email
-    to: "",
-    subject: "NEW FORM",
-    text: message
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) console.log(error);
-    else console.log("Email Sent: " + info.response);
-  });
+    throw e;
+  }
 });
 
 app.listen(process.env.SERVER_PORT, () =>

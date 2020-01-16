@@ -67,7 +67,6 @@ export function changeLastName(name) {
 }
 
 export default function reducer(state = initalState, action) {
-  console.log(state);
   switch (action.type) {
     case CHANGE_AUTH:
       return {

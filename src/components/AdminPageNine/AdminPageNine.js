@@ -33,9 +33,7 @@ function AdminPageNine(props) {
     setOption(null);
   }
   //redirect
-  console.log(props);
   if (props.room > props.numDining) {
-    console.log("here");
     Axios.post("/info", {
       diningData: formData
     });
@@ -79,7 +77,6 @@ function AdminPageNine(props) {
 }
 
 function mapStateToProps(reduxState) {
-  console.log(reduxState);
   return {
     numDining: reduxState.formInfoReducer.numRooms.numDining
   };

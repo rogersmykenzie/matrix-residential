@@ -20,18 +20,14 @@ function AdminPageSeven(props) {
   //ref
   const selectNode = useRef(null);
 
-  console.log("MYPROPS", props.room, props.numBeds);
   if (props.room > props.numBeds) {
     Axios.post("/info", {
-      bedroomData: {
-        ...formData
-      }
+      bedroomData: formData
     });
     return <Redirect to={`/page/${props.page + 1}`} />;
   }
 
   function reset(data) {
-    console.log([...formData, data]);
     setFormData([
       ...formData,
       {

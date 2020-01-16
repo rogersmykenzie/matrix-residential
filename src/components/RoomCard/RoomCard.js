@@ -1,4 +1,6 @@
 import React from "react";
+//css
+import "./RoomCard.css";
 /**
  *
  * @prop {Object!} data - An object containing data about the room
@@ -27,16 +29,46 @@ function RoomCard(props) {
     return null;
   }
 
+  function camelToNormal(string) {
+    let stringArg = string.trim();
+    let newString = stringArg[0].toUpperCase();
+    for (let i = 1; i < stringArg.length; i++) {
+      if (stringArg[i].toUpperCase() === stringArg[i]) {
+        newString += " ";
+      }
+      newString += stringArg[i];
+    }
+    return newString;
+  }
+  function kebabToNormal(string) {
+    return string
+      .trim()
+      .split("-")
+      .map(val => val[0].toUpperCase() + val.substring(1).toLowerCase())
+      .join(" ");
+  }
+  function convertToReadable(string) {
+    if (string.includes("-")) {
+      return kebabToNormal(string);
+    } else {
+      return camelToNormal(string);
+    }
+  }
+
   return (
-    <div>
-      <h3>Type: {data.type}</h3>
-      <h3>Level: {data.level}</h3>
-      {props.data.width !== undefined && props.data.length !== undefined ? (
+    <div className="room-card__container">
+      {data.type ? <h3>Type: {convertToReadable(data.type)}</h3> : null}
+      {data.level ? <h3>Level: {data.level}</h3> : null}
+      {props.data.width !== undefined &&
+      props.data.width !== null &&
+      props.data.length !== undefined &&
+      props.data.length !== null ? (
         <>
           <h3>Width: {data.width}</h3>
           <h3>Length: {data.length}</h3>
         </>
       ) : null}
+      <h4>This room has the following properties:</h4>
       <ul>
         {data.properties.map(val => (
           <li>{val}</li>

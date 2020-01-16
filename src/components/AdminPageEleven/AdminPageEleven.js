@@ -19,7 +19,6 @@ function AdminPageEleven(props) {
   //state
   const [selectedOption, setOption] = useState(null);
   const [formData, setFormData] = useState([]);
-  console.log(props);
   //refs
   const selectNode = useRef();
   //redirect
@@ -60,7 +59,6 @@ function AdminPageEleven(props) {
     }
   })();
   //render
-  console.log(props.room);
   return (
     <Paper className="page-two-paper">
       <h1>Enter Bathroom {props.room ? props.room : null}</h1>

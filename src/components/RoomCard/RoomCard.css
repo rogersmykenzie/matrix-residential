@@ -1,0 +1,29 @@
+.next-button__master {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.next-button__container {
+  display: flex;
+  /* border: 1px solid red; */
+  width: 140px;
+  justify-content: space-between;
+}
+.room-card__container {
+  /* border: 1px solid black; */
+  /* width: 75%; */
+  text-align: left;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+}
+.room-cards__master {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.room-card__move_over {
+  margin-left: 20%;
+}
