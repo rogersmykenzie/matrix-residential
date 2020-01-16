@@ -1,7 +1,7 @@
-function getRandomNumber(low, high) {
-  //inclusive
-  return Math.floor(Math.random() * (high - low + 1)) + low;
-}
+import getRandomNumber from "./util/getRandomNumber";
+// import basicTestWithRadio from "./util/getRandomNumber";
+// import basicTest from "./util/basicTest";
+
 function camelCase(str) {
   return str
     .split(" ")
@@ -768,5 +768,215 @@ describe(`Pool Form - Page 18`, () => {
 });
 
 describe("Handicap Form - Page 19", () => {
-  // it(`Should be able to go `);
+  it(`Should be able to move on if they pick "No"`, () => {
+    cy.contains("No").click();
+
+    cy.contains(`Next`);
+  });
+  it(`Should be able to select properties on the page`, () => {
+    cy.contains("Yes").click();
+
+    const options = [
+      "Elevator",
+      "Hand Rails",
+      "Lower Fixtures",
+      "Meets ADA Requirements",
+      "Other",
+      "Ramp",
+      "Wheelchair Access",
+      "Wide Doorways"
+    ];
+
+    cy.get(
+      `input[type="checkbox"][value="${
+        options[getRandomNumber(0, options.length - 1)]
+      }"]`
+    ).click();
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+describe("Flooring Form - Page 20", () => {
+  it(`Should be able to select properties on the page`, () => {
+    const options = [
+      "Brick/Adobe",
+      "Carpet",
+      "Ceramic Tile",
+      "Concrete",
+      "Laminate",
+      "Luxury Vinyl Plank",
+      "Marble",
+      "Other",
+      "Parquet",
+      "Slate",
+      "Stone",
+      "Terrazzo",
+      "Vinyl",
+      "Wood",
+      "Wood Under Carpet"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+describe("Feature Totals - Page 21", () => {
+  it(`Should be able to type in to the input fields`, () => {
+    const types = [
+      "carport__input",
+      "garage__input",
+      // "garage__input--width",
+      // "garage__input--length",
+      "total_cover_area__input",
+      "fireplace__input"
+    ];
+    types.forEach(function(type) {
+      cy.get(`div.${type}`).type(getRandomNumber(1, 3));
+    });
+  });
+  it("Should be able to move to the next page", () => {
+    cy.contains("Next").click();
+  });
+});
+describe("Smart Feature Form - Page 22", () => {
+  it(`Should be able to select yes`, () => {
+    cy.contains("Yes").click();
+  });
+
+  it(`Should be able to type into the textarea`, () => {
+    cy.get(`textarea`).type("This is some text");
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+describe(`Fireplace Form - Page 23`, () => {
+  it(`Should be able to select properties`, () => {
+    const options = [
+      "Blower Fan",
+      "Brick",
+      "Decorative",
+      "Direct Vent",
+      "Electric",
+      "Freestanding",
+      "Gas Logs",
+      "Gas Starter",
+      "Insert",
+      "Masonry Box",
+      "Metal Box",
+      "Other",
+      "See Through Fireplace",
+      "Stone",
+      "Wood Burning",
+      "Does Not Apply"
+    ];
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+describe(`Foundation Form - Page 24`, () => {
+  it(`Should be able to select properties`, () => {
+    const options = [
+      "Basement",
+      "Bois DArc Post",
+      "Other",
+      "Pier and Beam",
+      "Pier and Beam Slab",
+      "Pilings",
+      "Slab"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
+});
+
+describe(`Parking Form - Page 25`, () => {
+  it(`Should be able to select properties`, () => {
+    const options = [
+      "Area Assigned",
+      "Assigned Garage",
+      "Assigned Spaces",
+      "Attached",
+      "Circle Drive",
+      "Common Garage",
+      "Common Lot",
+      "Covered",
+      "Detached",
+      "Epoxy Flooring",
+      "Fence Assigned Lot",
+      "Fenced Open Lot",
+      "Front",
+      "Garage",
+      "Garage Conversion",
+      "Garage Door Opener",
+      "Garage Under Building",
+      "Golf Cart Garage",
+      "Has Sink in Garage",
+      "Individual Carport",
+      "On Street",
+      "Open",
+      "Open and Unassigned Garage",
+      "Opener",
+      "Other",
+      "Other Parking/Garage",
+      "Outside Entry",
+      "Oversized",
+      "Pay Parking Garage",
+      "Pay Parking Lot",
+      "Porte-Cochere",
+      "Rear",
+      "Shared Carport",
+      "Shared Garage",
+      "Side",
+      "Swing Drive",
+      "Tandem Style",
+      "Unassigned Spaces",
+      "Uncovered",
+      "Valet",
+      "Workbench",
+      "None"
+    ];
+
+    for (let i = 0; i < 3; i++) {
+      cy.get(
+        `input[type="checkbox"][value="${
+          options[getRandomNumber(0, options.length - 1)]
+        }"]`
+      ).click();
+    }
+  });
+
+  it(`Should be able to go to the next page`, () => {
+    cy.contains("Next").click();
+  });
 });

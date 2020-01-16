@@ -62,14 +62,16 @@ function FeatureTotals(props) {
         <h3># of Carport Spaces</h3>
         <TextField
           variant="outlined"
+          className="carport__input"
           // placeholder="# of Carport Spaces"
-          type="number"
+          type="number__input"
           style={textFieldStyle}
           onChange={e => setCarportSpaces(e.target.value)}
         />
         <h3># of Garage Spaces</h3>
         <TextField
           variant="outlined"
+          className="garage__input"
           // placeholder="# of Garage Spaces"
           type="number"
           style={textFieldStyle}
@@ -81,6 +83,7 @@ function FeatureTotals(props) {
             <TextField
               variant="outlined"
               // placeholder="Garage Width"
+              className="garage__input--width"
               type="text"
               style={textFieldStyle}
               onChange={e => setGarageWidth(e.target.value)}
@@ -89,6 +92,7 @@ function FeatureTotals(props) {
             <TextField
               variant="outlined"
               // placeholder="Garage Length"
+              className="garage__input--length"
               type="text"
               style={textFieldStyle}
               onChange={e => setGarageLength(e.target.value)}
@@ -99,6 +103,7 @@ function FeatureTotals(props) {
         <TextField
           variant="outlined"
           // placeholder="# of Total Cover Parking Areas"
+          className="total_cover_area__input"
           type="number"
           style={textFieldStyle}
           onChange={e => setTotalCoverParking(e.target.value)}
@@ -106,6 +111,7 @@ function FeatureTotals(props) {
         <h3># of Fireplaces</h3>
         <TextField
           variant="outlined"
+          className="fireplace__input"
           // placeholder="# of Fireplaces"
           type="number"
           style={textFieldStyle}
