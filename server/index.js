@@ -1,7 +1,6 @@
 const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
-const nodemailer = require("nodemailer");
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SEND_GRID_KEY);
 
@@ -335,27 +334,6 @@ ${
       text: message
     };
     sgMail.send(msg);
-
-    // const transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   auth: {
-    //     user: process.env.MAILER_USER,
-    //     pass: process.env.MAILER_PASS
-    //   }
-    // });
-
-    // const mailOptions = {
-    //   from: process.env.MAILER_USER,
-    //   // to: req.session.formData.email
-    //   to: process.env.SEND_TO,
-    //   subject: "NEW FORM",
-    //   text: message
-    // };
-
-    // transporter.sendMail(mailOptions, function(error, info) {
-    //   if (error) console.log(error);
-    //   else console.log("Email Sent: " + info.response);
-    // });
   } catch (e) {
     const message = `
     ERROR: ${e}
@@ -423,122 +401,11 @@ ${
     };
 
     sgMail.send(msg);
-    // const transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   auth: {
-    //     user: process.env.MAILER_USER,
-    //     pass: process.env.MAILER_PASS
-    //   }
-    // });
-
-    // const mailOptions = {
-    //   from: process.env.MAILER_USER,
-    //   // to: req.session.formData.email
-    //   to: "mykenzierogers@gmail.com",
-    //   subject: "FORM ERROR",
-    //   text: message
-    // };
-    // transporter.sendMail(mailOptions, function(error, info) {
-    //   if (error) console.log(error);
-    //   else console.log("Email Sent: " + info.response);
-    // });
-
-    // throw e;
+  } finally {
+    req.session.destroy();
   }
 });
 
 app.listen(process.env.SERVER_PORT, () =>
   console.log(`Listening on Port ${process.env.SERVER_PORT}`)
 );
-
-// { firstName: 'Mykenzie',
-//   lastName: 'Rogers',
-//   email: 'mykenzierogers@gmail.com',
-//   phone: '469-773-7996',
-//   address: '1829 San Jacinto Drive',
-//   auth: 'Agent',
-//   propertyType: [ 'Farm/Ranch', 'Half Duplex' ],
-//   housingType:
-//    [ 'Designated Historical Home', 'Doublewide Mobile w/ Land' ],
-//   homeStyles: [ 'Early American', 'Southwestern' ],
-//   constructionTypes: [ 'Fiber Cement' ],
-//   constructionStatus: [ 'New Const - Incomplete' ],
-//   sqFtSelection: 'Change to:',
-//   customSqFt: '123',
-//   changeReason: 'Building Plan',
-//   elementarySchool: 'elementary school',
-//   middleSchool: 'middle school',
-//   highSchool: 'high school',
-//   selectedTypes: [ 'Other' ],
-//   rooms:
-//    { numBeds: 1,
-//      numFullBath: 1,
-//      numHalfBath: 1,
-//      numDining: 2,
-//      num`Living`: 2,
-//      numStories: 2 },
-//   bedroomData:
-//    [ { type: 'master',
-//        width: '12',
-//        height: '12',
-//        level: '1',
-//        properties: [Array] } ],
-//   interiorFeatures:
-//    { properties: [ 'Central Vac', 'Multiple Staircases', 'Wainscoting' ] },
-//   alarmInfo:
-//    { selection: 'Yes',
-//      selectedTypes: [ 'Fire Sprinkler System', 'Smoke Detector' ] },
-//   roofInfo:
-//    { selectedTypes: [ 'Shake Metal', 'Overlay', 'Other', 'Wood Shingle' ] },
-//   kitchenInfo:
-//    { selectedTypes:
-//       [ 'Built-in Microwave',
-//         'Disposal',
-//         'Oven - Gas',
-//         'Warmer Oven Drawer' ] },
-//   poolInfo: { selection: false, properties: [] },
-//   handicapInfo: { properties: [], selection: 'No' },
-//   flooringInfo: { properties: [ 'Luxury Vinyl Plank', 'Laminate' ] },
-//   carportSpaces: '1',
-//   garageSpaces: '2',
-//   garageWidth: '3',
-//   garageLength: '4',
-//   totalCoverParking: '5',
-//   fireplaces: '6',
-//   smartHomeQuestion: { selection: 'No' },
-//   fireplaceInfo: { properties: [ 'Freestanding', 'See Through Fireplace' ] },
-//   foundationInfo: { properties: [ 'Pier and Beam' ] },
-//   parkingInfo:
-//    { properties: [ 'Attached', 'Assigned Spaces', 'Fenced Open Lot' ] },
-//   commonFeaturesInfo:
-//    { properties: [ 'Common Elevator', 'Public Hangar', 'Horse Facilities' ] },
-//   specialNoteInfo:
-//    { properties:
-//       [ 'Environ. Study Complete',
-//         'Right of First Refusal',
-//         'Verify Flood Insurance' ] },
-//   waterfrontInfo:
-//    { isWaterfront: 'No',
-//      isLakefront: 'No',
-//      dockIsPermitted: null,
-//      properties: [ 'Dock - Covered', 'Leasehold' ] },
-//   easementInfo: { properties: [ 'Other', 'Pipe Line', 'Telephone' ] },
-//   lotDescriptionInfo:
-//    { properties: [ 'Canal (Man Made)', 'Irregular', 'Some Trees' ] },
-//   fenceInfo: { properties: [ 'Cross Fenced', 'Rock/Stone' ] },
-//   exteriorFeaturesInfo:
-//    { properties:
-//       [ 'Private Outdoor Space',
-//         'Workshop With Electric',
-//         'Stable/Barn' ] },
-//   soilInfo: { properties: [ 'Other' ] },
-//   restrictionsInfo: { properties: [ 'Easement(s)', 'No Livestock' ] },
-//   streetUtilitiesInfo:
-//    { properties: [ 'Co-op Membership Included', 'Individual Water Meter' ] },
-//   heatingCoolingInfo: { properties: [ 'Other' ] },
-//   mudDistrictInfo: { selection: 'No' },
-//   greenFeaturesInfo:
-//    { properties: [ 'ET Irrigation Control', 'Recirculating Hot Water' ] },
-//   greenCertificationInfo:
-//    { properties: [ 'HERS 86-100', 'HERS 101+', 'LEED Silver' ] },
-//   energyEfficiencyInfo: { properties: [ 'Gas Water Heater' ] } }
