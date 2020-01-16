@@ -52,7 +52,8 @@ app.post("/info/:type", function(req, res) {
     req.session.formData[req.params.type].push({
       ...req.body
     });
-    console.log(`{${req.params.type}: ${req.body}}`);
+    console.log(req.session.formData);
+    // console.log(`{${req.params.type}: ${req.body}}`);
     res.sendStatus(200);
   } catch (e) {
     res.status(500).json(e);
@@ -169,7 +170,7 @@ app.post("/email", function(req, res) {
     energyEfficiencyInfo,
     hoaInfo
   } = req.session.formData;
-  console.log(hoaInfo);
+  console.log(req.session.formData);
   try {
     const message = `A new listing form has been submitted!
 
