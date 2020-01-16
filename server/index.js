@@ -328,7 +328,7 @@ ${
 }`;
 
     const msg = {
-      to: "mykenzierogers@gmail.com",
+      to: process.env.SEND_TO,
       from: "roborealtor@heehaw.com",
       subject: "NEW FORM",
       text: message
