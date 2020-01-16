@@ -2,6 +2,8 @@ const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SEND_GRID_KEY);
 
 const app = express();
 
@@ -313,7 +315,7 @@ Their HOA bills ${hoaInfo.billingCycle}.
 ${hoaInfo.hoaDues ? "They have the following HOA dues: " + hoaInfo.hoaDues : ""}
 ${
   hoaInfo.managementCompany
-    ? "They have the following Management Company" + hoaInfo.managementCompany
+    ? "They have the following Management Company: " + hoaInfo.managementCompany
     : ""
 }
 ${hoaInfo.phone ? "They provided the following contact: " + hoaInfo.phone : ""}
@@ -325,26 +327,35 @@ ${
 }
 `
 }`;
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.MAILER_USER,
-        pass: process.env.MAILER_PASS
-      }
-    });
 
-    const mailOptions = {
-      from: process.env.MAILER_USER,
-      // to: req.session.formData.email
-      to: process.env.SEND_TO,
+    const msg = {
+      to: "mykenzierogers@gmail.com",
+      from: "roborealtor@heehaw.com",
       subject: "NEW FORM",
       text: message
     };
+    sgMail.send(msg);
 
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) console.log(error);
-      else console.log("Email Sent: " + info.response);
-    });
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.MAILER_USER,
+    //     pass: process.env.MAILER_PASS
+    //   }
+    // });
+
+    // const mailOptions = {
+    //   from: process.env.MAILER_USER,
+    //   // to: req.session.formData.email
+    //   to: process.env.SEND_TO,
+    //   subject: "NEW FORM",
+    //   text: message
+    // };
+
+    // transporter.sendMail(mailOptions, function(error, info) {
+    //   if (error) console.log(error);
+    //   else console.log("Email Sent: " + info.response);
+    // });
   } catch (e) {
     const message = `
     ERROR: ${e}
@@ -403,27 +414,36 @@ ${
     greenFeaturesInfo: ${greenFeaturesInfo}
     greenCertificationInfo: ${greenCertificationInfo}
     energyEfficiencyInfo: ${greenCertificationInfo}`;
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.MAILER_USER,
-        pass: process.env.MAILER_PASS
-      }
-    });
 
-    const mailOptions = {
-      from: process.env.MAILER_USER,
-      // to: req.session.formData.email
+    const msg = {
       to: "mykenzierogers@gmail.com",
-      subject: "FORM ERROR",
+      from: "roborealtor@error.com",
+      subject: "ERROR",
       text: message
     };
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) console.log(error);
-      else console.log("Email Sent: " + info.response);
-    });
 
-    throw e;
+    sgMail.send(msg);
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.MAILER_USER,
+    //     pass: process.env.MAILER_PASS
+    //   }
+    // });
+
+    // const mailOptions = {
+    //   from: process.env.MAILER_USER,
+    //   // to: req.session.formData.email
+    //   to: "mykenzierogers@gmail.com",
+    //   subject: "FORM ERROR",
+    //   text: message
+    // };
+    // transporter.sendMail(mailOptions, function(error, info) {
+    //   if (error) console.log(error);
+    //   else console.log("Email Sent: " + info.response);
+    // });
+
+    // throw e;
   }
 });
 
