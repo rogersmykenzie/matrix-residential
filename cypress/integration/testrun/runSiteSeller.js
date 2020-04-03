@@ -198,7 +198,7 @@ describe("Room Entry - Page 4", () => {
   });
 
   it("Should be able to go to the next page", () => {
-    cy.get(`.page-two-paper`).scrollTo("bottom");
+    cy.get(`.intro-paper`).scrollTo("bottom");
     cy.contains("Next").click({ force: true });
   });
 });

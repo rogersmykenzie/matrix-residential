@@ -51,20 +51,22 @@ function AlarmQuestion(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Does your home have any alarms/security system?</h1>
       <RadioButtons buttons={["Yes", "No"]} onSelection={onRadioSelect} />
       <br />
-      {selection === "Yes" &&
-        securityTypes.map(val => {
-          return (
-            <CheckboxComp
-              label={val}
-              whenClicked={onCheck}
-              whenUnclicked={onUncheck}
-            />
-          );
-        })}
+      <div className="checkbox__container">
+        {selection === "Yes" &&
+          securityTypes.map(val => {
+            return (
+              <CheckboxComp
+                label={val}
+                whenClicked={onCheck}
+                whenUnclicked={onUncheck}
+              />
+            );
+          })}
+      </div>
       {selection === "No" ||
       (selection === "Yes" && selectedTypes.length > 0) ? (
         <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />

@@ -49,17 +49,19 @@ function FireplaceForm(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Select any of the following traits that apply to your fireplace:</h1>
-      {FIREPLACE_PROPERTIES.map(val => {
-        return (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        );
-      })}
+      <div className="checkbox__container">
+        {FIREPLACE_PROPERTIES.map(val => {
+          return (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          );
+        })}
+      </div>
       <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
     </Paper>
   );

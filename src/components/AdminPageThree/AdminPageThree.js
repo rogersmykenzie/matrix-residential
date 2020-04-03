@@ -63,7 +63,7 @@ const AdminPageThree = props => {
   return (
     <div>
       <div className="container">
-        <Paper className="page-two-paper">
+        <Paper className="intro-paper">
           <h1>Is your Square Footage...?</h1>
           <form onSubmit={e => e.preventDefault()}>
             <RadioButtons
@@ -103,7 +103,6 @@ const AdminPageThree = props => {
   );
 };
 
-export default connect(
-  null,
-  { setSquareFootage, setChangeReason }
-)(AdminPageThree);
+export default connect(null, { setSquareFootage, setChangeReason })(
+  AdminPageThree
+);

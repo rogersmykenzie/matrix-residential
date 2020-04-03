@@ -51,7 +51,7 @@ function FeatureTotals(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Please enter the following information: </h1>
       <div
         style={{

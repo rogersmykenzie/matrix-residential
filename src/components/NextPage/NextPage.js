@@ -23,13 +23,12 @@ function NextPage(props) {
   }
   return (
     <>
-      <br />
       <Link
         to={props.to}
         onClick={props.whenClicked ? props.whenClicked : null}>
         <Button
           className="fade-in admin-page-three-button"
-          style={{ ...buttonStyleMain, marginTop: "3vh" }}
+          style={{ ...buttonStyleMain, marginTop: "3vh", marginBottom: "3vh" }}
           // onClick={runWhenClicked}
           variant="contained">
           {props.buttonText === undefined ? "Next" : props.buttonText}

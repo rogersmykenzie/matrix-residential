@@ -36,19 +36,21 @@ function EasementsForm(props) {
   return (
     <ColumnPaper>
       <h1>Select any easements that apply to your lot</h1>
-      {properties.map(val => (
-        <CheckboxComp
-          label={val}
-          whenClicked={functions.createWhenClicked(
-            selectedProperties,
-            setSelectedProperties
-          )}
-          whenUnclicked={functions.createWhenUnclicked(
-            selectedProperties,
-            setSelectedProperties
-          )}
-        />
-      ))}
+      <div className="checkbox__container">
+        {properties.map(val => (
+          <CheckboxComp
+            label={val}
+            whenClicked={functions.createWhenClicked(
+              selectedProperties,
+              setSelectedProperties
+            )}
+            whenUnclicked={functions.createWhenUnclicked(
+              selectedProperties,
+              setSelectedProperties
+            )}
+          />
+        ))}
+      </div>
       <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
     </ColumnPaper>
   );

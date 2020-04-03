@@ -48,7 +48,7 @@ function InteriorFeaturesForm(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Check any interior features your home has:</h1>
       <BuildForm
         needsProperties

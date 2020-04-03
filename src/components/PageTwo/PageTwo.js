@@ -78,12 +78,13 @@ const PageTwo = props => {
   }
   return (
     <div className="container">
-      <Paper className="page-two-paper">
-        <div className="page-two-text-constraint">
-          <h1>
-            Please select the items which apply to the construction of this
-            property
-          </h1>
+      <Paper className="intro-paper">
+        {/* <div className="page-two-text-constraint"> */}
+        <h1>
+          Please select the items which apply to the construction of this
+          property
+        </h1>
+        <div className="checkbox__container">
           {construction.map(val => {
             return (
               <CheckboxComp
@@ -93,9 +94,11 @@ const PageTwo = props => {
               />
             );
           })}
-          {numClicked && isAgent ? (
-            <>
-              <h1>Select a Construction Status</h1>
+        </div>
+        {numClicked && isAgent ? (
+          <>
+            <h1>Select a Construction Status</h1>
+            <div className="checkbox__container">
               {status.map(val => {
                 return (
                   <CheckboxComp
@@ -105,13 +108,14 @@ const PageTwo = props => {
                   />
                 );
               })}
-            </>
-          ) : null}
-          <br />
-          {numClicked ? (
-            <NextPage to={`/page/${props.page + 1}`} whenClicked={postData} />
-          ) : null}
-        </div>
+            </div>
+          </>
+        ) : null}
+        <br />
+        {numClicked ? (
+          <NextPage to={`/page/${props.page + 1}`} whenClicked={postData} />
+        ) : null}
+        {/* </div> */}
       </Paper>
     </div>
   );

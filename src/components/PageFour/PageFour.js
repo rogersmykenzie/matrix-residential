@@ -95,17 +95,19 @@ function PageFour(props) {
 
   return (
     <div className="container">
-      <Paper className="page-two-paper">
+      <Paper className="intro-paper">
         <h1>Do you have any Accessory Units?</h1>
-        {accessoryTypes.map(val => {
-          return (
-            <CheckboxComp
-              label={val}
-              whenClicked={handleClick}
-              whenUnclicked={handleUnclick}
-            />
-          );
-        })}
+        <div className="checkbox__container">
+          {accessoryTypes.map(val => {
+            return (
+              <CheckboxComp
+                label={val}
+                whenClicked={handleClick}
+                whenUnclicked={handleUnclick}
+              />
+            );
+          })}
+        </div>
         {props.accessoryUnitTypes.length > 0 ? (
           <>
             <h1 className="fade-in">
@@ -116,6 +118,7 @@ function PageFour(props) {
                 variant="outlined"
                 placeholder={val}
                 name={camelCase(val)}
+                className="textfield"
                 style={styles.textFieldStyle}
                 onChange={handleChange}
               />

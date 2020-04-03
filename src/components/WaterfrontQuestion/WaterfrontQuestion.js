@@ -58,7 +58,7 @@ function WaterfrontQuestion(props) {
   }
   //template
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Is this a waterfront property?</h1>
       <RadioButtons buttons={["Yes", "No"]} onSelection={setIsWaterfront} />
       {isWaterfront === "Yes" ? (
@@ -81,7 +81,7 @@ function WaterfrontQuestion(props) {
         </div>
       ) : null}
       {dockIsPermitted !== "" && isWaterfront === "Yes" ? (
-        <>
+        <div className="checkbox__container">
           {waterfrontFeatures.map(val => {
             return (
               <CheckboxComp
@@ -91,7 +91,7 @@ function WaterfrontQuestion(props) {
               />
             );
           })}
-        </>
+        </div>
       ) : null}
       {(isWaterfront === "Yes" &&
         isLakefront !== "" &&

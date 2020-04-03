@@ -60,7 +60,7 @@ function AdminPageEleven(props) {
   })();
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Enter Bathroom {props.room ? props.room : null}</h1>
       <Select
         ref={selectNode}

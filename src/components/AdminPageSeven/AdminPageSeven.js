@@ -59,7 +59,7 @@ function AdminPageSeven(props) {
 
   return (
     <div className="container">
-      <Paper className="page-two-paper">
+      <Paper className="intro-paper">
         <h1>Bedroom {props.room ? props.room : null}</h1>
         <h4>What type of bedroom is this?</h4>
         <Select

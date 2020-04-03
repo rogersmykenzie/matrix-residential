@@ -14,7 +14,7 @@ function AdminPageTen(props) {
 
   return (
     <main className="container">
-      <Paper className="page-two-paper">
+      <Paper className="intro-paper">
         <h1>We will now create an entry for each bathroom in your house.</h1>
         <NextPage to={`/page/${props.page + 1}/1`} />
       </Paper>

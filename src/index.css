@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #309ea6;
 }
 
 code {
@@ -14,6 +14,43 @@ code {
     monospace;
 }
 
-h1 {
-  font-family: 'Merriweather', serif;
+h1,
+h2 {
+  font-family: "Merriweather", serif;
+  color: #3f5765;
+  padding: 25px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.checkbox__container {
+  padding: 25px;
+}
+@media (max-height: 600px) {
+  .textfield {
+    height: 40px !important;
+  }
+}
+@media (max-width: 500px) {
+  .intro-paper,
+  .page-one-paper,
+  .intro-paper {
+    width: 90vw;
+    /* height: 100vh; */
+  }
+  .textfield {
+    width: 90% !important;
+  }
+  h1 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 450px) {
+  .checkbox__container {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
 }

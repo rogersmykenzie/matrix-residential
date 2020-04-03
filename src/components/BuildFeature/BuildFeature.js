@@ -26,17 +26,19 @@ function BuildFeature(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>{props.tagline}</h1>
-      {props.properties.map(val => {
-        return (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        );
-      })}
+      <div className="checkbox__container">
+        {props.properties.map(val => {
+          return (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          );
+        })}
+      </div>
       {selectedProps.length > 0 ? (
         <NextPage
           to={`/page/${props.page + 1}`}

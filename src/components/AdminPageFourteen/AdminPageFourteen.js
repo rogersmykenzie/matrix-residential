@@ -76,8 +76,11 @@ function AdminPageFourteen(props) {
       <h1>Are there any other rooms that you need to enter?</h1>
       <div className="next-button__master">
         <div className="next-button__container">
-          <NextPage to={"/page/" + (props.page + 1)} buttonText="No" />
-          <NextPage to="/rooms/extra" buttonText="Yes" />
+          <div className="form-path-links">
+            {/* <div className="form-path-links"> */}
+            <NextPage to={"/page/" + (props.page + 1)} buttonText="No" />
+            <NextPage to="/rooms/extra" buttonText="Yes" />
+          </div>
         </div>
       </div>
       {roomMap}

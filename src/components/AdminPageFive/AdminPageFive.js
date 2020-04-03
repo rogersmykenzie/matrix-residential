@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Input from "@material-ui/core/Input";
 //components
 import NextPage from "../NextPage/NextPage";
+import useWindowSize from "../../utils/useWindowSize";
 //redux
 import { updateNumRooms } from "../../redux/formInfoReducer";
 import { connect } from "react-redux";
@@ -58,25 +59,27 @@ function AdminPageFive(props) {
       numHalfBath: null,
       numDining: null,
       numLiving: null
-      // numStories: null
     }
   );
+
+  const [width] = useWindowSize();
 
   function postInfo() {
     Axios.post("/info", {
       rooms
     });
   }
+
   return (
     <main className="container">
-      <Paper className="page-two-paper">
+      <Paper className="intro-paper">
         <div className="fade-in">
           <h1>
             How many
             <Popup
               trigger={<span className="tooltip-trigger"> bedrooms </span>}
-              position="right top"
-              on="hover">
+              position={width <= 500 ? "center" : "right top"}
+              on={width <= 1000 ? "click" : "hover"}>
               <Tooltip>This includes any master/guest bedrooms.</Tooltip>
             </Popup>
             does this property have?
@@ -99,8 +102,8 @@ function AdminPageFive(props) {
                 trigger={
                   <span className="tooltip-trigger"> dining areas? </span>
                 }
-                position="right top"
-                on="hover">
+                position={width <= 500 ? "center" : "right top"}
+                on={width <= 1000 ? "click" : "hover"}>
                 <Tooltip>
                   This includes breakfast nooks and dining rooms.
                 </Tooltip>
@@ -125,8 +128,8 @@ function AdminPageFive(props) {
                 trigger={
                   <span className="tooltip-trigger"> full bathrooms? </span>
                 }
-                position="right top"
-                on="hover">
+                position={width <= 500 ? "center" : "right top"}
+                on={width <= 1000 ? "click" : "hover"}>
                 <Tooltip>
                   A full bathroom has a shower, bathtub, toilet, and sink
                 </Tooltip>
@@ -151,8 +154,8 @@ function AdminPageFive(props) {
                 trigger={
                   <span className="tooltip-trigger"> half bathrooms? </span>
                 }
-                position="right top"
-                on="hover">
+                position={width <= 500 ? "center" : "right top"}
+                on={width <= 1000 ? "click" : "hover"}>
                 <Tooltip>A half bathroom has just a toilet and sink</Tooltip>
               </Popup>
             </h1>
@@ -175,8 +178,8 @@ function AdminPageFive(props) {
                 trigger={
                   <span className="tooltip-trigger"> living spaces? </span>
                 }
-                position="right top"
-                on="hover">
+                position={width <= 500 ? "center" : "right top"}
+                on={width <= 1000 ? "click" : "hover"}>
                 <Tooltip>
                   This includes living rooms, family rooms, play rooms, media
                   rooms, and game rooms.

@@ -140,13 +140,15 @@ function HoaForm(props) {
       phone !== "" ? (
         <>
           <h1>Select any that apply to your HOA</h1>
-          {attributes.map(val => (
-            <CheckboxComp
-              label={val}
-              whenClicked={onCheck}
-              whenUnclicked={onUncheck}
-            />
-          ))}
+          <div className="checkbox__container">
+            {attributes.map(val => (
+              <CheckboxComp
+                label={val}
+                whenClicked={onCheck}
+                whenUnclicked={onUncheck}
+              />
+            ))}
+          </div>
         </>
       ) : null}
       {selection === "None" || phone !== "" ? (

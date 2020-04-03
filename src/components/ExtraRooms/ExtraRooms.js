@@ -128,7 +128,7 @@ function ExtraRooms(props) {
   })();
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>What kind of room would you like to add?</h1>
       <select onChange={onRoomChange} ref={formRef}>
         {options.map(val => {

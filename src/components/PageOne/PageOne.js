@@ -142,7 +142,7 @@ const PageOne = props => {
 
   return (
     <div className="container">
-      <Paper className="page-one-paper">
+      <Paper className="intro-paper">
         <div className="fade-in">
           <h1>Which property type best describes your property?</h1>
           <RadioButtons buttons={propertyTypes} onSelection={setPicked} />
@@ -151,15 +151,17 @@ const PageOne = props => {
         {numPickedFirstAnswer ? (
           <div className="fade-in">
             <h1>Select any home styles that describe your home:</h1>
-            {housingTypes.map(val => {
-              return (
-                <CheckboxComp
-                  label={val}
-                  whenClicked={type => setPicked2(type)}
-                  whenUnclicked={type => unPicked2(type)}
-                />
-              );
-            })}
+            <div className="checkbox__container">
+              {housingTypes.map(val => {
+                return (
+                  <CheckboxComp
+                    label={val}
+                    whenClicked={type => setPicked2(type)}
+                    whenUnclicked={type => unPicked2(type)}
+                  />
+                );
+              })}
+            </div>
           </div>
         ) : null}
 
@@ -167,15 +169,17 @@ const PageOne = props => {
         {numPickedSecondAnswer && numPickedFirstAnswer ? (
           <div className="fade-in">
             <h1>Select any home styles that apply</h1>
-            {optionalHousingStyles.map(val => {
-              return (
-                <CheckboxComp
-                  label={val}
-                  whenClicked={setPicked3}
-                  whenUnclicked={setUnpicked3}
-                />
-              );
-            })}
+            <div className="checkbox__container">
+              {optionalHousingStyles.map(val => {
+                return (
+                  <CheckboxComp
+                    label={val}
+                    whenClicked={setPicked3}
+                    whenUnclicked={setUnpicked3}
+                  />
+                );
+              })}
+            </div>
           </div>
         ) : null}
 

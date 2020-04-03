@@ -31,22 +31,23 @@ function ExpoundingQuestion(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>{props.tagline}</h1>
 
       <RadioButtons buttons={["Yes", "No"]} onSelection={onSelection} />
       <br />
-      {userSelection === "Yes" &&
-        props.properties.map(val => {
-          return (
-            <CheckboxComp
-              label={val}
-              whenClicked={onCheck}
-              whenUnclicked={onUncheck}
-            />
-          );
-        })}
-
+      <div className="checkbox__container">
+        {userSelection === "Yes" &&
+          props.properties.map(val => {
+            return (
+              <CheckboxComp
+                label={val}
+                whenClicked={onCheck}
+                whenUnclicked={onUncheck}
+              />
+            );
+          })}
+      </div>
       {userSelection === "No" ||
       (userSelection === "Yes" && selectedOptions.length > 0) ? (
         <NextPage

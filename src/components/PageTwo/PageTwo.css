@@ -1,9 +1,9 @@
 .page-two-text-constraint {
-    width: 80%;
-    margin: auto;
+  width: 80%;
+  margin: auto;
 }
-.page-two-paper {
-    width: 90vw;
-    height: 80vh;
-    overflow: scroll;
+.intro-paper {
+  width: 90vw;
+  height: 80vh;
+  overflow: scroll;
 }

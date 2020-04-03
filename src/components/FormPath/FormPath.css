@@ -12,3 +12,25 @@ div.form-path-links {
   display: flex;
   justify-content: space-evenly;
 }
+
+img.FormPath__img--logo {
+  width: 300px;
+}
+
+@media (max-width: 650px) {
+  img.FormPath__img--logo {
+    width: 200px;
+  }
+}
+@media (max-width: 555px) {
+  div.form-path-links {
+    height: 200px;
+    flex-direction: column;
+  }
+}
+@media (max-height: 600px) {
+  main.form-path h1,
+  main.form-path h2 {
+    font-size: 20px;
+  }
+}

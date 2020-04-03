@@ -61,17 +61,19 @@ function KitchenEquipForm(props) {
   ];
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Select any of the following equipment included with your kitchen:</h1>
-      {kitchenEquipment.map(val => {
-        return (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        );
-      })}
+      <div className="checkbox__container">
+        {kitchenEquipment.map(val => {
+          return (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          );
+        })}
+      </div>
       {selectedEquip.length > 0 ? (
         <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
       ) : null}

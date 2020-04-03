@@ -13,8 +13,8 @@ import { changeAuth } from "../../redux/userReducer";
 import "./FormPath.css";
 //fetch
 import axios from "axios";
-//components
-// import Radio from "../Radio/Radio";
+//assets
+import Logo from "../../assets/tcs_logo.svg";
 
 function FormPath(props) {
   React.useEffect(() => {
@@ -42,6 +42,7 @@ function FormPath(props) {
       <Paper className="intro-paper">
         <main className="form-path">
           <div>
+            <img src={Logo} className="FormPath__img--logo" />
             <h1>Welcome to the Sellers Listing Form</h1>
             <h2>Are you a seller or an agent?</h2>
           </div>
@@ -51,7 +52,7 @@ function FormPath(props) {
                 variant="contained"
                 style={buttonStyleMain}
                 onClick={handleClientClick}>
-                I am a seller
+                Seller
               </Button>
             </Link>
             <Link to="/welcome">
@@ -59,7 +60,7 @@ function FormPath(props) {
                 variant="contained"
                 style={buttonStyleMain}
                 onClick={handleAdminClick}>
-                I am an agent
+                Agent
               </Button>
             </Link>
           </div>
@@ -69,7 +70,4 @@ function FormPath(props) {
   );
 }
 
-export default connect(
-  undefined,
-  { changeAuth }
-)(FormPath);
+export default connect(undefined, { changeAuth })(FormPath);

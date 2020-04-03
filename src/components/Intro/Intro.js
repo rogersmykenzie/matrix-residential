@@ -69,6 +69,7 @@ const Intro = props => {
       variant="outlined"
       placeholder="First Name"
       style={styles.textFieldStyle}
+      className="textfield"
       onChange={e => {
         props.changeFirstName(e.target.value);
         setFirstName(e.target.value);
@@ -79,6 +80,7 @@ const Intro = props => {
       variant="outlined"
       placeholder="Last Name"
       style={styles.textFieldStyle}
+      className="textfield"
       onChange={e => {
         props.changeLastName(e.target.value);
         setLastName(e.target.value);
@@ -89,6 +91,7 @@ const Intro = props => {
       variant="outlined"
       placeholder="Email"
       style={styles.textFieldStyle}
+      className="textfield"
       onChange={e => {
         props.changeEmail(e.target.value);
         setEmail(e.target.value);
@@ -99,6 +102,7 @@ const Intro = props => {
       variant="outlined"
       placeholder="Phone Number"
       style={styles.textFieldStyle}
+      className="textfield"
       onChange={e => {
         props.changePhoneNumber(e.target.value);
         setPhone(e.target.value);
@@ -109,6 +113,7 @@ const Intro = props => {
       variant="outlined"
       placeholder="Property Address"
       style={styles.textFieldStyle}
+      className="textfield"
       onChange={e => {
         props.updateAddress(e.target.value);
         setAddress(e.target.value);
@@ -131,9 +136,13 @@ const Intro = props => {
   return (
     <div className="intro-container">
       <Paper className="intro-paper">
-        <h1>To get started, please enter your contact info:</h1>
+        <h1 className="intro__h1--get-started">
+          To get started, please enter your contact info:
+        </h1>
         <div className="intro-text-field-container">
-          <h1 className="error-message-global">{errorMessage}</h1>
+          {errorMessage ? (
+            <h1 className="error-message-global">{errorMessage}</h1>
+          ) : null}
           {correctForms}
 
           {props.auth === "a" || props.auth === "c" ? (

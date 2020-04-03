@@ -1,22 +1,39 @@
 .intro-container {
-    width: 100vw;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .intro-text-field-container {
-    height: 70%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
+  height: 70%;
+  max-height: 700px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 .intro-paper {
-    width: 60vw;
-    height: 80vh;
+  width: 60vw;
+  height: 80vh;
+  overflow: scroll;
 }
 /* before you ask yes i know this is lazy but its 12:30pm cut me some slack */
 body {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .intro-paper,
+  .page-one-paper,
+  .intro-paper {
+    width: 80vw;
+    height: 90vh;
+  }
+}
+
+@media (max-width: 468px) {
+  .intro__h1--get-started {
+    font-size: 20px;
+  }
 }

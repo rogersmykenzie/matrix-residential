@@ -60,18 +60,20 @@ function PoolQuestion(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Do you have a pool?</h1>
       <RadioButtons buttons={["Yes", "No"]} onSelection={onSelection} />
       <br />
-      {hasPool &&
-        poolFeatures.map(val => (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        ))}
+      <div className="checkbox__container">
+        {hasPool &&
+          poolFeatures.map(val => (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          ))}
+      </div>
       {hasPool === false ||
       (hasPool === true && selectedFeatures.length > 0) ? (
         <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />

@@ -27,7 +27,7 @@ function SmartHomeQuestion(props) {
 
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>
         Do you have any Smart Home Features that are App or Password Dependent?
       </h1>

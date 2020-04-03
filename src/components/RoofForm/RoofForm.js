@@ -42,17 +42,19 @@ function RoofForm(props) {
     "Wood Shingle"
   ];
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Select any of the following that apply to your roof:</h1>
-      {roofTypes.map(val => {
-        return (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        );
-      })}
+      <div className="checkbox__container">
+        {roofTypes.map(val => {
+          return (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          );
+        })}
+      </div>
       {selectedRoofTypes.length > 0 ? (
         <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
       ) : null}

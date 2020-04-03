@@ -50,7 +50,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 const Page = props => {
-  //Switch hard a / c to `props.auth` for prod
   const myProps = {
     page: +props.match.params.pageNum,
     room: +props.match.params.roomNum
@@ -60,6 +59,7 @@ const Page = props => {
   //   console.log("route changed");
   // }, [props.match.params.pageNum, props.match.params.roomNum]);
 
+  //Switch hard a / c to `props.auth` for prod
   switch (+props.match.params.pageNum + "c") {
     case "1c":
     case "1a":

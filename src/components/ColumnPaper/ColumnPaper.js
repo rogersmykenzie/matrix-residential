@@ -3,11 +3,7 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 
 function ColumnPaper(props) {
-    return (
-        <Paper className="page-two-paper">
-            {props.children}
-        </Paper>
-    )
+  return <Paper className="intro-paper">{props.children}</Paper>;
 }
 
 export default ColumnPaper;

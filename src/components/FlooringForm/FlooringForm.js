@@ -46,17 +46,19 @@ function FlooringForm(props) {
   }
   //render
   return (
-    <Paper className="page-two-paper">
+    <Paper className="intro-paper">
       <h1>Please select any flooring type this property has:</h1>
-      {properties.map(val => {
-        return (
-          <CheckboxComp
-            label={val}
-            whenClicked={onCheck}
-            whenUnclicked={onUncheck}
-          />
-        );
-      })}
+      <div className="checkbox__container">
+        {properties.map(val => {
+          return (
+            <CheckboxComp
+              label={val}
+              whenClicked={onCheck}
+              whenUnclicked={onUncheck}
+            />
+          );
+        })}
+      </div>
       {selectedProperties.length > 0 ? (
         <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
       ) : null}

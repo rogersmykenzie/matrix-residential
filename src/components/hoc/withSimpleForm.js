@@ -34,19 +34,21 @@ function withSimpleForm(Component, checkLabels, infoTitle) {
     return (
       <ColumnPaper>
         <Component {...props} />
-        {properties.map(val => (
-          <CheckboxComp
-            label={val}
-            whenClicked={functions.createWhenClicked(
-              selectedProperties,
-              setSelectedProperties
-            )}
-            whenUnclicked={functions.createWhenUnclicked(
-              selectedProperties,
-              setSelectedProperties
-            )}
-          />
-        ))}
+        <div className="checkbox__container">
+          {properties.map(val => (
+            <CheckboxComp
+              label={val}
+              whenClicked={functions.createWhenClicked(
+                selectedProperties,
+                setSelectedProperties
+              )}
+              whenUnclicked={functions.createWhenUnclicked(
+                selectedProperties,
+                setSelectedProperties
+              )}
+            />
+          ))}
+        </div>
         {selectedProperties.length > 0 ? (
           <NextPage to={`/page/${props.page + 1}`} whenClicked={postInfo} />
         ) : null}

@@ -74,13 +74,15 @@ function BuildForm(props) {
       {props.needsProperties === true ? (
         <>
           <h4>Select any properties that apply</h4>
-          {props.properties.map(val => (
-            <CheckboxComp
-              whenClicked={addProp}
-              whenUnclicked={removeProp}
-              label={val}
-            />
-          ))}
+          <div className="checkbox__container">
+            {props.properties.map(val => (
+              <CheckboxComp
+                whenClicked={addProp}
+                whenUnclicked={removeProp}
+                label={val}
+              />
+            ))}
+          </div>
         </>
       ) : null}
       {props.needsNext === true && props.cameFromExtraRoom !== true ? (

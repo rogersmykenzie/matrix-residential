@@ -1,3 +1,6 @@
 .next-button__container {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 500px;
 }
