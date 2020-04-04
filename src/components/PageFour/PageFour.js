@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-//routing
-import { Link } from "react-router-dom";
 //mui
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 //components
 import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
@@ -17,7 +14,6 @@ import {
 } from "../../redux/formInfoReducer";
 //inline styles
 import styles from "./PageFourStyles";
-import { buttonStyleMain } from "../../styles/GlobalStyles";
 import Axios from "axios";
 
 function PageFour(props) {
@@ -25,7 +21,7 @@ function PageFour(props) {
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [schoolsAreUnknown, setUnknown] = useState(null);
   const [schoolNames, dispatch] = React.useReducer(
-    function(state, action) {
+    function (state, action) {
       switch (action.type) {
         case "elementarySchool":
           return {

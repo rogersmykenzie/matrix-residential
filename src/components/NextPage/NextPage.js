@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 //inline styles
 import { buttonStyleMain } from "../../styles/GlobalStyles";
 //routing
-import { Redirect, Link, withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 //css
 import "./NextPage.css";
 
@@ -16,11 +16,11 @@ import "./NextPage.css";
 
 function NextPage(props) {
   // const [shouldRedirect, setShouldRedirect] = React.useState(false);
-  function runWhenClicked() {
-    if (props.whenClicked) {
-      props.whenClicked();
-    }
-  }
+  // function runWhenClicked() {
+  //   if (props.whenClicked) {
+  //     props.whenClicked();
+  //   }
+  // }
   return (
     <>
       <Link

@@ -1,6 +1,5 @@
 import React from "react";
 import BuildForm from "../BuildForm/BuildForm";
-import NextPage from "../NextPage/NextPage";
 //mui
 import Paper from "@material-ui/core/Paper";
 import Axios from "axios";

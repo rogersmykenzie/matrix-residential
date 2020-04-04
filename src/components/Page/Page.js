@@ -46,8 +46,6 @@ import HoaForm from "../HoaForm/HoaForm";
 import EndPage from "../EndPage/EndPage";
 //redux
 import { connect } from "react-redux";
-//routing
-import { Redirect } from "react-router-dom";
 
 const Page = props => {
   const myProps = {

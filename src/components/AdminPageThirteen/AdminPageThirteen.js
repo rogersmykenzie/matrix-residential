@@ -2,12 +2,9 @@ import React from "react";
 //redux
 import { connect } from "react-redux";
 //components
-import Study from "../livingTypes/Study/Study";
 import MediaRoom from "../livingTypes/MediaRoom/MediaRoom";
 import GameRoom from "../livingTypes/GameRoom/GameRoom";
 import LivingRoom from "../livingTypes/LivingRoom/LivingRoom";
-import UtilityRoom from "../livingTypes/UtilityRoom/UtilityRoom";
-import Error from "../Error/Error";
 //routing
 import { Redirect } from "react-router-dom";
 //hoc
@@ -33,7 +30,7 @@ function AdminPageThirteen(props) {
     return <Redirect to={`/page/${props.page + 1}`} />;
   }
   //component decider
-  const CurrentForm = (function() {
+  const CurrentForm = (function () {
     switch (option) {
       // case "study":
       //   return Study;

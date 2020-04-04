@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 //css
 import "./AdminPageFive.css";
 //mui
@@ -17,7 +17,7 @@ import Axios from "axios";
 
 function AdminPageFive(props) {
   const [rooms, dispatch] = useReducer(
-    function(state, action) {
+    function (state, action) {
       switch (action.type) {
         case "UPDATE_BEDS":
           return {

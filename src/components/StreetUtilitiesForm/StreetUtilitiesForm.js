@@ -1,8 +1,6 @@
 import React from "react";
 // hoc
 import withSimpleForm from "../hoc/withSimpleForm";
-//libs
-import Axios from "axios";
 
 function StreetUtilitiesForm(props) {
   return (

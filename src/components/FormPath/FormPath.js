@@ -42,7 +42,11 @@ function FormPath(props) {
       <Paper className="intro-paper">
         <main className="form-path">
           <div>
-            <img src={Logo} className="FormPath__img--logo" />
+            <img
+              src={Logo}
+              className="FormPath__img--logo"
+              alt="tc_source_logo"
+            />
             <h1>Welcome to the Sellers Listing Form</h1>
             <h2>Are you a seller or an agent?</h2>
           </div>

@@ -6,9 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import "./AdminPageThree.css";
 //inline styles
 import styles from "./AdminPageThreeStyles";
-import { buttonStyleMain } from "../../styles/GlobalStyles";
 //components
-import CheckboxComp from "../CheckboxComp/CheckboxComp";
 import NextPage from "../NextPage/NextPage";
 import RadioButtons from "../RadioButtons/RadioButtons";
 //redux
@@ -24,22 +22,22 @@ const AdminPageThree = props => {
   const [changeReason, setReason] = useState("");
 
   //constants
-  const changeReasons = ["Appraiser", "Building Plan", "Other", "Owner"];
-  const SAME_AS_TAX_RECORD = "Same as Tax Record";
+  // const changeReasons = ["Appraiser", "Building Plan", "Other", "Owner"];
+  // const SAME_AS_TAX_RECORD = "Same as Tax Record";
 
   //Event Handlers
-  const handleRadioChange = e => {
-    setSqFtSelection(e.target.value);
-    if (e.target.value === SAME_AS_TAX_RECORD) {
-      props.setSquareFootage(SAME_AS_TAX_RECORD);
-    }
-  };
+  // const handleRadioChange = e => {
+  //   setSqFtSelection(e.target.value);
+  //   if (e.target.value === SAME_AS_TAX_RECORD) {
+  //     props.setSquareFootage(SAME_AS_TAX_RECORD);
+  //   }
+  // };
 
-  const handlePClick = e => {
-    setSqFtSelection(e.target.innerText);
-    if (e.target.innerText === SAME_AS_TAX_RECORD)
-      props.setSquareFootage(SAME_AS_TAX_RECORD);
-  };
+  // const handlePClick = e => {
+  //   setSqFtSelection(e.target.innerText);
+  //   if (e.target.innerText === SAME_AS_TAX_RECORD)
+  //     props.setSquareFootage(SAME_AS_TAX_RECORD);
+  // };
 
   const handleCustomSqFt = e => {
     setCustom(e.target.value);

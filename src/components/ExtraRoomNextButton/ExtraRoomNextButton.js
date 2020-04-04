@@ -1,6 +1,5 @@
 import React from "react";
 //components
-import NextPage from "../NextPage/NextPage";
 import { buttonStyleMain } from "../../styles/GlobalStyles";
 //mui
 import Button from "@material-ui/core/Button";

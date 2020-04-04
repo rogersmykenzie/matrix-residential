@@ -6,7 +6,7 @@ import withAuth from "../../hoc/withAuth";
 
 function BreakfastNookType(props) {
   //state
-  const [formData, setFormData] = React.useState(null);
+  // const [formData, setFormData] = React.useState(null);
   //event handlers
   function whenDone(formData) {
     props.reset(formData);

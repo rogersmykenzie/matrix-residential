@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import BuildForm from "../../BuildForm/BuildForm";
 //hocs
 import withAuth from "../../hoc/withAuth";
 
 function KitchenType(props) {
-  const [formData, setFormData] = useState(null);
+  // const [formData, setFormData] = useState(null);
   //constants
   const PROPERTIES = [
     "Breakfast Bar",

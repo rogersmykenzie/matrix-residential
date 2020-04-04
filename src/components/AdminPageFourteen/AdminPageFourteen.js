@@ -38,13 +38,10 @@ function AdminPageFourteen(props) {
     livingData: [...]
   }
   */
-  function sum(a, b) {
-    return a + b;
-  }
   // console.log(rooms);
   const roomMap = rooms.map((val, i) => {
     if (val && val.length > 0) {
-      let displayText = (function() {
+      let displayText = (function () {
         switch (i) {
           case 0:
             return "Bedrooms:";
@@ -83,7 +80,7 @@ function AdminPageFourteen(props) {
           </div>
         </div>
       </div>
-      {roomMap}
+      <div style={{ padding: "10px" }}>{roomMap}</div>
     </ColumnPaper>
   );
 }

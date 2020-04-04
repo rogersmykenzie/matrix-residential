@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 //mui
 import Paper from "@material-ui/core/Paper";
 //css
@@ -37,14 +37,14 @@ const PageOne = props => {
     props.addPropertyType(property);
   };
 
-  const unPicked = property => {
-    //Decrements first counter and removes property type from store
-    let arr = [...propertyType];
-    arr.splice(arr.indexOf(property), 1);
-    setPropertyType(arr);
-    setFirst(numPickedFirstAnswer - 1);
-    props.removePropertyType(property);
-  };
+  // const unPicked = property => {
+  //   //Decrements first counter and removes property type from store
+  //   let arr = [...propertyType];
+  //   arr.splice(arr.indexOf(property), 1);
+  //   setPropertyType(arr);
+  //   setFirst(numPickedFirstAnswer - 1);
+  //   props.removePropertyType(property);
+  // };
 
   const setPicked2 = type => {
     //Increments second counter and adds property type to store

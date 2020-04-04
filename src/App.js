@@ -1,7 +1,4 @@
 import React from "react";
-//component imports
-import Intro from "./components/Intro/Intro";
-import Nav from "./components/Nav/Nav";
 //css imports
 import "./App.css";
 //redux imports

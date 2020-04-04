@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 //components
 import DiningRoomType from "../diningTypes/DiningRoomType/DiningRoomType";
-import KitchenType from "../diningTypes/KitchenType/KitchenType";
 import BreakfastNookType from "../diningTypes/BreakfastNookType/BreakfastNookType";
 import PageStart from "../PageStart/PageStart";
 //redux
@@ -46,7 +45,7 @@ function AdminPageNine(props) {
     sectionPage: props.page
   };
   //component decider
-  let currentForm = (function() {
+  let currentForm = (function () {
     switch (selectOption) {
       case "dining-room":
         return <DiningRoomType {...componentProps} />;
