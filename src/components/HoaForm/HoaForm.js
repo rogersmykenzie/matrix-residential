@@ -14,6 +14,8 @@ import { Redirect } from "react-router-dom";
 //inline styles
 import { buttonStyleMain } from "../../styles/GlobalStyles";
 
+import useWindowSize from "../../utils/useWindowSize";
+
 function HoaForm(props) {
   const [selection, setSelection] = React.useState("");
   const [billingCycle, setBillingCycle] = React.useState("");
@@ -44,8 +46,15 @@ function HoaForm(props) {
     "Trash",
     "Water/Sewer"
   ];
+
+  const [width] = useWindowSize();
+
+  const isTablet = width <= 1024;
+  const isMobile = width <= 500;
+
+  //inline styles
   const textFieldStyle = {
-    width: "30%",
+    width: isMobile ? "80%" : isTablet ? "50%" : "30%",
     marginBottom: "3vh"
   };
   //event handlers

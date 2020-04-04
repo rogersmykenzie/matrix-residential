@@ -65,14 +65,18 @@ function PoolQuestion(props) {
       <RadioButtons buttons={["Yes", "No"]} onSelection={onSelection} />
       <br />
       <div className="checkbox__container">
-        {hasPool &&
-          poolFeatures.map(val => (
-            <CheckboxComp
-              label={val}
-              whenClicked={onCheck}
-              whenUnclicked={onUncheck}
-            />
-          ))}
+        {hasPool && (
+          <>
+            <h1>Select all that apply</h1>
+            {poolFeatures.map(val => (
+              <CheckboxComp
+                label={val}
+                whenClicked={onCheck}
+                whenUnclicked={onUncheck}
+              />
+            ))}
+          </>
+        )}
       </div>
       {hasPool === false ||
       (hasPool === true && selectedFeatures.length > 0) ? (

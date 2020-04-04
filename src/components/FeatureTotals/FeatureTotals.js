@@ -10,6 +10,8 @@ import Axios from "axios";
 //mui
 import Paper from "@material-ui/core/Paper";
 
+import useWindowSize from "../../utils/useWindowSize";
+
 function FeatureTotals(props) {
   //state
   const [carportSpaces, setCarportSpaces] = React.useState("");
@@ -18,6 +20,8 @@ function FeatureTotals(props) {
   const [garageLength, setGarageLength] = React.useState("");
   const [totalCoverParking, setTotalCoverParking] = React.useState("");
   const [fireplaces, setFireplaces] = React.useState("");
+
+  const [width] = useWindowSize();
   //conditions
   let shouldShowNext = true;
   const conditionArr = [
@@ -33,9 +37,13 @@ function FeatureTotals(props) {
   if (conditionArr.includes("")) {
     shouldShowNext = false;
   }
+
+  const isTablet = width <= 1024;
+  const isMobile = width <= 500;
+
   //inline styles
   const textFieldStyle = {
-    width: "30%",
+    width: isMobile ? "80%" : isTablet ? "50%" : "30%",
     marginBottom: "3vh"
   };
   //event handlers
