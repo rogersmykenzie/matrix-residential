@@ -20,7 +20,7 @@ app.use(
   })
 );
 
-app.post("/start", function(req, res) {
+app.post("/start", function (req, res) {
   try {
     req.session.formData = {};
     res.sendStatus(200);
@@ -29,7 +29,7 @@ app.post("/start", function(req, res) {
   }
 });
 
-app.post("/info", function(req, res) {
+app.post("/info", function (req, res) {
   try {
     req.session.formData = {
       ...req.session.formData,
@@ -42,7 +42,7 @@ app.post("/info", function(req, res) {
   }
 });
 
-app.post("/info/:type", function(req, res) {
+app.post("/info/:type", function (req, res) {
   if (req.session.formData === undefined) {
     req.session.formData = {};
   }
@@ -61,7 +61,7 @@ app.post("/info/:type", function(req, res) {
   }
 });
 
-app.get("/server/rooms", function(req, res) {
+app.get("/server/rooms", function (req, res) {
   res.status(200).json({
     bedroomData: req.session.formData.bedroomData,
     diningData: req.session.formData.diningData,
@@ -70,7 +70,7 @@ app.get("/server/rooms", function(req, res) {
   });
 });
 
-app.post("/email", function(req, res) {
+app.post("/email", function (req, res) {
   function camelToNormal(string) {
     let stringArg = string.trim();
     let newString = stringArg[0].toUpperCase();
@@ -404,6 +404,10 @@ ${
   } finally {
     req.session.destroy();
   }
+});
+
+app.get("*", (req, res) => {
+  res.send("<h1>WORKS</h1>");
 });
 
 app.listen(process.env.SERVER_PORT, () =>
