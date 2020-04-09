@@ -171,7 +171,7 @@ app.post("/email", function (req, res) {
     energyEfficiencyInfo,
     hoaInfo
   } = req.session.formData;
-  console.log(req.session.formData);
+
   try {
     const message = `A new listing form has been submitted!
 
@@ -229,39 +229,51 @@ ${
     : ""
 }
 
-They stated the following interior features: ${interiorFeatures.properties.join(
-      ", "
-    )}
+They stated the following interior features: ${
+      interiorFeatures ? interiorFeatures.properties.join(", ") : ""
+    }
 ${
   alarmInfo.selection === "Yes"
     ? "They have the following alarm types: " +
       alarmInfo.selectedTypes.join(", ")
     : "They do not have an alarm"
 }
-They have the following roof types: ${roofInfo.selectedTypes.join(", ")}
+They have the following roof types: ${
+      roofInfo ? roofInfo.selectedTypes.join(", ") : ""
+    }
 They have the following kitchen features: ${kitchenInfo.selectedTypes.join(
       ", "
     )}
-They have the following pool features: ${poolInfo.properties.join(", ")}
-They have the following handicap features: ${handicapInfo.properties.join(", ")}
-They have the following flooring features: ${flooringInfo.properties.join(", ")}
+They have the following pool features: ${
+      poolInfo ? poolInfo.properties.join(", ") : ""
+    }
+They have the following handicap features: ${
+      handicapInfo ? handicapInfo.properties.join(", ") : ""
+    }
+They have the following flooring features: ${
+      flooringInfo ? flooringInfo.properties.join(", ") : ""
+    }
 They have ${carportSpaces} carport spaces.
 They have ${garageSpaces} garage spaces.
 ${garageWidth ? "Their garage has a width of " + garageWidth : ""}
 ${garageLength ? "Their garage has a length of " + garageLength : ""}
 They have ${totalCoverParking} parking spots with total cover.
 The have ${fireplaces} fireplaces.
-Their fireplaces have the following features: ${fireplaceInfo.properties.join(
-      ", "
-    )}
-Their foundation has the following features: ${foundationInfo.properties.join(
-      ", "
-    )}
-They have the following parking features: ${parkingInfo.properties.join(", ")}
-They have the following common features: ${commonFeaturesInfo.properties.join(
-      ", "
-    )}
-They have the following special notes: ${specialNoteInfo.properties.join(", ")}
+Their fireplaces have the following features: ${
+      fireplaceInfo ? fireplaceInfo.properties.join(", ") : ""
+    }
+Their foundation has the following features: ${
+      foundationInfo ? foundationInfo.properties.join(", ") : ""
+    }
+They have the following parking features: ${
+      parkingInfo ? parkingInfo.properties.join(", ") : ""
+    }
+They have the following common features: ${
+      commonFeaturesInfo ? commonFeaturesInfo.properties.join(", ") : ""
+    }
+They have the following special notes: ${
+      specialNoteInfo ? specialNoteInfo.properties.join(", ") : ""
+    }
 
 Is their property waterfront? ${waterfrontInfo.isWaterfront}
 ${
@@ -281,31 +293,41 @@ ${
     : ""
 }
 
-They have the following easement features: ${easementInfo.properties.join(", ")}
-Their lot has the following features: ${lotDescriptionInfo.properties.join(
-      ", "
-    )}
-Their fence has the following attributes: ${fenceInfo.properties.join(", ")}
-They have the following exterior features: ${exteriorFeaturesInfo.properties.join(
-      ", "
-    )}
-Their soil has the following attributes: ${soilInfo.properties.join(", ")}
-They have the following restrictions: ${restrictionsInfo.properties.join(", ")}
-They have the following street utilities: ${streetUtilitiesInfo.properties.join(
-      ", "
-    )}
-They have the following heating/cooling info: ${heatingCoolingInfo.properties.join(
-      ", "
-    )}
+They have the following easement features: ${
+      easementInfo ? easementInfo.properties.join(", ") : ""
+    }
+Their lot has the following features: ${
+      lotDescriptionInfo ? lotDescriptionInfo.properties.join(", ") : ""
+    }
+Their fence has the following attributes: ${
+      fenceInfo ? fenceInfo.properties.join(", ") : ""
+    }
+They have the following exterior features: ${
+      exteriorFeaturesInfo ? exteriorFeaturesInfo.properties.join(", ") : ""
+    }
+Their soil has the following attributes: ${
+      soilInfo ? soilInfo.properties.join(", ") : ""
+    }
+They have the following restrictions: ${
+      restrictionsInfo ? restrictionsInfo.properties.join(", ") : ""
+    }
+They have the following street utilities: ${
+      streetUtilitiesInfo ? streetUtilitiesInfo.properties.join(", ") : ""
+    }
+They have the following heating/cooling info: ${
+      heatingCoolingInfo ? heatingCoolingInfo.properties.join(", ") : ""
+    }
 
 Are they in a MUD? ${mudDistrictInfo.selection}
-What green features do they have? ${greenFeaturesInfo.properties.join(", ")}
-What green certifications do they have? ${greenCertificationInfo.properties.join(
-      ", "
-    )}
-What energy efficient features do they have? ${energyEfficiencyInfo.properties.join(
-      ", "
-    )}
+What green features do they have? ${
+      greenFeaturesInfo ? greenFeaturesInfo.properties.join(", ") : ""
+    } 
+What green certifications do they have? ${
+      greenCertificationInfo ? greenCertificationInfo.properties.join(", ") : ""
+    }
+What energy efficient features do they have? ${
+      energyEfficiencyInfo ? energyEfficiencyInfo.properties.join(", ") : ""
+    }
 ${
   hoaInfo.hasHoa === "None"
     ? `They do not have an HOA.`
